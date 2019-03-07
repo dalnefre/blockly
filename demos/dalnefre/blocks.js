@@ -49,6 +49,27 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "actor_handler",
+    "message0": "when %1 %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "PATTERN",
+        "check": "Dict"
+      },
+      {
+        "type": "input_statement",
+        "name": "SCRIPT",
+        "check": "Action"
+      }
+    ],
+    "previousStatement": "Action",
+    "nextStatement": "Action",
+    "colour": 345,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
     "type": "actor_send",
     "message0": "send %1 to %2",
     "args0": [
@@ -274,6 +295,61 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 45,
     "tooltip": "dictionary definition",
     "helpUrl": ""
+  },
+  {
+    "type": "form_expression",
+    "message0": "form %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "VALUE"
+      }
+    ],
+    "output": "Form",
+    "colour": "#999999",
+    "tooltip": "form template",
+    "helpUrl": ""
+  },
+  {
+    "type": "form_variable",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "NAME",
+        "text": "name"
+      }
+    ],
+    "output": null,
+    "colour": "#999999",
+    "tooltip": "replacement variable",
+    "helpUrl": ""
+  },
+  {
+    "type": "form_replace",
+    "message0": "replace in %1 %2 with %3",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "FORM",
+        "check": "Form",
+        "align": "RIGHT"
+      },
+      {
+        "type": "field_input",
+        "name": "NAME",
+        "text": "name"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE",
+        "align": "RIGHT"
+      }
+    ],
+    "output": null,
+    "colour": 210, //"#999999",
+    "tooltip": "fill template with values",
+    "helpUrl": ""
   }
 ]);
 
@@ -336,6 +412,14 @@ Blockly.JavaScript['actor_behavior_with'] = function(block) {
   code += 'Object.create(this._)';
   code += ', ' + value_state + '))';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['actor_handler'] = function(block) {
+  var value_pattern = Blockly.JavaScript.valueToCode(block, 'PATTERN', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
 };
 
 Blockly.JavaScript['actor_become'] = function(block) {
@@ -443,4 +527,34 @@ Blockly.JavaScript['dict_bind'] = function(block) {
   code += ': ' + value_value + ' }';
   code += '))';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+/*
+ * Form (Template/Variable)
+ */
+
+Blockly.JavaScript['form_expression'] = function(block) {
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['form_replace'] = function(block) {
+  var value_form = Blockly.JavaScript.valueToCode(block, 'FORM', Blockly.JavaScript.ORDER_ATOMIC);
+  var text_name = block.getFieldValue('NAME');
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['form_variable'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
 };

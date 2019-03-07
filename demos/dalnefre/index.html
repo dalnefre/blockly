@@ -48,7 +48,7 @@
 </body>
 
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-  <category name="Actions" colour="345">
+  <category name="Action" colour="345">
     <block type="actor_config">
       <next>
         <shadow type="actor_send">
@@ -100,6 +100,14 @@
         <shadow type="actor_ignore"></shadow>
       </value>
     </block>
+    <block type="actor_handler">
+      <value name="PATTERN">
+        <shadow type="dict_empty"></shadow>
+      </value>
+      <value name="SCRIPT">
+        <shadow type="actor_ignore"></shadow>
+      </value>
+    </block>
     <block type="actor_become">
       <value name="BEHAVIOR">
         <shadow type="actor_behavior">
@@ -133,6 +141,28 @@
       <value name="DICT">
         <shadow type="dict_empty"></shadow>
       </value>
+    </block>
+    <block type="form_expression">
+      <value name="VALUE">
+        <shadow type="form_variable"></shadow>
+      </value>
+    </block>
+    <block type="form_variable"></block>
+    <block type="form_replace">
+      <value name="FORM">
+        <shadow type="form_expression"></shadow>
+      </value>
+    </block>
+  </category>
+  <category name="Alternate" colour="#999999">
+    <block type="actor_create">
+      <value name="BEHAVIOR">
+        <shadow type="actor_behavior">
+          <statement name="SCRIPT">
+            <shadow type="actor_ignore"></shadow>
+          </statement>
+        </shadow>
+      </value>      
     </block>
   </category>
   <category name="Lists" colour="#745CA6">
