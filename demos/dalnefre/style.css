@@ -1,0 +1,35 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+button {
+  margin: 0.5ex;
+}
+table {
+  height: 100%;
+  width: 100%;
+}
+#displayArea {
+  height: 99%;
+}
+.source {
+  visibility: hidden;
+  position: absolute;
+}
+pre.source {
+  margin: 0px;
+  border: 1px solid #0cc;
+  padding: 2px;
+  background-color: #ffd;
+  overflow: scroll;
+}
