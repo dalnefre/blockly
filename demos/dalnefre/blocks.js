@@ -96,6 +96,14 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "actor_message",
+    "message0": "message",
+    "output": "Dict",
+    "colour": 45,
+    "tooltip": "the current message",
+    "helpUrl": ""
+  },
+  {
     "type": "actor_ignore",
     "message0": "no action",
     "previousStatement": "Action",
@@ -329,7 +337,7 @@ Blockly.JavaScript['actor_behavior_with'] = function(block) {
   var code = '';
   code += '((_) => function (__) {\n';
   code += '  this._ = this._ || _;  // actor state\n';
-  code += '  Object.assign(this._, __);  // copy message into actor state\n';
+//  code += '  Object.assign(this._, __);  // copy message into actor state\n';
   code += statements_script;
   code += '})(';
   code += 'Object.assign(';
@@ -349,6 +357,11 @@ Blockly.JavaScript['actor_become'] = function(block) {
 
 Blockly.JavaScript['actor_self'] = function(block) {
   var code = 'this.self';
+  return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['actor_message'] = function(block) {
+  var code = '__';
   return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
 };
 
