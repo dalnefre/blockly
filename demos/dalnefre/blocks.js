@@ -16,8 +16,8 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "field_number",
         "name": "ACTORS",
-        "value": 0,
-        "min": 99
+        "value": 99,
+        "min": 0
       },
       {
         "type": "input_dummy",
@@ -26,8 +26,8 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "field_number",
         "name": "EVENTS",
-        "value": 0,
-        "min": 999
+        "value": 999,
+        "min": 0
       },
       {
         "type": "input_dummy",
@@ -326,7 +326,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript['actor_config'] = function(block) {
   var code = '';
-  code += 'this.sponsor = tartjs(fail);  // configuration create\n';
+  code += 'this.sponsor = DAL.tart();  // configuration create\n';
   code += 'this._ = {};  // configuration state\n';
   return code;  // statements don't need binding-strength
 };
@@ -336,14 +336,14 @@ Blockly.JavaScript['actor_sponsor'] = function(block) {
   var number_events = block.getFieldValue('EVENTS');
   var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
   // FIXME: implement actor and event limits!
-  var code = '';
-  code += '(_ => {  // WARNING! `this` is still global!\n';
-  code += '  this.sponsor = tartjs(fail);  // configuration create\n';
+  var code = '\n';
+  code += '((DAL.tart({  // begin configuration\n';
+  code += '  actorLimit: ' + number_actors + ',\n';
+  code += '  eventLimit: ' + number_events + '\n';
+  code += '}))(function (_) {\n';
   code += '  this._ = _;  // configuration state\n';
-  code += '  // actor limit: ' + number_actors + '\n';
-  code += '  // event limit: ' + number_events + '\n';
   code += statements_script;
-  code += '})({})';
+  code += '}))({});  // end configuration\n';
   return code;  // statements don't need binding-strength
 };
 
@@ -454,8 +454,7 @@ Blockly.JavaScript['actor_fail'] = function(block) {
 Blockly.JavaScript['actor_debug'] = function(block) {
   var code = '';
   code += 'function (__) {\n';
-  code += '  let log = (console && console.log) || alert;\n';
-  code += '  log("DEBUG:", __);\n';
+  code += '  DAL.log("DEBUG:", __);\n';
   code += '}';
   return [code, Blockly.JavaScript.ORDER_COMMA];
 };
