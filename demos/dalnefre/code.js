@@ -1,13 +1,54 @@
 'use strict';
 
-// polyfill async call
-let invokeLater = (typeof setImmediate === "function")
-  ? function invokeLater(callback) { setImmediate(callback); }
-  : function invokeLater(callback) { setTimeout(callback, 0); };
-
 var DAL = (function (self) {
 
-  let fail = function fail(e) { alert('FAIL! ' + e); };  // default error handler
+  let ignore = function noop() { return ignore; };  // no operation (callable)
+  let log = (console && console.log) || ignore;  // default error log
+  let show = alert && (_ => alert(_)) || ignore;  // synchronous message dialog
+  let fail = function fail(e) { self.log('FAIL!', e); self.show('FAIL! ' + e); };  // default error handler
+  let trace = ignore; //log;
+  let invokeLater = (typeof setImmediate === "function")
+    ? function invokeLater(callback) { setImmediate(callback); }
+    : function invokeLater(callback) { setTimeout(callback, 0); };
+
+  let tart = function config(options) {
+    options = options || {};
+    var fail = options.fail || self.fail || ignore;
+    options.actorLimit = (options.actorLimit >= 0) ? options.actorLimit : Infinity;
+    options.eventLimit = (options.eventLimit >= 0) ? options.eventLimit : Infinity;
+    var sponsor = function create(behavior) {
+      trace("create["+options.actorLimit+"]", behavior);
+      var actor = ignore;
+      if (options.actorLimit >= 0) {
+        --options.actorLimit;
+        actor = function send(message) {
+          trace("send["+options.eventLimit+"]", message);
+          if (options.eventLimit >= 0) {
+            --options.eventLimit;
+            invokeLater(() => {
+              try {
+                context.behavior(message);
+              } catch (exception) {
+                fail(exception);
+              };
+            });
+          } else {
+            fail('Event limit exceeded');
+          }
+        };
+        var context = {
+          self: actor,
+          behavior: behavior,
+          sponsor: sponsor
+        };
+      } else {
+        fail('Actor limit exceeded');
+      }
+      return actor;
+    };
+    return sponsor;
+  };
+
   let displayArea = document.getElementById('displayArea');
   let source = {  // source elements by language
     "JavaScript": document.getElementById('sourceJavaScript'),
@@ -44,22 +85,7 @@ var DAL = (function (self) {
   };
   let generateJavaScript = function generateJavaScript() {
     // Blockly.JavaScript.addReservedWords('sponsor');  // protect reserved word(s)
-    return ''
-      + '// requires: invokeLater\n'
-      + '// optional: fail\n'
-      + '// provides: tartjs, sponsor, _\n'
-      + 'let tartjs = ((f) => {  // tiny actor run-time\n'
-      + '  let c = (b) => {\n'
-      + '    let a = (m) => {\n'
-      + '      invokeLater(() => {\n'
-      + '        try { x.behavior(m) } catch (e) { f && f(e) }\n'
-      + '      })\n'
-      + '    }, x = { self: a, behavior: b, sponsor: c };\n'
-      + '    return a\n'
-      + '  };\n'
-      + '  return c\n'
-      + '});\n\n'
-      + Blockly.JavaScript.workspaceToCode(self.blocklyWorkspace);
+    return Blockly.JavaScript.workspaceToCode(self.blocklyWorkspace);
   };
   let displaySource = function displaySource(lang) {
     // de-select and hide current source
@@ -118,7 +144,10 @@ var DAL = (function (self) {
   };
 
   // exports
+  self.log = log;
+  self.show = show;
   self.fail = fail;
+  self.tart = tart;
   self.init = onload;
   self.displaySource = displaySource;
   self.executeCode = executeJavaScript;

@@ -484,11 +484,26 @@
   <category name="Library" colour="#666666" expanded="true">
     <category name="Test">
 
-<!--
-<xml xmlns="http://www.w3.org/1999/xhtml" id="workspace" style="display: none;">
--->
-  <block type="actor_config" id="M)Q}6,|#FR5=W6m#-=g$" x="120" y="76">
-    <next>
+  <block type="actor_sponsor" id="[+eT3m{rLl1seH-Q-P{8" x="69" y="61">
+    <field name="ACTORS">1</field>
+    <field name="EVENTS">2</field>
+    <statement name="SCRIPT">
+      <shadow type="actor_send" id=":dWk4YU1rMJBAFhg6S_5">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="4Jt[DJxfx)cx5UDZtH+o"></shadow>
+        </value>
+        <value name="ACTOR">
+          <shadow type="actor_new" id="@6xAe]c9t^N=Bqj`~8:{">
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="#(T@XzVPsTy444qQxl3.">
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="}jOCv7F;5i#nSOl]lGo6"></shadow>
+                </statement>
+              </shadow>
+            </value>
+          </shadow>
+        </value>
+      </shadow>
       <block type="actor_assign" id="h3kSVG/8CAAa+!w@|P5+">
         <field name="NAME">a</field>
         <value name="VALUE">
@@ -499,9 +514,23 @@
                   <shadow type="actor_ignore" id="r;zqWcVtRmE{|1JrybRJ"></shadow>
                 </statement>
               </shadow>
-              <block type="actor_behavior" id="KcT8Mq^Wk;yqVK0UIDm1">
+              <block type="actor_behavior_with" id="n!r^oI.Ng)iHJF6*Y,_L">
+                <value name="STATE">
+                  <shadow type="dict_empty" id="?f#(.m*Em=WCl2HMx8sJ"></shadow>
+                  <block type="dict_bind" id="(?`Z2K`6eL`h[Cen!#4`">
+                    <field name="NAME">prev</field>
+                    <value name="VALUE">
+                      <block type="text" id="O7@C3?77sUyh,GTR~Acm">
+                        <field name="TEXT">none</field>
+                      </block>
+                    </value>
+                    <value name="DICT">
+                      <shadow type="dict_empty" id="jNxS7n]r!Z:^O?u;aPB1"></shadow>
+                    </value>
+                  </block>
+                </value>
                 <statement name="SCRIPT">
-                  <shadow type="actor_ignore" id="I3Sng%}=jo0?-m+-TH:]"></shadow>
+                  <shadow type="actor_ignore" id="]PKHVG0K^h^XL2^$T[Lt"></shadow>
                   <block type="text_print" id="0e0SOqDQGa%N+Tfiy0F`">
                     <value name="TEXT">
                       <shadow type="text" id="pCKSTZJx@$vislw)}tv[">
@@ -520,8 +549,11 @@
                           </block>
                         </value>
                         <value name="ADD2">
-                          <block type="actor_state" id="qRp_z|Ns%(M%}W139_wD">
+                          <block type="dict_get" id="30!Q0rEl3Cr=9v`_oqcf">
                             <field name="NAME">name</field>
+                            <value name="DICT">
+                              <shadow type="actor_message" id="vP1kAIRiLYY:fsLxdHkB"></shadow>
+                            </value>
                           </block>
                         </value>
                       </block>
@@ -530,8 +562,11 @@
                       <block type="actor_assign" id=")$ByH+gX9G1B~TJ{~4M{">
                         <field name="NAME">prev</field>
                         <value name="VALUE">
-                          <block type="actor_state" id="Df3(VNT4_+bxLFJsR-AE">
+                          <block type="dict_get" id="R%TwPXzkADm;1R{dR?7L">
                             <field name="NAME">name</field>
+                            <value name="DICT">
+                              <shadow type="actor_message" id="2*qIsZk#-BUlTM.9gA}t"></shadow>
+                            </value>
                           </block>
                         </value>
                       </block>
@@ -589,27 +624,8 @@
           </block>
         </next>
       </block>
-      <shadow type="actor_send" id="f)R?oyrcexx02Lh5Kx:$">
-        <value name="MESSAGE">
-          <shadow type="dict_empty" id="`tB=*8F3e=vW)(!*o3^,"></shadow>
-        </value>
-        <value name="ACTOR">
-          <shadow type="actor_new" id="h,EBUg5pbPhGXE#[(1}d">
-            <value name="BEHAVIOR">
-              <shadow type="actor_behavior" id="FvjRwZT0(U!wRT.K.4]c">
-                <statement name="SCRIPT">
-                  <shadow type="actor_ignore" id="UNC^dp3[yR=zVK0:3F]H"></shadow>
-                </statement>
-              </shadow>
-            </value>
-          </shadow>
-        </value>
-      </shadow>
-    </next>
+    </statement>
   </block>
-<!--
-</xml>
--->
 
   <block type="actor_config" id="NF#)5$+g?+!0O)itj@f." x="48" y="33">
     <next>
@@ -1083,8 +1099,26 @@
 
     <category name="PEG">
 
-  <block type="actor_config" id=")(Ug-fDfvZZM?,ktTT42" x="173" y="117">
-    <next>
+  <block type="actor_sponsor" id="_@#FSJN2m^.TeO~dQ(=)" x="58" y="45">
+    <field name="ACTORS">2</field>
+    <field name="EVENTS">2</field>
+    <statement name="SCRIPT">
+      <shadow type="actor_send" id="~,|gg{viBnda~X.dAnx!">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="L6aQ=%.?k:Y5#G9HNRTU"></shadow>
+        </value>
+        <value name="ACTOR">
+          <shadow type="actor_new" id="i(/$V9d#WE[r#%n/TD,,">
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="+JT^oawk:c0FI1@,lRVh">
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="IU/OuLve$oXx%sS?5JV%"></shadow>
+                </statement>
+              </shadow>
+            </value>
+          </shadow>
+        </value>
+      </shadow>
       <block type="actor_assign" id="PvKs=oLN{Sg(V=W@yy;l">
         <field name="NAME">alert</field>
         <value name="VALUE">
@@ -1225,23 +1259,7 @@
           </block>
         </next>
       </block>
-      <shadow type="actor_send" id="+DC#:?21wTLGilq+/8=J">
-        <value name="MESSAGE">
-          <shadow type="dict_empty" id="{Y%o{:}]|1rh^Crz~=61"></shadow>
-        </value>
-        <value name="ACTOR">
-          <shadow type="actor_new" id="J|tqRCs,9Yz~_Y0%dgj;">
-            <value name="BEHAVIOR">
-              <shadow type="actor_behavior" id="CGED9k;bPtMJmhz%_!$H">
-                <statement name="SCRIPT">
-                  <shadow type="actor_ignore" id="#4G%91y%p*i,0[?$s#W:"></shadow>
-                </statement>
-              </shadow>
-            </value>
-          </shadow>
-        </value>
-      </shadow>
-    </next>
+    </statement>
   </block>
 
   <block type="procedures_defreturn" id="Bd,SnMOn)sDM(g*YMXtJ" x="138" y="-191">
