@@ -10,6 +10,41 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "actor_sponsor",
+    "message0": "sponsor with %1 actors %2 %3 events %4 %5",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "ACTORS",
+        "value": 0,
+        "min": 99
+      },
+      {
+        "type": "input_dummy",
+        "align": "RIGHT"
+      },
+      {
+        "type": "field_number",
+        "name": "EVENTS",
+        "value": 0,
+        "min": 999
+      },
+      {
+        "type": "input_dummy",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_statement",
+        "name": "SCRIPT",
+        "check": "Action",
+        "align": "RIGHT"
+      }
+    ],
+    "colour": 345,
+    "tooltip": "actor resource pool",
+    "helpUrl": ""
+  },
+  {
     "type": "actor_behavior",
     "message0": "behavior %1 %2",
     "args0": [
@@ -296,6 +331,22 @@ Blockly.JavaScript['actor_config'] = function(block) {
   return code;  // statements don't need binding-strength
 };
 
+Blockly.JavaScript['actor_sponsor'] = function(block) {
+  var number_actors = block.getFieldValue('ACTORS');
+  var number_events = block.getFieldValue('EVENTS');
+  var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
+  // FIXME: implement actor and event limits!
+  var code = '';
+  code += '(_ => {  // WARNING! `this` is still global!\n';
+  code += '  this.sponsor = tartjs(fail);  // configuration create\n';
+  code += '  this._ = _;  // configuration state\n';
+  code += '  // actor limit: ' + number_actors + '\n';
+  code += '  // event limit: ' + number_events + '\n';
+  code += statements_script;
+  code += '})({})';
+  return code;  // statements don't need binding-strength
+};
+
 Blockly.JavaScript['actor_send'] = function(block) {
   var value_message = Blockly.JavaScript.valueToCode(block, 'MESSAGE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
   var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_FUNCTION_CALL);  // default: ORDER_ATOMIC
@@ -323,9 +374,9 @@ Blockly.JavaScript['actor_create'] = function(block) {
 Blockly.JavaScript['actor_behavior'] = function(block) {
   var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
   var code = '';
-  code += '((_) => function (__) {\n';
+  code += '(_ => function (__) {\n';
   code += '  this._ = this._ || _;  // actor state\n';
-  code += '  Object.assign(this._, __);  // copy message into actor state\n';
+//  code += '  Object.assign(this._, __);  // copy message into actor state\n';
   code += statements_script;
   code += '})(Object.create(this._))';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
@@ -335,7 +386,7 @@ Blockly.JavaScript['actor_behavior_with'] = function(block) {
   var value_state = Blockly.JavaScript.valueToCode(block, 'STATE', Blockly.JavaScript.ORDER_COMMA);
   var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
   var code = '';
-  code += '((_) => function (__) {\n';
+  code += '(_ => function (__) {\n';
   code += '  this._ = this._ || _;  // actor state\n';
 //  code += '  Object.assign(this._, __);  // copy message into actor state\n';
   code += statements_script;
