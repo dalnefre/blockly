@@ -37,7 +37,9 @@ pre.source {
   float: right;
   height: 89px;
   width: 144px;
+  color: #ccc;
   background-color: #666;
   border: solid 1px #333;
   margin: 0.5ex;
+  padding: 0px;
 }
