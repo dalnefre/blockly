@@ -22,19 +22,20 @@ var DAL = (function (self) {
       if (options.actorLimit >= 0) {
         --options.actorLimit;
         actor = function send(message) {
-          trace("send["+options.eventLimit+"]", message);
-          if (options.eventLimit >= 0) {
-            --options.eventLimit;
-            invokeLater(() => {
+//          trace("send["+options.eventLimit+"]", message);
+          invokeLater(() => {
+            trace("deliver["+options.eventLimit+"]", message);
+            if (options.eventLimit >= 0) {
+              --options.eventLimit;
               try {
                 context.behavior(message);
               } catch (exception) {
                 fail(exception);
               };
-            });
-          } else {
-            fail('Event limit exceeded');
-          }
+            } else {
+              fail('Event limit exceeded');
+            }
+          });
         };
         var context = {
           self: actor,
