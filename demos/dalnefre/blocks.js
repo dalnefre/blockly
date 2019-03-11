@@ -119,7 +119,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": "Action",
     "nextStatement": "Action",
     "colour": 345,
-    "tooltip": "update behavior",
+    "tooltip": "update behavior script",
     "helpUrl": ""
   },
   {
@@ -164,18 +164,25 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "actor_create",
-    "message0": "create %1 actor",
+    "message0": "new actor with: %1 script: %2",
     "args0": [
       {
         "type": "input_value",
+        "name": "STATE",
+        "check": "Dict",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
         "name": "BEHAVIOR",
-        "check": "Behavior"
+        "check": "Behavior",
+        "align": "RIGHT"
       }
     ],
     "inputsInline": false,
     "output": "Actor",
     "colour": 90,
-    "tooltip": "create an actor",
+    "tooltip": "create an actor with initial state",
     "helpUrl": ""
   },
   {
@@ -366,8 +373,13 @@ Blockly.JavaScript['actor_new'] = function(block) {
 };
 
 Blockly.JavaScript['actor_create'] = function(block) {
+  var value_state = Blockly.JavaScript.valueToCode(block, 'STATE', Blockly.JavaScript.ORDER_COMMA);
   var value_behavior = Blockly.JavaScript.valueToCode(block, 'BEHAVIOR', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
-  var code = 'this.sponsor(' + value_behavior + ')';
+  var code = '';
+  code += 'this.sponsor(';
+  code += value_behavior + '(';
+  code += 'Object.assign(Object.create(this._), ';
+  code += value_state + ')))';
   return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
 };
 
@@ -376,9 +388,8 @@ Blockly.JavaScript['actor_behavior'] = function(block) {
   var code = '';
   code += '(_ => function (__) {\n';
   code += '  this._ = this._ || _;  // actor state\n';
-//  code += '  Object.assign(this._, __);  // copy message into actor state\n';
   code += statements_script;
-  code += '})(Object.create(this._))';
+  code += '})';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
@@ -388,7 +399,6 @@ Blockly.JavaScript['actor_behavior_with'] = function(block) {
   var code = '';
   code += '(_ => function (__) {\n';
   code += '  this._ = this._ || _;  // actor state\n';
-//  code += '  Object.assign(this._, __);  // copy message into actor state\n';
   code += statements_script;
   code += '})(';
   code += 'Object.assign(';
@@ -453,10 +463,10 @@ Blockly.JavaScript['actor_fail'] = function(block) {
 
 Blockly.JavaScript['actor_debug'] = function(block) {
   var code = '';
-  code += 'function (__) {\n';
+  code += '(_ => function (__) {  // ignore state\n';
   code += '  DAL.log("DEBUG:", __);\n';
-  code += '}';
-  return [code, Blockly.JavaScript.ORDER_COMMA];
+  code += '})';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 /*
