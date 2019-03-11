@@ -2,14 +2,6 @@
 
 Blockly.defineBlocksWithJsonArray([
   {
-    "type": "actor_config",
-    "message0": "configuration",
-    "nextStatement": "Action",
-    "colour": 345,
-    "tooltip": "cast of actors",
-    "helpUrl": ""
-  },
-  {
     "type": "actor_sponsor",
     "message0": "sponsor with %1 actors %2 %3 events %4 %5",
     "args0": [
@@ -330,13 +322,6 @@ Blockly.defineBlocksWithJsonArray([
 /*
  * Actor
  */
-
-Blockly.JavaScript['actor_config'] = function(block) {
-  var code = '';
-  code += 'this.sponsor = DAL.tart();  // configuration create\n';
-  code += 'this._ = {};  // configuration state\n';
-  return code;  // statements don't need binding-strength
-};
 
 Blockly.JavaScript['actor_sponsor'] = function(block) {
   var number_actors = block.getFieldValue('ACTORS');
