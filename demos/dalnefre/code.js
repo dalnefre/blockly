@@ -6,7 +6,8 @@ var DAL = (function (self) {
   let log = (console && console.log) || ignore;  // default error log
   let show = alert && (_ => alert(_)) || ignore;  // synchronous message dialog
   let fail = function fail(e) { self.log('FAIL!', e); self.show('FAIL! ' + e); };  // default error handler
-  let trace = ignore; //log;
+  let trace = log;
+//  let trace = ignore;
   let invokeLater = (typeof setImmediate === "function")
     ? function invokeLater(callback) { setImmediate(callback); }
     : function invokeLater(callback) { setTimeout(callback, 0); };
@@ -22,12 +23,13 @@ var DAL = (function (self) {
       if (options.actorLimit >= 0) {
         --options.actorLimit;
         actor = function send(message) {
-//          trace("send["+options.eventLimit+"]", message);
+          trace("send["+options.eventLimit+"]", message);
           invokeLater(() => {
             trace("deliver["+options.eventLimit+"]", message);
             if (options.eventLimit >= 0) {
               --options.eventLimit;
               try {
+                trace("context["+options.eventLimit+"]", context);
                 context.behavior(message);
               } catch (exception) {
                 fail(exception);
@@ -152,6 +154,7 @@ var DAL = (function (self) {
   self.init = onload;
   self.displaySource = displaySource;
   self.executeCode = executeJavaScript;
+  self.varPattern = /^[a-zA-Z_$][0-9a-zA-Z_$]*$/;
   return self;
 })({});
 

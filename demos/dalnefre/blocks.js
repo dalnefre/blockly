@@ -38,8 +38,13 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "actor_behavior",
-    "message0": "behavior %1 %2",
+    "message0": "behavior %1 %2 %3",
     "args0": [
+      {
+        "type": "field_input",
+        "name": "NAME",
+        "text": ""
+      },
       {
         "type": "input_dummy"
       },
@@ -369,9 +374,14 @@ Blockly.JavaScript['actor_create'] = function(block) {
 };
 
 Blockly.JavaScript['actor_behavior'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
   var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
   var code = '';
-  code += '(_ => function (__) {\n';
+  code += '(_ => function ';
+  if (text_name.match(DAL.varPattern)) {
+    code += text_name;  // --FIXME-- quote special characters in identifier text_name
+  }
+  code += '(__) {\n';
   code += '  this._ = this._ || _;  // actor state\n';
   code += statements_script;
   code += '})';
@@ -393,10 +403,10 @@ Blockly.JavaScript['actor_behavior_with'] = function(block) {
 };
 
 Blockly.JavaScript['actor_become'] = function(block) {
-  var value_behavior = Blockly.JavaScript.valueToCode(block, 'BEHAVIOR', Blockly.JavaScript.ORDER_ASSIGNMENT);  // default: ORDER_ATOMIC
+  var value_behavior = Blockly.JavaScript.valueToCode(block, 'BEHAVIOR', Blockly.JavaScript.ORDER_FUNCTION_CALL);  // default: ORDER_ATOMIC
   var code = '';
   code += 'this.behavior = ';
-  code += value_behavior;
+  code += value_behavior + '(this._)';
   code += ';\n';
   return code;  // statements don't need binding-strength
 };
@@ -431,7 +441,7 @@ Blockly.JavaScript['actor_assign'] = function(block) {
 Blockly.JavaScript['actor_state'] = function(block) {
   var text_name = block.getFieldValue('NAME');
   var code = 'this._';  // stateful context
-  if (text_name.match(/^[a-zA-Z_$][0-9a-zA-Z_$]*$/)) {
+  if (text_name.match(DAL.varPattern)) {
     code += '.' + text_name;  // --FIXME-- quote special characters in identifier text_name
   } else {
     code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
