@@ -761,9 +761,9 @@
     </statement>
   </block>
 
-  <block type="actor_sponsor" id="j9Wu=Ht*_CWhP^$4DO+u" x="20" y="19">
-    <field name="ACTORS">20</field>
-    <field name="EVENTS">100</field>
+  <block type="actor_sponsor" id="j9Wu=Ht*_CWhP^$4DO+u" x="42" y="25">
+    <field name="ACTORS">99</field>
+    <field name="EVENTS">999</field>
     <statement name="SCRIPT">
       <shadow type="actor_send" id="Yy!glB4]jDHo9OJw%bY?">
         <value name="MESSAGE">
@@ -981,52 +981,61 @@
                           </block>
                         </statement>
                         <statement name="ELSE">
-                          <block type="actor_assign" id="i|{PK4h4wYfS9__{Bwk?">
-                            <field name="NAME">first</field>
-                            <value name="VALUE">
-                              <block type="dict_get" id="$=WFxdB2)CJl=KG5lGGN">
-                                <field name="NAME">first</field>
-                                <value name="DICT">
-                                  <shadow type="actor_message" id="-qnM}[mXH=BxMbJ-Z_}:"></shadow>
-                                </value>
-                              </block>
+                          <block type="text_print" id="x!ywdfCF~Pcht{GK]-,;">
+                            <value name="TEXT">
+                              <shadow type="text" id="KsFI3@P:-Lb=muI1pA`E">
+                                <field name="TEXT">start.</field>
+                              </shadow>
                             </value>
                             <next>
-                              <block type="actor_send" id="Ch0#NCoymcKqbO@v^n_3">
-                                <value name="MESSAGE">
-                                  <shadow type="dict_empty" id="/^:A.3#}uf7L234fiBI#"></shadow>
-                                  <block type="dict_bind" id="p5D^vU*{:B@W43:|m#%4">
-                                    <field name="NAME">count</field>
-                                    <value name="VALUE">
-                                      <block type="dict_get" id="9H^n9N;i]c)t6;a2LQ4k">
-                                        <field name="NAME">count</field>
-                                        <value name="DICT">
-                                          <shadow type="actor_message" id="n*~ST6S=9QDk2)~p:N=?"></shadow>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <value name="DICT">
-                                      <shadow type="dict_empty" id="|!!%4(qS5O?O._/5jJVR"></shadow>
-                                    </value>
-                                  </block>
-                                </value>
-                                <value name="ACTOR">
-                                  <block type="actor_state" id="]$nV7$N0Po#pyeMz1e?/">
+                              <block type="actor_assign" id="i|{PK4h4wYfS9__{Bwk?">
+                                <field name="NAME">first</field>
+                                <value name="VALUE">
+                                  <block type="dict_get" id="$=WFxdB2)CJl=KG5lGGN">
                                     <field name="NAME">first</field>
+                                    <value name="DICT">
+                                      <shadow type="actor_message" id="-qnM}[mXH=BxMbJ-Z_}:"></shadow>
+                                    </value>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="actor_become" id="C;MRspxr)sHglRZGJ.NS">
-                                    <value name="BEHAVIOR">
-                                      <shadow type="actor_behavior" id="ZiF?KcJ[a]%{[t;e2LXP">
-                                        <statement name="SCRIPT">
-                                          <shadow type="actor_ignore" id="bz#1lh=S@1smL(ijW8Ez"></shadow>
-                                        </statement>
-                                      </shadow>
-                                      <block type="actor_state" id="Ua3ymU;/U6w:3[Ch2s-]">
-                                        <field name="NAME">last</field>
+                                  <block type="actor_send" id="Ch0#NCoymcKqbO@v^n_3">
+                                    <value name="MESSAGE">
+                                      <shadow type="dict_empty" id="/^:A.3#}uf7L234fiBI#"></shadow>
+                                      <block type="dict_bind" id="p5D^vU*{:B@W43:|m#%4">
+                                        <field name="NAME">count</field>
+                                        <value name="VALUE">
+                                          <block type="dict_get" id="9H^n9N;i]c)t6;a2LQ4k">
+                                            <field name="NAME">count</field>
+                                            <value name="DICT">
+                                              <shadow type="actor_message" id="n*~ST6S=9QDk2)~p:N=?"></shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="DICT">
+                                          <shadow type="dict_empty" id="|!!%4(qS5O?O._/5jJVR"></shadow>
+                                        </value>
                                       </block>
                                     </value>
+                                    <value name="ACTOR">
+                                      <block type="actor_state" id="]$nV7$N0Po#pyeMz1e?/">
+                                        <field name="NAME">first</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="actor_become" id="C;MRspxr)sHglRZGJ.NS">
+                                        <value name="BEHAVIOR">
+                                          <shadow type="actor_behavior" id="ZiF?KcJ[a]%{[t;e2LXP">
+                                            <statement name="SCRIPT">
+                                              <shadow type="actor_ignore" id="bz#1lh=S@1smL(ijW8Ez"></shadow>
+                                            </statement>
+                                          </shadow>
+                                          <block type="actor_state" id="Ua3ymU;/U6w:3[Ch2s-]">
+                                            <field name="NAME">last</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
@@ -1048,7 +1057,7 @@
                             <field name="NAME">size</field>
                             <value name="VALUE">
                               <block type="math_number" id="]:u!:|hWw5X-Ex|+ZW3#">
-                                <field name="NUM">5</field>
+                                <field name="NUM">99</field>
                               </block>
                             </value>
                             <value name="DICT">
@@ -1085,7 +1094,7 @@
                                 <field name="NAME">count</field>
                                 <value name="VALUE">
                                   <block type="math_number" id="wSJB[paRf95/LxXe/Gc@">
-                                    <field name="NUM">3</field>
+                                    <field name="NUM">9</field>
                                   </block>
                                 </value>
                                 <value name="DICT">
