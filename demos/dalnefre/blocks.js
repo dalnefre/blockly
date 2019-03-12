@@ -297,7 +297,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "dict_bind",
-    "message0": "bind %1 to %2 in %3",
+    "message0": "bind %1 to %2 with %3",
     "args0": [
       {
         "type": "field_input",
