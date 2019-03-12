@@ -3,7 +3,7 @@
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "actor_sponsor",
-    "message0": "sponsor with %1 actors %2 %3 events %4 %5",
+    "message0": "sponsor %1 actors %2 %3 events %4 %5",
     "args0": [
       {
         "type": "field_number",
@@ -95,7 +95,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": "Action",
     "nextStatement": "Action",
     "colour": 345,
-    "tooltip": "send a message",
+    "tooltip": "send a message to an actor",
     "helpUrl": ""
   },
   {
@@ -156,7 +156,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "actor_create",
-    "message0": "new actor with: %1 script: %2",
+    "message0": "actor with: %1 script: %2",
     "args0": [
       {
         "type": "input_value",
