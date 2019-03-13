@@ -18,18 +18,18 @@ var DAL = (function (self) {
     options.actorLimit = (options.actorLimit >= 0) ? options.actorLimit : Infinity;
     options.eventLimit = (options.eventLimit >= 0) ? options.eventLimit : Infinity;
     var sponsor = function create(behavior) {
-      trace("create["+options.actorLimit+"]", behavior);
+      xtrace("create["+options.actorLimit+"]", behavior);
       var actor = ignore;
       if (options.actorLimit >= 0) {
         --options.actorLimit;
         actor = function send(message) {
           xtrace("send["+options.eventLimit+"]", message);
           invokeLater(() => {
-            trace("deliver["+options.eventLimit+"]", message);
+            xtrace("deliver["+options.eventLimit+"]", message);
             if (options.eventLimit >= 0) {
               --options.eventLimit;
               try {
-                trace("context["+options.eventLimit+"]", context);
+                xtrace("context["+options.eventLimit+"]", context);
                 context.behavior(message);
               } catch (exception) {
                 fail(exception);
