@@ -1125,7 +1125,7 @@
 
     <category name="Lambda">
 
-  <block type="actor_sponsor" id="sq:0JbrO!u3DOQr=-y$D" x="17" y="15">
+  <block type="actor_sponsor" id="sq:0JbrO!u3DOQr=-y$D" x="31" y="17">
     <field name="ACTORS">99</field>
     <field name="EVENTS">999</field>
     <statement name="SCRIPT">
@@ -1149,136 +1149,153 @@
           </shadow>
         </value>
       </shadow>
-      <block type="actor_assign" id="o$.Rij(Ly]4g^CyiRBDK">
-        <field name="NAME">lit_expr</field>
+      <block type="actor_assign" id="{Y|Y+A0fK,-=Jx.o=wso">
+        <field name="NAME">empty_env</field>
         <value name="VALUE">
-          <block type="actor_behavior" id="^.S.nYe0[p#7V)XR,*#7">
-            <field name="NAME">const_beh</field>
-            <statement name="SCRIPT">
-              <shadow type="actor_ignore" id="2{J=2Sqh^OWHfF-rltLb"></shadow>
-              <block type="controls_if" id="T/Y5mgE%!)8764jIbX]`">
-                <value name="IF0">
-                  <block type="logic_compare" id="-rB2DX2WdMkpoUKs:T|O">
-                    <field name="OP">EQ</field>
-                    <value name="A">
-                      <block type="dict_get" id="IF2KN#H,:IHb=?@H#f-!">
-                        <field name="NAME">op</field>
-                        <value name="DICT">
-                          <shadow type="actor_message" id="Ax|43b6I$Sm+S@6h}yL,"></shadow>
-                        </value>
-                      </block>
-                    </value>
-                    <value name="B">
-                      <block type="text" id="Wlo~C:e^vE0u}W7AhBw2">
-                        <field name="TEXT">eval</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <statement name="DO0">
-                  <block type="actor_send" id="yO(K_v|#1}fOpTL1Oelw">
+          <block type="actor_create" id="d{eO/njFmrDxOI8Pt;`%">
+            <value name="STATE">
+              <shadow type="dict_empty" id="_nEkLsLB{xd^cHT^uHY#"></shadow>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id=",5.}BqC^SY5h;.v^Ip/}">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="`yMhH9O!.NMp5u[lU*ot"></shadow>
+                </statement>
+              </shadow>
+              <block type="actor_behavior" id="Or0v@7y_w%Yg?BGQZYu;">
+                <field name="NAME">undefined_beh</field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="2{J=2Sqh^OWHfF-rltLb"></shadow>
+                  <block type="actor_send" id="-kqj:h0-)4ji.?jv=08z">
                     <value name="MESSAGE">
                       <shadow type="dict_empty" id="roS_g}-os6*mNQGzJfY1"></shadow>
-                      <block type="dict_bind" id="FZ?1R4$=aQKdWcgoEZJa">
-                        <field name="NAME">value</field>
-                        <value name="VALUE">
-                          <block type="actor_state" id="1z9me]WD9vI5)wB^Ismz">
-                            <field name="NAME">value</field>
-                          </block>
-                        </value>
-                        <value name="DICT">
-                          <shadow type="dict_empty" id="iQP{BteH):G[_,sk6n+%"></shadow>
-                        </value>
-                      </block>
                     </value>
                     <value name="ACTOR">
-                      <block type="dict_get" id="2w?qUr06AKb!rG.A1$Q#">
+                      <block type="dict_get" id=";tU3A^}0(/|Vy3Z8fznm">
                         <field name="NAME">cust</field>
                         <value name="DICT">
-                          <shadow type="actor_message" id="/Q}@pf8Xcgv/.Tz%(-3("></shadow>
+                          <shadow type="actor_message" id="W;ATtVm#-EK}ga03Bs.i"></shadow>
                         </value>
                       </block>
                     </value>
+                    <next>
+                      <block type="actor_fail" id=";E*m$E(a#,dFt);%UZk,">
+                        <value name="ERROR">
+                          <shadow type="text" id="{T3a1~):jX5^B|`NSWNs">
+                            <field name="TEXT">undefined</field>
+                          </shadow>
+                          <block type="text_join" id="rY^tkXB{8Q5afQm);cPQ">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="dict_get" id="(h|.:*-ake1nTjXRz{^h">
+                                <field name="NAME">name</field>
+                                <value name="DICT">
+                                  <shadow type="actor_message" id="FqNM.o(qkbg%y9megC^J"></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="text" id=";,gYOG;O/}HR`uykRnXW">
+                                <field name="TEXT"> undefined.</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
                   </block>
                 </statement>
               </block>
-            </statement>
+            </value>
           </block>
         </value>
         <next>
-          <block type="actor_assign" id="Wvg{sXT)LX]1?Rh6XG7[">
-            <field name="NAME">var_expr</field>
+          <block type="actor_assign" id="K~.yxP$j9dJB=Sz(Q._6">
+            <field name="NAME">bound_env</field>
             <value name="VALUE">
-              <block type="actor_behavior" id="~ZQI{x~Ff[kdMRK,W|sz">
-                <field name="NAME">ident_beh</field>
+              <block type="actor_behavior" id="j$BET2Y(+JDC7%BdHC6z">
+                <field name="NAME">env_beh</field>
                 <statement name="SCRIPT">
                   <shadow type="actor_ignore" id="2{J=2Sqh^OWHfF-rltLb"></shadow>
-                  <block type="controls_if" id="T*EOZ]4g!9Z(:L@][lw8">
+                  <block type="controls_if" id="UJEgc|6yN~Wr?hK:{3t)">
+                    <mutation else="1"></mutation>
                     <value name="IF0">
-                      <block type="logic_compare" id="M{6t|g}?~S}0nvvF/Hn0">
-                        <field name="OP">EQ</field>
+                      <block type="logic_operation" id="AmYRd[l8MVR#yXz]7=?E">
+                        <field name="OP">AND</field>
                         <value name="A">
-                          <block type="dict_get" id="n5rnZJ=3Wqx8Mz0,R)~P">
-                            <field name="NAME">op</field>
-                            <value name="DICT">
-                              <shadow type="actor_message" id="@,ZmC?}(J9_vM=bDVi(r"></shadow>
+                          <block type="logic_compare" id="]bMVVALL6HeDX6E~T/Q^">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="dict_get" id="G.Z?T[]P3~r{y[~b;tZ:">
+                                <field name="NAME">op</field>
+                                <value name="DICT">
+                                  <shadow type="actor_message" id="b`)Lj6w+?MGC+Ud#cq/b"></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="text" id="9V#8{5JnZ,_[8()CS?t;">
+                                <field name="TEXT">lookup</field>
+                              </block>
                             </value>
                           </block>
                         </value>
                         <value name="B">
-                          <block type="text" id="dLNP?kErh2%sqLidDnT%">
-                            <field name="TEXT">eval</field>
+                          <block type="logic_compare" id="`f_Z7azQ7L]QRt.aHa[C">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="dict_get" id="u4P?CRy-]{Dl)I(0Rh)/">
+                                <field name="NAME">name</field>
+                                <value name="DICT">
+                                  <shadow type="actor_message" id=".~`Oo{jdm^]2;3!To;p3"></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="actor_state" id="=|1xtQSX)l2OKh~L+#yr">
+                                <field name="NAME">name</field>
+                              </block>
+                            </value>
                           </block>
                         </value>
                       </block>
                     </value>
                     <statement name="DO0">
-                      <block type="actor_send" id="MkdR@;4;2d^=Ml-MqErG">
+                      <block type="actor_send" id="Y^!c`G|u]zY[~$kE6!~U">
                         <value name="MESSAGE">
-                          <shadow type="dict_empty" id="roS_g}-os6*mNQGzJfY1"></shadow>
-                          <block type="dict_bind" id="Z;?rvu1zZPWzk[,Pu0h[">
-                            <field name="NAME">name</field>
+                          <shadow type="dict_empty" id="=bN|_XWo@i~hVV8Xxl~C"></shadow>
+                          <block type="dict_bind" id="cyyawL]}9KM#v2uHTui;">
+                            <field name="NAME">value</field>
                             <value name="VALUE">
-                              <block type="actor_state" id="R}v@lK!5mTZjT:BaM,vW">
-                                <field name="NAME">name</field>
+                              <block type="actor_state" id="Qsmb:`(fIa;Z4Y)jvs57">
+                                <field name="NAME">value</field>
                               </block>
                             </value>
                             <value name="DICT">
-                              <shadow type="dict_empty" id="_kJUBP0N?n5GwB*Tfw#?"></shadow>
-                              <block type="dict_bind" id="6mJ),xxS[xoB.(0z)^hb">
-                                <field name="NAME">op</field>
-                                <value name="VALUE">
-                                  <block type="text" id="Y_^8MJN0p|:e4FbCpc,A">
-                                    <field name="TEXT">lookup</field>
-                                  </block>
-                                </value>
-                                <value name="DICT">
-                                  <shadow type="dict_empty" id="R?r/k9g?%+=|q.AuW9@e"></shadow>
-                                  <block type="dict_bind" id="X4ut8F1KU8t=d3,2aQow">
-                                    <field name="NAME">cust</field>
-                                    <value name="VALUE">
-                                      <block type="dict_get" id="(Er.2:;iVURcv.PZ*VGo">
-                                        <field name="NAME">cust</field>
-                                        <value name="DICT">
-                                          <shadow type="actor_message" id="i}N^=+HA1nGwZ`X+}nNk"></shadow>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <value name="DICT">
-                                      <shadow type="dict_empty" id="mXd8f3[Z`sgVZaNL|ILe"></shadow>
-                                    </value>
-                                  </block>
-                                </value>
-                              </block>
+                              <shadow type="dict_empty" id="DOVOJHq:_lUm:|k1,[-:"></shadow>
                             </value>
                           </block>
                         </value>
                         <value name="ACTOR">
-                          <block type="dict_get" id="iMzPAiLo=snuP7*3UsKv">
-                            <field name="NAME">env</field>
+                          <block type="dict_get" id="~]Ds.!E]W9Ib[zeyP5D2">
+                            <field name="NAME">cust</field>
                             <value name="DICT">
-                              <shadow type="actor_message" id="[bDc1Nh(H=Q`oT?T#d=L"></shadow>
+                              <shadow type="actor_message" id="NJ.-`VM]+*M/KPt5ARsC"></shadow>
                             </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="actor_send" id="y)=,sb9e,xhQy6:@G;dQ">
+                        <value name="MESSAGE">
+                          <shadow type="dict_empty" id="!fFwfPJ.rkj2{c2!4_XB"></shadow>
+                          <block type="actor_message" id="GG(^L^uRZy{@-`5H^UEn"></block>
+                        </value>
+                        <value name="ACTOR">
+                          <block type="actor_state" id="bgotm}/DRn%_v!5Nw(o+">
+                            <field name="NAME">next</field>
                           </block>
                         </value>
                       </block>
@@ -1288,153 +1305,136 @@
               </block>
             </value>
             <next>
-              <block type="actor_assign" id="{Y|Y+A0fK,-=Jx.o=wso">
-                <field name="NAME">empty_env</field>
+              <block type="actor_assign" id="o$.Rij(Ly]4g^CyiRBDK">
+                <field name="NAME">lit_expr</field>
                 <value name="VALUE">
-                  <block type="actor_create" id="d{eO/njFmrDxOI8Pt;`%">
-                    <value name="STATE">
-                      <shadow type="dict_empty" id="_nEkLsLB{xd^cHT^uHY#"></shadow>
-                    </value>
-                    <value name="BEHAVIOR">
-                      <shadow type="actor_behavior" id=",5.}BqC^SY5h;.v^Ip/}">
-                        <field name="NAME"></field>
-                        <statement name="SCRIPT">
-                          <shadow type="actor_ignore" id="`yMhH9O!.NMp5u[lU*ot"></shadow>
-                        </statement>
-                      </shadow>
-                      <block type="actor_behavior" id="Or0v@7y_w%Yg?BGQZYu;">
-                        <field name="NAME">undefined_beh</field>
-                        <statement name="SCRIPT">
-                          <shadow type="actor_ignore" id="2{J=2Sqh^OWHfF-rltLb"></shadow>
-                          <block type="actor_send" id="-kqj:h0-)4ji.?jv=08z">
+                  <block type="actor_behavior" id="^.S.nYe0[p#7V)XR,*#7">
+                    <field name="NAME">const_beh</field>
+                    <statement name="SCRIPT">
+                      <shadow type="actor_ignore" id="2{J=2Sqh^OWHfF-rltLb"></shadow>
+                      <block type="controls_if" id="T/Y5mgE%!)8764jIbX]`">
+                        <value name="IF0">
+                          <block type="logic_compare" id="-rB2DX2WdMkpoUKs:T|O">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="dict_get" id="IF2KN#H,:IHb=?@H#f-!">
+                                <field name="NAME">op</field>
+                                <value name="DICT">
+                                  <shadow type="actor_message" id="Ax|43b6I$Sm+S@6h}yL,"></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="text" id="Wlo~C:e^vE0u}W7AhBw2">
+                                <field name="TEXT">eval</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="actor_send" id="yO(K_v|#1}fOpTL1Oelw">
                             <value name="MESSAGE">
                               <shadow type="dict_empty" id="roS_g}-os6*mNQGzJfY1"></shadow>
-                            </value>
-                            <value name="ACTOR">
-                              <block type="dict_get" id=";tU3A^}0(/|Vy3Z8fznm">
-                                <field name="NAME">cust</field>
-                                <value name="DICT">
-                                  <shadow type="actor_message" id="W;ATtVm#-EK}ga03Bs.i"></shadow>
-                                </value>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="actor_fail" id=";E*m$E(a#,dFt);%UZk,">
-                                <value name="ERROR">
-                                  <shadow type="text" id="{T3a1~):jX5^B|`NSWNs">
-                                    <field name="TEXT">undefined</field>
-                                  </shadow>
-                                  <block type="text_join" id="rY^tkXB{8Q5afQm);cPQ">
-                                    <mutation items="2"></mutation>
-                                    <value name="ADD0">
-                                      <block type="dict_get" id="(h|.:*-ake1nTjXRz{^h">
-                                        <field name="NAME">name</field>
-                                        <value name="DICT">
-                                          <shadow type="actor_message" id="FqNM.o(qkbg%y9megC^J"></shadow>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <value name="ADD1">
-                                      <block type="text" id=";,gYOG;O/}HR`uykRnXW">
-                                        <field name="TEXT"> undefined.</field>
-                                      </block>
-                                    </value>
+                              <block type="dict_bind" id="FZ?1R4$=aQKdWcgoEZJa">
+                                <field name="NAME">value</field>
+                                <value name="VALUE">
+                                  <block type="actor_state" id="1z9me]WD9vI5)wB^Ismz">
+                                    <field name="NAME">value</field>
                                   </block>
                                 </value>
+                                <value name="DICT">
+                                  <shadow type="dict_empty" id="iQP{BteH):G[_,sk6n+%"></shadow>
+                                </value>
                               </block>
-                            </next>
+                            </value>
+                            <value name="ACTOR">
+                              <block type="dict_get" id="2w?qUr06AKb!rG.A1$Q#">
+                                <field name="NAME">cust</field>
+                                <value name="DICT">
+                                  <shadow type="actor_message" id="/Q}@pf8Xcgv/.Tz%(-3("></shadow>
+                                </value>
+                              </block>
+                            </value>
                           </block>
                         </statement>
                       </block>
-                    </value>
+                    </statement>
                   </block>
                 </value>
                 <next>
-                  <block type="actor_assign" id="K~.yxP$j9dJB=Sz(Q._6">
-                    <field name="NAME">bound_env</field>
+                  <block type="actor_assign" id="Wvg{sXT)LX]1?Rh6XG7[">
+                    <field name="NAME">var_expr</field>
                     <value name="VALUE">
-                      <block type="actor_behavior" id="j$BET2Y(+JDC7%BdHC6z">
-                        <field name="NAME">env_beh</field>
+                      <block type="actor_behavior" id="~ZQI{x~Ff[kdMRK,W|sz">
+                        <field name="NAME">ident_beh</field>
                         <statement name="SCRIPT">
                           <shadow type="actor_ignore" id="2{J=2Sqh^OWHfF-rltLb"></shadow>
-                          <block type="controls_if" id="UJEgc|6yN~Wr?hK:{3t)">
-                            <mutation else="1"></mutation>
+                          <block type="controls_if" id="T*EOZ]4g!9Z(:L@][lw8">
                             <value name="IF0">
-                              <block type="logic_operation" id="AmYRd[l8MVR#yXz]7=?E">
-                                <field name="OP">AND</field>
+                              <block type="logic_compare" id="M{6t|g}?~S}0nvvF/Hn0">
+                                <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="logic_compare" id="]bMVVALL6HeDX6E~T/Q^">
-                                    <field name="OP">EQ</field>
-                                    <value name="A">
-                                      <block type="dict_get" id="G.Z?T[]P3~r{y[~b;tZ:">
-                                        <field name="NAME">op</field>
-                                        <value name="DICT">
-                                          <shadow type="actor_message" id="b`)Lj6w+?MGC+Ud#cq/b"></shadow>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="text" id="9V#8{5JnZ,_[8()CS?t;">
-                                        <field name="TEXT">lookup</field>
-                                      </block>
+                                  <block type="dict_get" id="n5rnZJ=3Wqx8Mz0,R)~P">
+                                    <field name="NAME">op</field>
+                                    <value name="DICT">
+                                      <shadow type="actor_message" id="@,ZmC?}(J9_vM=bDVi(r"></shadow>
                                     </value>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="logic_compare" id="`f_Z7azQ7L]QRt.aHa[C">
-                                    <field name="OP">EQ</field>
-                                    <value name="A">
-                                      <block type="dict_get" id="u4P?CRy-]{Dl)I(0Rh)/">
-                                        <field name="NAME">name</field>
-                                        <value name="DICT">
-                                          <shadow type="actor_message" id=".~`Oo{jdm^]2;3!To;p3"></shadow>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="actor_state" id="=|1xtQSX)l2OKh~L+#yr">
-                                        <field name="NAME">name</field>
-                                      </block>
-                                    </value>
+                                  <block type="text" id="dLNP?kErh2%sqLidDnT%">
+                                    <field name="TEXT">eval</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <statement name="DO0">
-                              <block type="actor_send" id="Y^!c`G|u]zY[~$kE6!~U">
+                              <block type="actor_send" id="MkdR@;4;2d^=Ml-MqErG">
                                 <value name="MESSAGE">
-                                  <shadow type="dict_empty" id="=bN|_XWo@i~hVV8Xxl~C"></shadow>
-                                  <block type="dict_bind" id="cyyawL]}9KM#v2uHTui;">
-                                    <field name="NAME">value</field>
+                                  <shadow type="dict_empty" id="roS_g}-os6*mNQGzJfY1"></shadow>
+                                  <block type="dict_bind" id="Z;?rvu1zZPWzk[,Pu0h[">
+                                    <field name="NAME">name</field>
                                     <value name="VALUE">
-                                      <block type="actor_state" id="Qsmb:`(fIa;Z4Y)jvs57">
-                                        <field name="NAME">value</field>
+                                      <block type="actor_state" id="R}v@lK!5mTZjT:BaM,vW">
+                                        <field name="NAME">name</field>
                                       </block>
                                     </value>
                                     <value name="DICT">
-                                      <shadow type="dict_empty" id="DOVOJHq:_lUm:|k1,[-:"></shadow>
+                                      <shadow type="dict_empty" id="_kJUBP0N?n5GwB*Tfw#?"></shadow>
+                                      <block type="dict_bind" id="6mJ),xxS[xoB.(0z)^hb">
+                                        <field name="NAME">op</field>
+                                        <value name="VALUE">
+                                          <block type="text" id="Y_^8MJN0p|:e4FbCpc,A">
+                                            <field name="TEXT">lookup</field>
+                                          </block>
+                                        </value>
+                                        <value name="DICT">
+                                          <shadow type="dict_empty" id="R?r/k9g?%+=|q.AuW9@e"></shadow>
+                                          <block type="dict_bind" id="X4ut8F1KU8t=d3,2aQow">
+                                            <field name="NAME">cust</field>
+                                            <value name="VALUE">
+                                              <block type="dict_get" id="(Er.2:;iVURcv.PZ*VGo">
+                                                <field name="NAME">cust</field>
+                                                <value name="DICT">
+                                                  <shadow type="actor_message" id="i}N^=+HA1nGwZ`X+}nNk"></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="DICT">
+                                              <shadow type="dict_empty" id="mXd8f3[Z`sgVZaNL|ILe"></shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
                                     </value>
                                   </block>
                                 </value>
                                 <value name="ACTOR">
-                                  <block type="dict_get" id="~]Ds.!E]W9Ib[zeyP5D2">
-                                    <field name="NAME">cust</field>
+                                  <block type="dict_get" id="iMzPAiLo=snuP7*3UsKv">
+                                    <field name="NAME">env</field>
                                     <value name="DICT">
-                                      <shadow type="actor_message" id="NJ.-`VM]+*M/KPt5ARsC"></shadow>
+                                      <shadow type="actor_message" id="[bDc1Nh(H=Q`oT?T#d=L"></shadow>
                                     </value>
-                                  </block>
-                                </value>
-                              </block>
-                            </statement>
-                            <statement name="ELSE">
-                              <block type="actor_send" id="y)=,sb9e,xhQy6:@G;dQ">
-                                <value name="MESSAGE">
-                                  <shadow type="dict_empty" id="!fFwfPJ.rkj2{c2!4_XB"></shadow>
-                                  <block type="actor_message" id="GG(^L^uRZy{@-`5H^UEn"></block>
-                                </value>
-                                <value name="ACTOR">
-                                  <block type="actor_state" id="bgotm}/DRn%_v!5Nw(o+">
-                                    <field name="NAME">next</field>
                                   </block>
                                 </value>
                               </block>
@@ -1953,366 +1953,6 @@
                                     </statement>
                                   </block>
                                 </value>
-                                <next>
-                                  <block type="actor_assign" id="uZ!0.r#@YEo*,ZsQ+]GC">
-                                    <field name="NAME">lit_42</field>
-                                    <value name="VALUE">
-                                      <block type="actor_create" id="1h_lhJojJd,ChI.I[#P0">
-                                        <value name="STATE">
-                                          <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                          <block type="dict_bind" id="pc5wjF?6h+W9}9a+$uFI">
-                                            <field name="NAME">value</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="cG+8~-z{-Z`?N[_m3jk3">
-                                                <field name="NUM">42</field>
-                                              </block>
-                                            </value>
-                                            <value name="DICT">
-                                              <shadow type="dict_empty" id="IWH].0B|*Ol%~{%}N~zE"></shadow>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="BEHAVIOR">
-                                          <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                            <field name="NAME"></field>
-                                            <statement name="SCRIPT">
-                                              <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                            </statement>
-                                          </shadow>
-                                          <block type="actor_state" id="T;v_?B~O;f8gRC^tewdt">
-                                            <field name="NAME">lit_expr</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="actor_assign" id="xBxMmh5vHsedCeum64)]">
-                                        <field name="NAME">var_x</field>
-                                        <value name="VALUE">
-                                          <block type="actor_create" id="ZpYsdrkh8feqwM9Yl~#4">
-                                            <value name="STATE">
-                                              <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                              <block type="dict_bind" id="9EMjH@7W7O,]YTnM_*mE">
-                                                <field name="NAME">name</field>
-                                                <value name="VALUE">
-                                                  <block type="text" id=":HB$2k^D0I`ggZQq=?Rr">
-                                                    <field name="TEXT">x</field>
-                                                  </block>
-                                                </value>
-                                                <value name="DICT">
-                                                  <shadow type="dict_empty" id="zHxg0-Z(bPRrN0U)1x)*"></shadow>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="BEHAVIOR">
-                                              <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                <field name="NAME"></field>
-                                                <statement name="SCRIPT">
-                                                  <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                </statement>
-                                              </shadow>
-                                              <block type="actor_state" id="dO!j4Q)=)D)!(`(]0_Cp">
-                                                <field name="NAME">var_expr</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="actor_assign" id="D=ND79}1Z!?JRdCuV,rW">
-                                            <field name="NAME">fun_identity</field>
-                                            <value name="VALUE">
-                                              <block type="actor_create" id="-#ANc9o;Pq=G+[X@sLdR">
-                                                <value name="STATE">
-                                                  <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                                  <block type="dict_bind" id="OSqS2R(wf:;VQ@uj]`gU">
-                                                    <field name="NAME">name</field>
-                                                    <value name="VALUE">
-                                                      <block type="text" id="*W|.L2SPv5=jv_f{Wd57">
-                                                        <field name="TEXT">x</field>
-                                                      </block>
-                                                    </value>
-                                                    <value name="DICT">
-                                                      <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
-                                                      <block type="dict_bind" id="TB$S)ZHtU(4+73+vF;f0">
-                                                        <field name="NAME">expr</field>
-                                                        <value name="VALUE">
-                                                          <block type="actor_state" id="@yq3ou7-.otqh%Oe@G:z">
-                                                            <field name="NAME">var_x</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="DICT">
-                                                          <shadow type="dict_empty" id=".-Vh6.h~oEqlfW+ba+u3"></shadow>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <value name="BEHAVIOR">
-                                                  <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                    <field name="NAME"></field>
-                                                    <statement name="SCRIPT">
-                                                      <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                    </statement>
-                                                  </shadow>
-                                                  <block type="actor_state" id="aL$H8J3+,5Nuf7;dF3.f">
-                                                    <field name="NAME">abs_expr</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="actor_assign" id="BQdQ1{{?+2bVn2ervv:c">
-                                                <field name="NAME">call_id_with_42</field>
-                                                <value name="VALUE">
-                                                  <block type="actor_create" id="3Uim?r8+9[k1B1-~jfop">
-                                                    <value name="STATE">
-                                                      <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                                      <block type="dict_bind" id="I86M)WVDog|d:kf#l3@K">
-                                                        <field name="NAME">fun_expr</field>
-                                                        <value name="VALUE">
-                                                          <block type="actor_state" id="-:Ko[zD}sQ$QsqM!G/zj">
-                                                            <field name="NAME">fun_identity</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="DICT">
-                                                          <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
-                                                          <block type="dict_bind" id=",=t.L}#^Gt$30]r(WuEk">
-                                                            <field name="NAME">arg_expr</field>
-                                                            <value name="VALUE">
-                                                              <block type="actor_state" id="42wgB2xkkJm$o[c9m0TR">
-                                                                <field name="NAME">lit_42</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="DICT">
-                                                              <shadow type="dict_empty" id="*%l_A{h((dE]d4~l2rsx"></shadow>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="BEHAVIOR">
-                                                      <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                        <field name="NAME"></field>
-                                                        <statement name="SCRIPT">
-                                                          <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                        </statement>
-                                                      </shadow>
-                                                      <block type="actor_state" id="u?HDj.#2r/KjHCoyzk#l">
-                                                        <field name="NAME">app_expr</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="actor_assign" id="10,Sv8B@gt$M+,r?==L)">
-                                                    <field name="NAME">example_expr</field>
-                                                    <value name="VALUE">
-                                                      <block type="actor_create" id="OI:]k6q*wE9)KhW{wtVv">
-                                                        <value name="STATE">
-                                                          <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                                          <block type="dict_bind" id="d%*HZ}RnP}$RcXd@Q@7v">
-                                                            <field name="NAME">fun_expr</field>
-                                                            <value name="VALUE">
-                                                              <block type="actor_create" id="+(J2|xm|).JkkqW*R.nh">
-                                                                <value name="STATE">
-                                                                  <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                                                  <block type="dict_bind" id="zUp_(Pq2ASyvc=6B3uHW">
-                                                                    <field name="NAME">name</field>
-                                                                    <value name="VALUE">
-                                                                      <block type="text" id="kn(gq(#_^_dL4-fNkM4.">
-                                                                        <field name="TEXT">x</field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="DICT">
-                                                                      <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
-                                                                      <block type="dict_bind" id="O!,zP)aklkJe7`qy~!Yi">
-                                                                        <field name="NAME">expr</field>
-                                                                        <value name="VALUE">
-                                                                          <block type="actor_create" id="5r(PUP9#rt-u4MTY*tOC">
-                                                                            <value name="STATE">
-                                                                              <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                                                              <block type="dict_bind" id="Z@Ud=nGw2K%lq/76OBbb">
-                                                                                <field name="NAME">name</field>
-                                                                                <value name="VALUE">
-                                                                                  <block type="text" id="Ga06*vOSNfv93(/.8k99">
-                                                                                    <field name="TEXT">x</field>
-                                                                                  </block>
-                                                                                </value>
-                                                                                <value name="DICT">
-                                                                                  <shadow type="dict_empty" id=":]dYLm+m**kq4qA./TH,"></shadow>
-                                                                                </value>
-                                                                              </block>
-                                                                            </value>
-                                                                            <value name="BEHAVIOR">
-                                                                              <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                                                <field name="NAME"></field>
-                                                                                <statement name="SCRIPT">
-                                                                                  <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                                                </statement>
-                                                                              </shadow>
-                                                                              <block type="actor_state" id="-Vub^}[dvD0:=sQ.TYxQ">
-                                                                                <field name="NAME">var_expr</field>
-                                                                              </block>
-                                                                            </value>
-                                                                          </block>
-                                                                        </value>
-                                                                        <value name="DICT">
-                                                                          <shadow type="dict_empty" id="C.SSc07RtLjSPd`oy(=1"></shadow>
-                                                                        </value>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="BEHAVIOR">
-                                                                  <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                                    <field name="NAME"></field>
-                                                                    <statement name="SCRIPT">
-                                                                      <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                                    </statement>
-                                                                  </shadow>
-                                                                  <block type="actor_state" id="Z18^2~f[1hupwqRpAkdO">
-                                                                    <field name="NAME">abs_expr</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                            <value name="DICT">
-                                                              <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
-                                                              <block type="dict_bind" id="2ijAnXS4PH47-c9mHK`Y">
-                                                                <field name="NAME">arg_expr</field>
-                                                                <value name="VALUE">
-                                                                  <block type="actor_create" id="vdh%PN_oBb4,/ged2[V^">
-                                                                    <value name="STATE">
-                                                                      <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
-                                                                      <block type="dict_bind" id="gQ34QlCrqWj?+!vX^!h9">
-                                                                        <field name="NAME">value</field>
-                                                                        <value name="VALUE">
-                                                                          <block type="math_number" id="63XG_qf^kU%x9/;0kZVm">
-                                                                            <field name="NUM">42</field>
-                                                                          </block>
-                                                                        </value>
-                                                                        <value name="DICT">
-                                                                          <shadow type="dict_empty" id="`d{zX0KCmjba)}4?0R/~"></shadow>
-                                                                        </value>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="BEHAVIOR">
-                                                                      <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                                        <field name="NAME"></field>
-                                                                        <statement name="SCRIPT">
-                                                                          <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                                        </statement>
-                                                                      </shadow>
-                                                                      <block type="actor_state" id="fsd6a4m5%0az!2/QK~=K">
-                                                                        <field name="NAME">lit_expr</field>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="DICT">
-                                                                  <shadow type="dict_empty" id="G1vo_Za%yS6c7^c}[%pg"></shadow>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <value name="BEHAVIOR">
-                                                          <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
-                                                            <field name="NAME"></field>
-                                                            <statement name="SCRIPT">
-                                                              <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
-                                                            </statement>
-                                                          </shadow>
-                                                          <block type="actor_state" id="N/GLrY4R{RgJG0yJh2Q$">
-                                                            <field name="NAME">app_expr</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="actor_send" id="AjMXFC=~]zA/$RuCE?1+">
-                                                        <value name="MESSAGE">
-                                                          <shadow type="dict_empty" id="$efoi`VMDzBeJ*Os(o:3"></shadow>
-                                                          <block type="dict_bind" id="nlFm4@tR?T+iPNR[XuF~">
-                                                            <field name="NAME">op</field>
-                                                            <value name="VALUE">
-                                                              <block type="text" id="a)qvF9uIMVsC,fdZE;SV">
-                                                                <field name="TEXT">eval</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="DICT">
-                                                              <shadow type="dict_empty" id="_kJUBP0N?n5GwB*Tfw#?"></shadow>
-                                                              <block type="dict_bind" id="2.R0){#/dfKFIB[}G;V-">
-                                                                <field name="NAME">env</field>
-                                                                <value name="VALUE">
-                                                                  <block type="actor_state" id="QdF3:{eA#a/Z8aRre^FP">
-                                                                    <field name="NAME">empty_env</field>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="DICT">
-                                                                  <shadow type="dict_empty" id="R?r/k9g?%+=|q.AuW9@e"></shadow>
-                                                                  <block type="dict_bind" id="BD@JL1O_)yQN}U%*tycN">
-                                                                    <field name="NAME">cust</field>
-                                                                    <value name="VALUE">
-                                                                      <block type="actor_create" id="m2w~4x~,;pK+isI}.KX-">
-                                                                        <value name="STATE">
-                                                                          <shadow type="dict_empty" id="(g-ls8t6(|SU!7:@BIr)"></shadow>
-                                                                        </value>
-                                                                        <value name="BEHAVIOR">
-                                                                          <shadow type="actor_behavior" id="h|PTfi8*rRC0}WJ!~zW!">
-                                                                            <field name="NAME"></field>
-                                                                            <statement name="SCRIPT">
-                                                                              <shadow type="actor_ignore" id="qZ2lSN8}#F61Nr_m+#dG"></shadow>
-                                                                            </statement>
-                                                                          </shadow>
-                                                                          <block type="actor_behavior" id="uv15yMvB+]HdeG_7:9W,">
-                                                                            <field name="NAME"></field>
-                                                                            <statement name="SCRIPT">
-                                                                              <shadow type="actor_ignore" id="f3dfxe/Ma0xW`(HUb?p*"></shadow>
-                                                                              <block type="text_print" id="2aFYbS^RhR@GSSk`HHS,">
-                                                                                <value name="TEXT">
-                                                                                  <shadow type="text" id="n5#m^zaCLqj3.vTi:r_n">
-                                                                                    <field name="TEXT">abc</field>
-                                                                                  </shadow>
-                                                                                  <block type="dict_get" id="~2[Jd]!A5o(wJF%4}tJj">
-                                                                                    <field name="NAME">value</field>
-                                                                                    <value name="DICT">
-                                                                                      <shadow type="actor_message" id="Zh2l.Yvxm:b?6lf{3%@@"></shadow>
-                                                                                    </value>
-                                                                                  </block>
-                                                                                </value>
-                                                                              </block>
-                                                                            </statement>
-                                                                          </block>
-                                                                        </value>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="DICT">
-                                                                      <shadow type="dict_empty" id="up--0DQCg|[v`tL,`!*B"></shadow>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <value name="ACTOR">
-                                                          <block type="actor_state" id="]$m@3,ehLn9FwGvkt$gO">
-                                                            <field name="NAME">example_expr</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
                               </block>
                             </next>
                           </block>
@@ -2327,6 +1967,362 @@
         </next>
       </block>
     </statement>
+  </block>
+  <block type="actor_assign" id="uZ!0.r#@YEo*,ZsQ+]GC" x="38" y="2423">
+    <field name="NAME">lit_42</field>
+    <value name="VALUE">
+      <block type="actor_create" id="1h_lhJojJd,ChI.I[#P0">
+        <value name="STATE">
+          <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+          <block type="dict_bind" id="pc5wjF?6h+W9}9a+$uFI">
+            <field name="NAME">value</field>
+            <value name="VALUE">
+              <block type="math_number" id="cG+8~-z{-Z`?N[_m3jk3">
+                <field name="NUM">42</field>
+              </block>
+            </value>
+            <value name="DICT">
+              <shadow type="dict_empty" id="IWH].0B|*Ol%~{%}N~zE"></shadow>
+            </value>
+          </block>
+        </value>
+        <value name="BEHAVIOR">
+          <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+            <field name="NAME"></field>
+            <statement name="SCRIPT">
+              <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+            </statement>
+          </shadow>
+          <block type="actor_state" id="T;v_?B~O;f8gRC^tewdt">
+            <field name="NAME">lit_expr</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="actor_assign" id="xBxMmh5vHsedCeum64)]">
+        <field name="NAME">var_x</field>
+        <value name="VALUE">
+          <block type="actor_create" id="ZpYsdrkh8feqwM9Yl~#4">
+            <value name="STATE">
+              <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+              <block type="dict_bind" id="9EMjH@7W7O,]YTnM_*mE">
+                <field name="NAME">name</field>
+                <value name="VALUE">
+                  <block type="text" id=":HB$2k^D0I`ggZQq=?Rr">
+                    <field name="TEXT">x</field>
+                  </block>
+                </value>
+                <value name="DICT">
+                  <shadow type="dict_empty" id="zHxg0-Z(bPRrN0U)1x)*"></shadow>
+                </value>
+              </block>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+                </statement>
+              </shadow>
+              <block type="actor_state" id="dO!j4Q)=)D)!(`(]0_Cp">
+                <field name="NAME">var_expr</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="actor_assign" id="D=ND79}1Z!?JRdCuV,rW">
+            <field name="NAME">fun_identity</field>
+            <value name="VALUE">
+              <block type="actor_create" id="-#ANc9o;Pq=G+[X@sLdR">
+                <value name="STATE">
+                  <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+                  <block type="dict_bind" id="OSqS2R(wf:;VQ@uj]`gU">
+                    <field name="NAME">name</field>
+                    <value name="VALUE">
+                      <block type="text" id="*W|.L2SPv5=jv_f{Wd57">
+                        <field name="TEXT">x</field>
+                      </block>
+                    </value>
+                    <value name="DICT">
+                      <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
+                      <block type="dict_bind" id="TB$S)ZHtU(4+73+vF;f0">
+                        <field name="NAME">expr</field>
+                        <value name="VALUE">
+                          <block type="actor_state" id="@yq3ou7-.otqh%Oe@G:z">
+                            <field name="NAME">var_x</field>
+                          </block>
+                        </value>
+                        <value name="DICT">
+                          <shadow type="dict_empty" id=".-Vh6.h~oEqlfW+ba+u3"></shadow>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="BEHAVIOR">
+                  <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+                    <field name="NAME"></field>
+                    <statement name="SCRIPT">
+                      <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+                    </statement>
+                  </shadow>
+                  <block type="actor_state" id="aL$H8J3+,5Nuf7;dF3.f">
+                    <field name="NAME">abs_expr</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="actor_assign" id="BQdQ1{{?+2bVn2ervv:c">
+                <field name="NAME">call_id_with_42</field>
+                <value name="VALUE">
+                  <block type="actor_create" id="3Uim?r8+9[k1B1-~jfop">
+                    <value name="STATE">
+                      <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+                      <block type="dict_bind" id="I86M)WVDog|d:kf#l3@K">
+                        <field name="NAME">fun_expr</field>
+                        <value name="VALUE">
+                          <block type="actor_state" id="-:Ko[zD}sQ$QsqM!G/zj">
+                            <field name="NAME">fun_identity</field>
+                          </block>
+                        </value>
+                        <value name="DICT">
+                          <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
+                          <block type="dict_bind" id=",=t.L}#^Gt$30]r(WuEk">
+                            <field name="NAME">arg_expr</field>
+                            <value name="VALUE">
+                              <block type="actor_state" id="42wgB2xkkJm$o[c9m0TR">
+                                <field name="NAME">lit_42</field>
+                              </block>
+                            </value>
+                            <value name="DICT">
+                              <shadow type="dict_empty" id="*%l_A{h((dE]d4~l2rsx"></shadow>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="BEHAVIOR">
+                      <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+                        <field name="NAME"></field>
+                        <statement name="SCRIPT">
+                          <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+                        </statement>
+                      </shadow>
+                      <block type="actor_state" id="u?HDj.#2r/KjHCoyzk#l">
+                        <field name="NAME">app_expr</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="actor_assign" id="10,Sv8B@gt$M+,r?==L)" x="37" y="2825">
+    <field name="NAME">example_expr</field>
+    <value name="VALUE">
+      <block type="actor_create" id="OI:]k6q*wE9)KhW{wtVv">
+        <value name="STATE">
+          <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+          <block type="dict_bind" id="d%*HZ}RnP}$RcXd@Q@7v">
+            <field name="NAME">fun_expr</field>
+            <value name="VALUE">
+              <block type="actor_create" id="+(J2|xm|).JkkqW*R.nh">
+                <value name="STATE">
+                  <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+                  <block type="dict_bind" id="zUp_(Pq2ASyvc=6B3uHW">
+                    <field name="NAME">name</field>
+                    <value name="VALUE">
+                      <block type="text" id="kn(gq(#_^_dL4-fNkM4.">
+                        <field name="TEXT">x</field>
+                      </block>
+                    </value>
+                    <value name="DICT">
+                      <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
+                      <block type="dict_bind" id="O!,zP)aklkJe7`qy~!Yi">
+                        <field name="NAME">expr</field>
+                        <value name="VALUE">
+                          <block type="actor_create" id="5r(PUP9#rt-u4MTY*tOC">
+                            <value name="STATE">
+                              <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+                              <block type="dict_bind" id="Z@Ud=nGw2K%lq/76OBbb">
+                                <field name="NAME">name</field>
+                                <value name="VALUE">
+                                  <block type="text" id="Ga06*vOSNfv93(/.8k99">
+                                    <field name="TEXT">x</field>
+                                  </block>
+                                </value>
+                                <value name="DICT">
+                                  <shadow type="dict_empty" id=":]dYLm+m**kq4qA./TH,"></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="BEHAVIOR">
+                              <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+                                <field name="NAME"></field>
+                                <statement name="SCRIPT">
+                                  <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+                                </statement>
+                              </shadow>
+                              <block type="actor_state" id="-Vub^}[dvD0:=sQ.TYxQ">
+                                <field name="NAME">var_expr</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="DICT">
+                          <shadow type="dict_empty" id="C.SSc07RtLjSPd`oy(=1"></shadow>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="BEHAVIOR">
+                  <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+                    <field name="NAME"></field>
+                    <statement name="SCRIPT">
+                      <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+                    </statement>
+                  </shadow>
+                  <block type="actor_state" id="Z18^2~f[1hupwqRpAkdO">
+                    <field name="NAME">abs_expr</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="DICT">
+              <shadow type="dict_empty" id="-62-q$0vd-h7o#=,rPI6"></shadow>
+              <block type="dict_bind" id="2ijAnXS4PH47-c9mHK`Y">
+                <field name="NAME">arg_expr</field>
+                <value name="VALUE">
+                  <block type="actor_create" id="vdh%PN_oBb4,/ged2[V^">
+                    <value name="STATE">
+                      <shadow type="dict_empty" id="x9d1Ia?WV})tr@+faXr*"></shadow>
+                      <block type="dict_bind" id="gQ34QlCrqWj?+!vX^!h9">
+                        <field name="NAME">value</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="63XG_qf^kU%x9/;0kZVm">
+                            <field name="NUM">42</field>
+                          </block>
+                        </value>
+                        <value name="DICT">
+                          <shadow type="dict_empty" id="`d{zX0KCmjba)}4?0R/~"></shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="BEHAVIOR">
+                      <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+                        <field name="NAME"></field>
+                        <statement name="SCRIPT">
+                          <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+                        </statement>
+                      </shadow>
+                      <block type="actor_state" id="fsd6a4m5%0az!2/QK~=K">
+                        <field name="NAME">lit_expr</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="DICT">
+                  <shadow type="dict_empty" id="G1vo_Za%yS6c7^c}[%pg"></shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="BEHAVIOR">
+          <shadow type="actor_behavior" id="]5W/,UP|pK{#A_X/lJC4">
+            <field name="NAME"></field>
+            <statement name="SCRIPT">
+              <shadow type="actor_ignore" id="U%+DscK{)sbUfJb$ws#-"></shadow>
+            </statement>
+          </shadow>
+          <block type="actor_state" id="N/GLrY4R{RgJG0yJh2Q$">
+            <field name="NAME">app_expr</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="actor_send" id="AjMXFC=~]zA/$RuCE?1+">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="$efoi`VMDzBeJ*Os(o:3"></shadow>
+          <block type="dict_bind" id="nlFm4@tR?T+iPNR[XuF~">
+            <field name="NAME">op</field>
+            <value name="VALUE">
+              <block type="text" id="a)qvF9uIMVsC,fdZE;SV">
+                <field name="TEXT">eval</field>
+              </block>
+            </value>
+            <value name="DICT">
+              <shadow type="dict_empty" id="_kJUBP0N?n5GwB*Tfw#?"></shadow>
+              <block type="dict_bind" id="2.R0){#/dfKFIB[}G;V-">
+                <field name="NAME">env</field>
+                <value name="VALUE">
+                  <block type="actor_state" id="QdF3:{eA#a/Z8aRre^FP">
+                    <field name="NAME">empty_env</field>
+                  </block>
+                </value>
+                <value name="DICT">
+                  <shadow type="dict_empty" id="R?r/k9g?%+=|q.AuW9@e"></shadow>
+                  <block type="dict_bind" id="BD@JL1O_)yQN}U%*tycN">
+                    <field name="NAME">cust</field>
+                    <value name="VALUE">
+                      <block type="actor_create" id="m2w~4x~,;pK+isI}.KX-">
+                        <value name="STATE">
+                          <shadow type="dict_empty" id="(g-ls8t6(|SU!7:@BIr)"></shadow>
+                        </value>
+                        <value name="BEHAVIOR">
+                          <shadow type="actor_behavior" id="h|PTfi8*rRC0}WJ!~zW!">
+                            <field name="NAME"></field>
+                            <statement name="SCRIPT">
+                              <shadow type="actor_ignore" id="qZ2lSN8}#F61Nr_m+#dG"></shadow>
+                            </statement>
+                          </shadow>
+                          <block type="actor_behavior" id="uv15yMvB+]HdeG_7:9W,">
+                            <field name="NAME"></field>
+                            <statement name="SCRIPT">
+                              <shadow type="actor_ignore" id="f3dfxe/Ma0xW`(HUb?p*"></shadow>
+                              <block type="text_print" id="2aFYbS^RhR@GSSk`HHS,">
+                                <value name="TEXT">
+                                  <shadow type="text" id="n5#m^zaCLqj3.vTi:r_n">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="dict_get" id="~2[Jd]!A5o(wJF%4}tJj">
+                                    <field name="NAME">value</field>
+                                    <value name="DICT">
+                                      <shadow type="actor_message" id="Zh2l.Yvxm:b?6lf{3%@@"></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="DICT">
+                      <shadow type="dict_empty" id="up--0DQCg|[v`tL,`!*B"></shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="ACTOR">
+          <block type="actor_state" id="]$m@3,ehLn9FwGvkt$gO">
+            <field name="NAME">example_expr</field>
+          </block>
+        </value>
+      </block>
+    </next>
   </block>
 
     </category>
