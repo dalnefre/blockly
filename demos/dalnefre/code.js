@@ -7,7 +7,7 @@ var DAL = (function (self) {
   let show = alert && (_ => alert(_)) || ignore;  // synchronous message dialog
   let fail = function fail(e) { self.log('FAIL!', e); self.show('FAIL! ' + e); };  // default error handler
   let trace = log;
-//  let trace = ignore;
+  let xtrace = ignore;
   let invokeLater = (typeof setImmediate === "function")
     ? function invokeLater(callback) { setImmediate(callback); }
     : function invokeLater(callback) { setTimeout(callback, 0); };
@@ -18,18 +18,18 @@ var DAL = (function (self) {
     options.actorLimit = (options.actorLimit >= 0) ? options.actorLimit : Infinity;
     options.eventLimit = (options.eventLimit >= 0) ? options.eventLimit : Infinity;
     var sponsor = function create(behavior) {
-//      trace("create["+options.actorLimit+"]", behavior);
+      trace("create["+options.actorLimit+"]", behavior);
       var actor = ignore;
       if (options.actorLimit >= 0) {
         --options.actorLimit;
         actor = function send(message) {
-//          trace("send["+options.eventLimit+"]", message);
+          xtrace("send["+options.eventLimit+"]", message);
           invokeLater(() => {
-//            trace("deliver["+options.eventLimit+"]", message);
+            trace("deliver["+options.eventLimit+"]", message);
             if (options.eventLimit >= 0) {
               --options.eventLimit;
               try {
-//                trace("context["+options.eventLimit+"]", context);
+                trace("context["+options.eventLimit+"]", context);
                 context.behavior(message);
               } catch (exception) {
                 fail(exception);
