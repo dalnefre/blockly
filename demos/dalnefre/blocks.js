@@ -458,7 +458,7 @@ Blockly.JavaScript['actor_fail'] = function(block) {
 
 Blockly.JavaScript['actor_debug'] = function(block) {
   var code = '';
-  code += '(_ => function (__) {  // ignore state\n';
+  code += '(_ => function DEBUG(__) {  // ignore state\n';
   code += '  DAL.log("DEBUG:", __);\n';
   code += '})';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
