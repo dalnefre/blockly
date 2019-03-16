@@ -321,6 +321,29 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 45,
     "tooltip": "dictionary definition",
     "helpUrl": ""
+  },
+  {
+    "type": "device_set",
+    "message0": "set pin %1 to %2",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "PIN",
+        "value": 0,
+        "min": 0,
+        "max": 5
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE",
+        "check": "Boolean"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 345,
+    "tooltip": "set state of device output pin",
+    "helpUrl": ""
   }
 ]);
 
@@ -511,4 +534,20 @@ Blockly.JavaScript['dict_bind'] = function(block) {
   code += ': ' + value_value + ' }';
   code += '))';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+/*
+ * Device
+ */
+
+Blockly.JavaScript['device_set'] = function(block) {
+  var number_pin = block.getFieldValue('PIN');
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = '';
+  code += 'DAL.setDevicePin(';
+  code += number_pin
+  code += ', ';
+  code += value_value
+  code += ');\n';
+  return code;
 };
