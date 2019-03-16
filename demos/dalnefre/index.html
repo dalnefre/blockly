@@ -12,9 +12,9 @@
       <td>
         <div id="deviceArea">
           <canvas id="deviceCanvas" height="89" width="144">canvas not supported</canvas>
-          <button id="deviceButtonA">A</button>
-          <button id="deviceButtonB">B</button>
-          <button id="deviceButtonC">C</button>
+          <button id="deviceButtonA" onclick="DAL.deviceEvent('A.clicked')">A</button>
+          <button id="deviceButtonB" onclick="DAL.deviceEvent('B.clicked')">B</button>
+          <button id="deviceButtonC" onclick="DAL.deviceEvent('C.clicked')">C</button>
         </div>
         <h1><a href="https://developers.google.com/blockly/">Blockly</a> 
           &gt; <a href="../index.html">Demos</a> 
@@ -140,13 +140,6 @@
         <shadow type="dict_empty"></shadow>
       </value>
     </block>
-    <block type="device_set">
-      <value name="VALUE">
-        <shadow type="logic_boolean">
-          <field name="BOOL">TRUE</field>
-        </shadow>
-      </value>
-    </block>
   </category>
   <category name="Lists" colour="#745CA6">
     <block type="lists_create_with">
@@ -215,6 +208,16 @@
       <field name="TYPE">NUMERIC</field>
       <field name="DIRECTION">1</field>
     </block>
+  </category>
+  <category name="Device" colour="345">
+    <block type="device_set">
+      <value name="VALUE">
+        <shadow type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="device_event"></block>
   </category>
   <sep></sep>
   <category name="Math" colour="#5C68A6">
@@ -1126,6 +1129,217 @@
                     </next>
                   </block>
                 </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="actor_sponsor" id="bRq4ASD(,f)%WXzvKBF^" x="57" y="55">
+    <field name="ACTORS">99</field>
+    <field name="EVENTS">999</field>
+    <statement name="SCRIPT">
+      <shadow type="actor_send" id="TpC~,Z:H[RI!1.yN:|1H">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="e0k[])@%cQ17mN.Nq7O["></shadow>
+        </value>
+        <value name="ACTOR">
+          <shadow type="actor_create" id="8$$O(I:Q`$eI.w$!H}G3">
+            <value name="STATE">
+              <shadow type="dict_empty" id="l^?i*4uyd$VWEw,l#H,u"></shadow>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="P*f]tX%n^AkGv=Spo7ZK">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="~si5xDe7?g2=.~4QZtZL"></shadow>
+                </statement>
+              </shadow>
+            </value>
+          </shadow>
+        </value>
+      </shadow>
+      <block type="device_event" id="YQd]TNF?9hg4_K!yC6[I">
+        <field name="EVENT">A.clicked</field>
+        <value name="ACTOR">
+          <block type="actor_create" id="zkpHA0Ra0X*2%MIg0fHG">
+            <value name="STATE">
+              <shadow type="dict_empty" id="%4nPfKP@rnx!C.;Jl{si"></shadow>
+              <block type="dict_bind" id="ZiGj(|dj$+9qG?F(@%Dn">
+                <field name="NAME">on</field>
+                <value name="VALUE">
+                  <block type="logic_boolean" id="{BFN?7aCazf,4UZcSkZx">
+                    <field name="BOOL">FALSE</field>
+                  </block>
+                </value>
+                <value name="DICT">
+                  <shadow type="dict_empty" id="wg@Q/IxWCKGB*ENGU,lp"></shadow>
+                </value>
+              </block>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="2vjO^}Q`EynefMj=V^|u">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="R8etD@UyEcDg|=$;KScx"></shadow>
+                </statement>
+              </shadow>
+              <block type="actor_behavior" id="OWOW7KKdWHszKtnuHz)H">
+                <field name="NAME">green LED</field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="2@bCnvIigBc-^`)mN]0A"></shadow>
+                  <block type="actor_assign" id="r]_{S*5B}fU+1%2X;xk#">
+                    <field name="NAME">on</field>
+                    <value name="VALUE">
+                      <block type="logic_negate" id="N}e]$_d.Fuh#d!(,LQO:">
+                        <value name="BOOL">
+                          <block type="actor_state" id="/H(PnL_BVx9sYP-]oiFH">
+                            <field name="NAME">on</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="device_set" id="Kr|F#+wAF6BS,wsW$kG?">
+                        <field name="PIN">0</field>
+                        <value name="VALUE">
+                          <shadow type="logic_boolean" id="JK2;?iVHj{+~%QvC=2Sv">
+                            <field name="BOOL">TRUE</field>
+                          </shadow>
+                          <block type="actor_state" id="NwWH~P[tH)^dHF_7y#sH">
+                            <field name="NAME">on</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="device_event" id="qxT6WALGVEzQQ)Ct@%k-">
+            <field name="EVENT">B.clicked</field>
+            <value name="ACTOR">
+              <block type="actor_create" id="+zHHuhmkJ3U=3lAFjx)Q">
+                <value name="STATE">
+                  <shadow type="dict_empty" id="%4nPfKP@rnx!C.;Jl{si"></shadow>
+                  <block type="dict_bind" id="`a]B/V!I}}3HU-I63C{J">
+                    <field name="NAME">on</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="?b0xnwh[E_F0tz/6^Dml">
+                        <field name="BOOL">FALSE</field>
+                      </block>
+                    </value>
+                    <value name="DICT">
+                      <shadow type="dict_empty" id="vu+Vrj6k87OkUu^@Qz?#"></shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="BEHAVIOR">
+                  <shadow type="actor_behavior" id="2vjO^}Q`EynefMj=V^|u">
+                    <field name="NAME"></field>
+                    <statement name="SCRIPT">
+                      <shadow type="actor_ignore" id="R8etD@UyEcDg|=$;KScx"></shadow>
+                    </statement>
+                  </shadow>
+                  <block type="actor_behavior" id="n8yP~uQiKa:^a?~B9n1`">
+                    <field name="NAME">yellow LED</field>
+                    <statement name="SCRIPT">
+                      <shadow type="actor_ignore" id="2@bCnvIigBc-^`)mN]0A"></shadow>
+                      <block type="actor_assign" id="r-;mKDT/Ya%MDC?@-Gk^">
+                        <field name="NAME">on</field>
+                        <value name="VALUE">
+                          <block type="logic_negate" id="e@[K9UhxbSZr.8)Eb@9x">
+                            <value name="BOOL">
+                              <block type="actor_state" id="r6tMFq,3w|6n$d_ANr+F">
+                                <field name="NAME">on</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="device_set" id="geH|}jxhk`M!$J^fW0(^">
+                            <field name="PIN">1</field>
+                            <value name="VALUE">
+                              <shadow type="logic_boolean" id="JK2;?iVHj{+~%QvC=2Sv">
+                                <field name="BOOL">TRUE</field>
+                              </shadow>
+                              <block type="actor_state" id="c0t5/cDdZ[86LO@IBwXY">
+                                <field name="NAME">on</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="device_event" id="[28[KXei%o=wtnG-e#[y">
+                <field name="EVENT">C.clicked</field>
+                <value name="ACTOR">
+                  <block type="actor_create" id="u.N27a-JdR^uI_n3sUSF">
+                    <value name="STATE">
+                      <shadow type="dict_empty" id="%4nPfKP@rnx!C.;Jl{si"></shadow>
+                      <block type="dict_bind" id="_*9?22zm@PwTLK{6^_z7">
+                        <field name="NAME">on</field>
+                        <value name="VALUE">
+                          <block type="logic_boolean" id="Xb.FG|4PE[J?kk5m[=?[">
+                            <field name="BOOL">FALSE</field>
+                          </block>
+                        </value>
+                        <value name="DICT">
+                          <shadow type="dict_empty" id="0TrYD{`iNYcLtUtN*m*A"></shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="BEHAVIOR">
+                      <shadow type="actor_behavior" id="2vjO^}Q`EynefMj=V^|u">
+                        <field name="NAME"></field>
+                        <statement name="SCRIPT">
+                          <shadow type="actor_ignore" id="R8etD@UyEcDg|=$;KScx"></shadow>
+                        </statement>
+                      </shadow>
+                      <block type="actor_behavior" id="Rj]Yf;yxyzPAR}jGH.RV">
+                        <field name="NAME">red LED</field>
+                        <statement name="SCRIPT">
+                          <shadow type="actor_ignore" id="2@bCnvIigBc-^`)mN]0A"></shadow>
+                          <block type="actor_assign" id="G6ZK$sibq5^6_B$M9h-k">
+                            <field name="NAME">on</field>
+                            <value name="VALUE">
+                              <block type="logic_negate" id="j$Vf:,JG6-,=;=#N1P)z">
+                                <value name="BOOL">
+                                  <block type="actor_state" id="4$`?h`RFnicZ2I`RqB;?">
+                                    <field name="NAME">on</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="device_set" id="-CD-gbm=2)9CNry+oFeC">
+                                <field name="PIN">2</field>
+                                <value name="VALUE">
+                                  <shadow type="logic_boolean" id="JK2;?iVHj{+~%QvC=2Sv">
+                                    <field name="BOOL">TRUE</field>
+                                  </shadow>
+                                  <block type="actor_state" id="Yu_6vm54_gvz0UdpPNjt">
+                                    <field name="NAME">on</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </value>
+                  </block>
+                </value>
               </block>
             </next>
           </block>

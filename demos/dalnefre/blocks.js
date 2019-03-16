@@ -339,10 +339,44 @@ Blockly.defineBlocksWithJsonArray([
         "check": "Boolean"
       }
     ],
-    "previousStatement": null,
-    "nextStatement": null,
+    "previousStatement": "Action",
+    "nextStatement": "Action",
     "colour": 345,
     "tooltip": "set state of device output pin",
+    "helpUrl": ""
+  },
+  {
+    "type": "device_event",
+    "message0": "when %1 notify %2",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "EVENT",
+        "options": [
+          [
+            "button A clicked,",
+            "A.clicked"
+          ],
+          [
+            "button B clicked,",
+            "B.clicked"
+          ],
+          [
+            "button C clicked,",
+            "C.clicked"
+          ]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "ACTOR",
+        "check": "Actor"
+      }
+    ],
+    "previousStatement": "Action",
+    "nextStatement": "Action",
+    "colour": 345,
+    "tooltip": "listen for device events",
     "helpUrl": ""
   }
 ]);
@@ -549,5 +583,17 @@ Blockly.JavaScript['device_set'] = function(block) {
   code += ', ';
   code += value_value
   code += ');\n';
+  return code;
+};
+
+Blockly.JavaScript['device_event'] = function(block) {
+  var dropdown_event = block.getFieldValue('EVENT');
+  var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '';
+  code += 'DAL.eventHandler';
+  code += '["' + dropdown_event + '"]';
+  code += ' = ' + value_actor;
+  code += ';\n';
   return code;
 };
