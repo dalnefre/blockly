@@ -125,11 +125,19 @@ var DAL = (function (self) {
   };
 
   let deviceArea = document.getElementById('deviceArea');
-  let deviceContext = deviceArea.getContext('2d');
+  let deviceCanvas = document.getElementById('deviceCanvas');
+  let deviceContext = deviceCanvas.getContext('2d');
+  let positionDevice = function positionDevice() {
+    var areaDim = elementDimensions(deviceArea);
+    var canvasDim = elementDimensions(deviceCanvas);
+    canvasDim.x = areaDim.x + 1;  // adjust for border
+    canvasDim.y = areaDim.y + 1;  // adjust for border
+    positionElement(deviceCanvas, canvasDim);
+  };
   let drawDevice = (_ => {
     let ctx = deviceContext;
-    let canvas_w = deviceArea.width;
-    let canvas_h = deviceArea.height;
+    let canvas_w = deviceCanvas.width;
+    let canvas_h = deviceCanvas.height;
     let two_pi = Math.PI * 2;
     let half_pi = Math.PI / 2;
     let led_radius = 7;
@@ -144,20 +152,24 @@ var DAL = (function (self) {
     let ledGreen = { on: '#0e0', off: '#050' };
     let ledBlue = { on: '#4af', off: '#446' };
     let ledOn = function ledOn(on) { drawLED(this, on); }
-    let led_0 = { on: ledOn, x: 32, y: 21, style: ledGreen };
-    let led_1 = { on: ledOn, x: canvas_w / 2, y: 21, style: ledYellow };
-    let led_2 = { on: ledOn, x: canvas_w - 32, y: 21, style: ledRed };
+    let led_0 = { on: ledOn, x: 32, y: 26, style: ledGreen };
+    let led_1 = { on: ledOn, x: canvas_w / 2, y: 26, style: ledYellow };
+    let led_2 = { on: ledOn, x: canvas_w - 32, y: 26, style: ledRed };
+/*
     let led_3 = { on: ledOn, x: 32, y: 55, style: ledGreen };
     let led_4 = { on: ledOn, x: canvas_w / 2, y: 55, style: ledYellow };
     let led_5 = { on: ledOn, x: canvas_w - 32, y: 55, style: ledRed };
+*/
     return function drawDevice() {
       ctx.clearRect(0, 0, canvas_w, canvas_h);
       led_0.on(true);
       led_1.on(true);
       led_2.on(true);
+/*
       led_3.on(false);
       led_4.on(false);
       led_5.on(false);
+*/
     };
   })();
 
@@ -179,9 +191,10 @@ var DAL = (function (self) {
       oneBasedIndex : true,
       toolbox: document.getElementById('toolbox')
     });
-    drawDevice();
     displaySource('Blocks');
     window.addEventListener('resize', resizeDisplay, false);
+    positionDevice();
+    drawDevice();
   };
 
   // exports
