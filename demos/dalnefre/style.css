@@ -23,8 +23,8 @@ table {
   height: 99%;
 }
 .source {
-  visibility: hidden;
   position: absolute;
+  visibility: hidden;
 }
 pre.source {
   margin: 0px;
@@ -42,4 +42,25 @@ pre.source {
   border: solid 1px #333;
   margin: 0.5ex;
   padding: 0px;
+}
+#deviceCanvas {
+  position: absolute;
+}
+#deviceButtonA {
+  position: relative;
+  top: 48px;
+  left: 18px;
+  cursor: pointer;
+}
+#deviceButtonB {
+  position: relative;
+  top: 48px;
+  left: 24px;
+  cursor: pointer;
+}
+#deviceButtonC {
+  position: relative;
+  top: 48px;
+  left: 30px;
+  cursor: pointer;
 }
