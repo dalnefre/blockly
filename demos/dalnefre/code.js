@@ -152,23 +152,28 @@ var DAL = (function (self) {
     let ledGreen = { on: '#0e0', off: '#050' };
     let ledBlue = { on: '#4af', off: '#446' };
     let ledOn = function ledOn(on) { drawLED(this, on); }
-    let led_0 = { on: ledOn, x: 32, y: 26, style: ledGreen };
-    let led_1 = { on: ledOn, x: canvas_w / 2, y: 26, style: ledYellow };
-    let led_2 = { on: ledOn, x: canvas_w - 32, y: 26, style: ledRed };
+    let led = [
+      { on: ledOn, x: 32, y: 26, style: ledGreen },
+      { on: ledOn, x: canvas_w / 2, y: 26, style: ledYellow },
+      { on: ledOn, x: canvas_w - 32, y: 26, style: ledRed },
 /*
-    let led_3 = { on: ledOn, x: 32, y: 55, style: ledGreen };
-    let led_4 = { on: ledOn, x: canvas_w / 2, y: 55, style: ledYellow };
-    let led_5 = { on: ledOn, x: canvas_w - 32, y: 55, style: ledRed };
+      { on: ledOn, x: 32, y: 55, style: ledGreen },
+      { on: ledOn, x: canvas_w / 2, y: 55, style: ledYellow },
+      { on: ledOn, x: canvas_w - 32, y: 55, style: ledRed },
 */
+    ];
+    self.setDevicePin = function setPin(pin, on) {
+      led[pin].on(on);
+    };
     return function drawDevice() {
       ctx.clearRect(0, 0, canvas_w, canvas_h);
-      led_0.on(true);
-      led_1.on(true);
-      led_2.on(true);
+      led[0].on(false);
+      led[1].on(false);
+      led[2].on(false);
 /*
-      led_3.on(false);
-      led_4.on(false);
-      led_5.on(false);
+      led[3].on(true);
+      led[4].on(true);
+      led[5].on(true);
 */
     };
   })();
