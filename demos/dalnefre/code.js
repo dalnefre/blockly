@@ -156,11 +156,9 @@ var DAL = (function (self) {
       { on: ledOn, x: 32, y: 26, style: ledGreen },
       { on: ledOn, x: canvas_w / 2, y: 26, style: ledYellow },
       { on: ledOn, x: canvas_w - 32, y: 26, style: ledRed },
-/*
       { on: ledOn, x: 32, y: 55, style: ledGreen },
       { on: ledOn, x: canvas_w / 2, y: 55, style: ledYellow },
       { on: ledOn, x: canvas_w - 32, y: 55, style: ledRed },
-*/
     ];
     self.setDevicePin = function setPin(pin, on) {
       led[pin].on(on);
@@ -177,6 +175,14 @@ var DAL = (function (self) {
 */
     };
   })();
+  var eventHandler = {};
+  let deviceEvent = function deviceEvent(name) {  // trigger named device event
+    let handler = eventHandler[name];
+    trace(name, handler);
+    if (handler) {
+      handler();
+    }
+  };
 
   let onload = function (e) {
     self.blocklyWorkspace = Blockly.inject(sourceBlocks, {
@@ -211,6 +217,8 @@ var DAL = (function (self) {
   self.displaySource = displaySource;
   self.executeCode = executeJavaScript;
   self.drawDevice = drawDevice;
+  self.deviceEvent = deviceEvent;
+  self.eventHandler = eventHandler;
   self.varPattern = /^[a-zA-Z_$][0-9a-zA-Z_$]*$/;
   return self;
 })({});
