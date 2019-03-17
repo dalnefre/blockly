@@ -105,16 +105,12 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "actor_send_after",
-    "message0": "after %1 ms %2 send %3 to %4",
+    "message0": "after %1 send %2 to %3",
     "args0": [
       {
-        "type": "field_number",
+        "type": "input_value",
         "name": "DELAY",
-        "value": 100,
-        "min": 0
-      },
-      {
-        "type": "input_dummy",
+        "check": "Number",
         "align": "RIGHT"
       },
       {
@@ -134,7 +130,7 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": "Action",
     "nextStatement": "Action",
     "colour": 345,
-    "tooltip": "send a delayed message to an actor",
+    "tooltip": "send a message to an actor after delay in milliseconds",
     "helpUrl": ""
   },
   {
@@ -434,6 +430,14 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 345,
     "tooltip": "listen for device events",
     "helpUrl": ""
+  },
+  {
+    "type": "device_now",
+    "message0": "now",
+    "output": "Number",
+    "colour": 225,
+    "tooltip": "the current time in milliseconds",
+    "helpUrl": ""
   }
 ]);
 
@@ -469,15 +473,14 @@ Blockly.JavaScript['actor_send'] = function(block) {
 };
 
 Blockly.JavaScript['actor_send_after'] = function(block) {
-  var number_delay = block.getFieldValue('DELAY');
+  var value_delay = Blockly.JavaScript.valueToCode(block, 'DELAY', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
   var value_message = Blockly.JavaScript.valueToCode(block, 'MESSAGE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
   var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
-  // TODO: Assemble JavaScript into code variable.
   var code = '';
   code += '((target, message) => {\n';
   code += '  setTimeout(() => { ';
   code += 'target(message); ';
-  code += '}, ' + number_delay + ');\n';
+  code += '}, ' + value_delay + ');\n';
   code += '})(' + value_actor + ', ' + value_message +');\n';
   return code;
 };
@@ -670,4 +673,9 @@ Blockly.JavaScript['device_event'] = function(block) {
   code += ' = ' + value_actor;
   code += ';\n';
   return code;
+};
+
+Blockly.JavaScript['device_now'] = function(block) {
+  var code = 'performance.now()';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
