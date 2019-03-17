@@ -313,10 +313,31 @@ Blockly.defineBlocksWithJsonArray([
         "check": "Dict"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": null,
     "colour": 210,
     "tooltip": "dictionary lookup",
+    "helpUrl": ""
+  },
+  {
+    "type": "dict_has",
+    "message0": "%1 defined in %2",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "NAME",
+        "text": "name"
+      },
+      {
+        "type": "input_value",
+        "name": "DICT",
+        "check": "Dict"
+      }
+    ],
+    "inputsInline": false,
+    "output": "Boolean",
+    "colour": 210,
+    "tooltip": "check for definition",
     "helpUrl": ""
   },
   {
@@ -621,6 +642,16 @@ Blockly.JavaScript['dict_get'] = function(block) {
     code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
   }
   return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['dict_has'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
+  var value_dict = Blockly.JavaScript.valueToCode(block, 'DICT', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += value_dict;
+  code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
+  code += ' !== undefined';
+  return [code, Blockly.JavaScript.ORDER_EQUALITY];  // default: ORDER_NONE
 };
 
 Blockly.JavaScript['dict_set'] = function(block) {
