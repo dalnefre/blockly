@@ -104,6 +104,40 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "actor_send_after",
+    "message0": "after %1 ms %2 send %3 to %4",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "DELAY",
+        "value": 100,
+        "min": 0
+      },
+      {
+        "type": "input_dummy",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "MESSAGE",
+        "check": "Dict",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "ACTOR",
+        "check": "Actor",
+        "align": "RIGHT"
+      }
+    ],
+    "inputsInline": false,
+    "previousStatement": "Action",
+    "nextStatement": "Action",
+    "colour": 345,
+    "tooltip": "send a delayed message to an actor",
+    "helpUrl": ""
+  },
+  {
     "type": "actor_become",
     "message0": "become %1",
     "args0": [
@@ -408,9 +442,22 @@ Blockly.JavaScript['actor_send'] = function(block) {
   code += value_actor;
   code += '(';
   code += value_message;
-  code += ')';
-  code += ';\n';
+  code += ');\n';
   return code;  // statements don't need binding-strength
+};
+
+Blockly.JavaScript['actor_send_after'] = function(block) {
+  var number_delay = block.getFieldValue('DELAY');
+  var value_message = Blockly.JavaScript.valueToCode(block, 'MESSAGE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  // TODO: Assemble JavaScript into code variable.
+  var code = '';
+  code += '((target, message) => {\n';
+  code += '  setTimeout(() => { ';
+  code += 'target(message); ';
+  code += '}, ' + number_delay + ');\n';
+  code += '})(' + value_actor + ', ' + value_message +');\n';
+  return code;
 };
 
 Blockly.JavaScript['actor_new'] = function(block) {
