@@ -253,6 +253,21 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "actor_has_state",
+    "message0": "%1 is defined",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "NAME",
+        "text": "name"
+      }
+    ],
+    "output": "Boolean",
+    "colour": 210,
+    "tooltip": "check for definition",
+    "helpUrl": ""
+  },
+  {
     "type": "actor_fail",
     "message0": "FAIL! %1",
     "args0": [
@@ -561,8 +576,15 @@ Blockly.JavaScript['actor_state'] = function(block) {
   } else {
     code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
   }
-  // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['actor_has_state'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
+  var code = 'this._';  // stateful context
+  code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
+  code += ' !== undefined';
+  return [code, Blockly.JavaScript.ORDER_EQUALITY];  // default: ORDER_NONE
 };
 
 Blockly.JavaScript['actor_fail'] = function(block) {
