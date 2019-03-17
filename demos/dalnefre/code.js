@@ -134,7 +134,7 @@ var DAL = (function (self) {
     canvasDim.y = areaDim.y + 1;  // adjust for border
     positionElement(deviceCanvas, canvasDim);
   };
-  let drawDevice = (_ => {
+  let drawDevice = (() => {
     let ctx = deviceContext;
     let canvas_w = deviceCanvas.width;
     let canvas_h = deviceCanvas.height;
