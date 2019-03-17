@@ -358,14 +358,25 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "device_set",
-    "message0": "set pin %1 to %2",
+    "message0": "set %1 to %2",
     "args0": [
       {
-        "type": "field_number",
+        "type": "field_dropdown",
         "name": "PIN",
-        "value": 0,
-        "min": 0,
-        "max": 5
+        "options": [
+          [
+            "pin 0",
+            "0"
+          ],
+          [
+            "pin 1",
+            "1"
+          ],
+          [
+            "pin 2",
+            "2"
+          ]
+        ]
       },
       {
         "type": "input_value",
@@ -622,11 +633,11 @@ Blockly.JavaScript['dict_bind'] = function(block) {
  */
 
 Blockly.JavaScript['device_set'] = function(block) {
-  var number_pin = block.getFieldValue('PIN');
+  var dropdown_pin = block.getFieldValue('PIN');
   var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
   var code = '';
   code += 'DAL.setDevicePin(';
-  code += number_pin
+  code += dropdown_pin
   code += ', ';
   code += value_value
   code += ');\n';
