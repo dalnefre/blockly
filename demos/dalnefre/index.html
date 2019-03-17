@@ -130,12 +130,6 @@
     <block type="actor_has_state"></block>
     <block type="actor_state"></block>
     <block type="actor_message"></block>
-    <block type="dict_empty"></block>
-    <block type="dict_set">
-      <value name="DICT">
-        <shadow type="dict_empty"></shadow>
-      </value>
-    </block>
     <block type="dict_has">
       <value name="DICT">
         <shadow type="actor_message"></shadow>
@@ -151,6 +145,7 @@
         <shadow type="dict_empty"></shadow>
       </value>
     </block>
+    <block type="dict_empty"></block>
   </category>
   <category name="Lists" colour="#745CA6">
     <block type="lists_create_with">
@@ -485,7 +480,7 @@
 
     <category name="Test">
 
-  <block type="actor_sponsor" id="[+eT3m{rLl1seH-Q-P{8" x="75" y="45">
+  <block type="actor_sponsor" id="[+eT3m{rLl1seH-Q-P{8" x="74" y="40">
     <field name="ACTORS">1</field>
     <field name="EVENTS">2</field>
     <statement name="SCRIPT">
@@ -530,6 +525,7 @@
                 </statement>
               </shadow>
               <block type="actor_behavior" id="#rQZbp%?jJk-ry~5QM6:">
+                <field name="NAME"></field>
                 <statement name="SCRIPT">
                   <shadow type="actor_ignore" id="4GBqb3KkZKUu=R~|t}DE"></shadow>
                   <block type="text_print" id="]yWtlB(:fy(d^5u2stc)">
@@ -582,7 +578,7 @@
           <block type="actor_send" id="FJYOn}%?U8esQycSHXp|">
             <value name="MESSAGE">
               <shadow type="dict_empty" id="?iEV]zP#_N[R$+^d_a?3"></shadow>
-              <block type="dict_set" id="iw$5`V^6J/CO2?;^|jWt">
+              <block type="dict_bind" id=";Y1MNyyXfMSgOT+qc;~W">
                 <field name="NAME">name</field>
                 <value name="VALUE">
                   <block type="text" id="9%OeB3o[lh`?JKW_X6B;">
@@ -590,7 +586,7 @@
                   </block>
                 </value>
                 <value name="DICT">
-                  <shadow type="dict_empty" id="YArV0|ieKYjeR=4.//XL"></shadow>
+                  <shadow type="dict_empty" id="Fbx5t|]VQ[%3SP/1OEXe"></shadow>
                 </value>
               </block>
             </value>
@@ -603,7 +599,7 @@
               <block type="actor_send" id="8w#mOHz+ievq^ZXIIy26">
                 <value name="MESSAGE">
                   <shadow type="dict_empty" id="F|L5yvU~gS|C!tvqx@fX"></shadow>
-                  <block type="dict_set" id="F~E[cc4Einv:2n*-[I25">
+                  <block type="dict_bind" id="37`$-s|rZ(J|Ar8:zoWK">
                     <field name="NAME">name</field>
                     <value name="VALUE">
                       <block type="text" id="ZZ=6oP0G-!A3/60.K*[4">
@@ -611,7 +607,7 @@
                       </block>
                     </value>
                     <value name="DICT">
-                      <shadow type="dict_empty" id="h%.6~mXR|ff%1H4QlkZx"></shadow>
+                      <shadow type="dict_empty" id="fMV}GoL3e^X;9Xe5etiA"></shadow>
                     </value>
                   </block>
                 </value>
@@ -628,7 +624,7 @@
     </statement>
   </block>
 
-  <block type="actor_sponsor" id="_@#FSJN2m^.TeO~dQ(=)" x="49" y="46">
+  <block type="actor_sponsor" id="_@#FSJN2m^.TeO~dQ(=)" x="75" y="485">
     <field name="ACTORS">2</field>
     <field name="EVENTS">2</field>
     <statement name="SCRIPT">
@@ -662,6 +658,7 @@
                 </statement>
               </shadow>
               <block type="actor_behavior" id="G`voZ2j9^K]m-+a=lc+6">
+                <field name="NAME"></field>
                 <statement name="SCRIPT">
                   <shadow type="actor_ignore" id="-yvA/@E5HF8N=D0Tr$`i"></shadow>
                   <block type="text_print" id="Cg6b;6YFoA.9p4Bc(;A5">
@@ -708,6 +705,7 @@
                     </statement>
                   </shadow>
                   <block type="actor_behavior" id=";9~:=86#fCPP^f8[XhWd">
+                    <field name="NAME"></field>
                     <statement name="SCRIPT">
                       <shadow type="actor_ignore" id="R7haV#Ixi2,bvSbp6lbr"></shadow>
                       <block type="actor_assign" id="xaO2fnq*k[k^@v/A6?v,">
@@ -763,7 +761,7 @@
               <block type="actor_send" id="nyeJ(Ajw;(!v;n=[!qyo">
                 <value name="MESSAGE">
                   <shadow type="dict_empty" id="f=8WnYo/rZW}`CLNKQ]S"></shadow>
-                  <block type="dict_set" id="#O;m[vy9?J}GyNsWRkRC">
+                  <block type="dict_bind" id="W0VOg97S1l^{},f~_%2S">
                     <field name="NAME">message</field>
                     <value name="VALUE">
                       <block type="text" id="]y8~]Kn)%}*M8V6OFN%,">
@@ -771,7 +769,7 @@
                       </block>
                     </value>
                     <value name="DICT">
-                      <shadow type="dict_empty" id="Ja02I|)1H!X4?d}!l=])"></shadow>
+                      <shadow type="dict_empty" id="l|8f!2ON+mI:f8Q3-G3*"></shadow>
                     </value>
                   </block>
                 </value>

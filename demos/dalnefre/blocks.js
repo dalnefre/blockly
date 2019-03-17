@@ -341,31 +341,6 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    "type": "dict_set",
-    "message0": "set %1 to %2 in %3",
-    "args0": [
-      {
-        "type": "field_input",
-        "name": "NAME",
-        "text": "name"
-      },
-      {
-        "type": "input_value",
-        "name": "VALUE"
-      },
-      {
-        "type": "input_value",
-        "name": "DICT",
-        "check": "Dict"
-      }
-    ],
-    "inputsInline": true,
-    "output": "Dict",
-    "colour": 45,
-    "tooltip": "dictionary definition",
-    "helpUrl": ""
-  },
-  {
     "type": "dict_bind",
     "message0": "bind %1 to %2 with %3",
     "args0": [
@@ -652,18 +627,6 @@ Blockly.JavaScript['dict_has'] = function(block) {
   code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
   code += ' !== undefined';
   return [code, Blockly.JavaScript.ORDER_EQUALITY];  // default: ORDER_NONE
-};
-
-Blockly.JavaScript['dict_set'] = function(block) {
-  var text_name = block.getFieldValue('NAME');
-  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
-  var value_dict = Blockly.JavaScript.valueToCode(block, 'DICT', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
-  var code = '';
-  code += 'Object.assign(';
-  code += value_dict + ', ';
-  code += '{ ' + Blockly.JavaScript.quote_(text_name);
-  code += ': ' + value_value + ' })';
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
 Blockly.JavaScript['dict_bind'] = function(block) {
