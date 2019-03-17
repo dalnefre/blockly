@@ -180,7 +180,7 @@ var DAL = (function (self) {
     let handler = eventHandler[name];
     trace(name, handler);
     if (handler) {
-      handler();
+      handler({ "name": name });  // FIXME: should we freeze the message?
     }
   };
 
