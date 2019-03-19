@@ -12,24 +12,35 @@ var DAL = (function (self) {
     ? function invokeLater(callback) { setImmediate(callback); }
     : function invokeLater(callback) { setTimeout(callback, 0); };
 
+  let snapshot = function snapshot(o) {  // snapshot mutable state
+    o = Object.assign({}, o);
+    if (o._) {
+      o._ = Object.freeze(Object.assign({}, o._));
+    }
+    return Object.freeze(o);
+  };
+  var configCount = 0;
   let tart = function config(options) {
+    let configId = ++configCount;
     options = options || {};
     var fail = options.fail || self.fail || ignore;
     options.actorLimit = (options.actorLimit >= 0) ? options.actorLimit : Infinity;
     options.eventLimit = (options.eventLimit >= 0) ? options.eventLimit : Infinity;
     var sponsor = function create(behavior) {
-      trace("create["+options.actorLimit+"]", behavior);
+      let actorId = options.actorLimit;
+      trace("create["+actorId+"]", behavior);
       var actor = ignore;
       if (options.actorLimit >= 0) {
         --options.actorLimit;
         actor = function send(message) {
-          trace("send["+options.eventLimit+"]", message);
+          let eventId = options.eventLimit;
+          trace("send["+eventId+"]", message);
           invokeLater(() => {
             trace("deliver["+options.eventLimit+"]", message);
             if (options.eventLimit >= 0) {
               --options.eventLimit;
               try {
-                trace("context["+options.eventLimit+"]", context);
+                trace("context["+eventId+"]", snapshot(context));
                 context.behavior(message);
               } catch (exception) {
                 fail(exception);
@@ -40,6 +51,7 @@ var DAL = (function (self) {
           });
         };
         var context = {
+          id: configId + '.' + actorId,
           self: actor,
           behavior: behavior,
           sponsor: sponsor
