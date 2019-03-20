@@ -100,6 +100,7 @@ var DAL = (function (self) {
     if (sourceElement === sourceBlocks) {
       Blockly.svgResize(self.blocklyWorkspace);
     }
+    positionDevice();
   };
   let generateJavaScript = function generateJavaScript() {
     // Blockly.JavaScript.addReservedWords('sponsor');  // protect reserved word(s)
