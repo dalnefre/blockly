@@ -8,6 +8,9 @@ var DAL = (function (self) {
   let fail = function fail(e) { self.log('FAIL!', e); self.show('FAIL! ' + e); };  // default error handler
   let trace = log;
   let xtrace = ignore;
+  let breakpoint = function breakpoint(data) {
+    trace("--BREAKPOINT--", data);
+  };
   let invokeLater = (typeof setImmediate === "function")
     ? function invokeLater(callback) { setImmediate(callback); }
     : function invokeLater(callback) { setTimeout(callback, 0); };
@@ -223,6 +226,7 @@ var DAL = (function (self) {
   // exports
   self.log = log;
   self.show = show;
+  self.breakpoint = breakpoint;
   self.fail = fail;
   self.tart = tart;
   self.init = onload;

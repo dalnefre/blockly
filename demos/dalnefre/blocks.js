@@ -287,6 +287,22 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "actor_break",
+    "message0": "BREAKPOINT... %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "DATA",
+        "text": ""
+      }
+    ],
+    "previousStatement": "Action",
+    "nextStatement": "Action",
+    "colour": 345,
+    "tooltip": "debugger breakpoint",
+    "helpUrl": ""
+  },
+  {
     "type": "dict_empty",
     "message0": "{ }",
     "output": "Dict",
@@ -598,6 +614,15 @@ Blockly.JavaScript['actor_debug'] = function(block) {
   code += '  DAL.log("DEBUG:", __);\n';
   code += '})';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript['actor_break'] = function(block) {
+  var text_data = block.getFieldValue('DATA');
+  var code = '';
+  code += 'DAL.breakpoint('
+  code += Blockly.JavaScript.quote_(text_data);
+  code += ');\n';
+  return code;
 };
 
 /*
