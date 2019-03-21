@@ -15,6 +15,15 @@ h1 {
 button {
   margin: 0.5ex;
 }
+.buttonStyle {
+  margin: 0.5ex;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1px 7px 2px;
+  box-sizing: border-box;
+  font: 400 11px system-ui;
+  -webkit-appearance: button;
+}
 table {
   height: 100%;
   width: 100%;
@@ -32,6 +41,10 @@ pre.source {
   padding: 2px;
   background-color: #ffd;
   overflow: scroll;
+}
+#loadXmlFile {
+  position: absolute;
+  visibility: hidden;
 }
 #deviceArea {  /* 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, ... */
   float: right;
