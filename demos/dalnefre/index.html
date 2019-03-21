@@ -38,6 +38,11 @@
         <button id="sourceJavaScriptButton" onclick="DAL.displaySource('JavaScript')">JavaScript</button>
         <button id="sourceXMLButton" onclick="DAL.displaySource('XML')">XML</button>
         <span style="float: right;">
+          <span>
+            <input id="loadXmlFile" type="file" name="loadXmlFile" accept="application/xml" onchange="DAL.loadXml()" />
+            <label for="loadXmlFile" class="buttonStyle">Load XML</label>
+          </span>
+          <button id="saveXmlButton" onclick="DAL.saveXml()">Save XML</button>
           <button id="executeButton" onclick="DAL.executeCode()">Execute</button>
         </span>
       </td>

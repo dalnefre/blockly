@@ -102,7 +102,7 @@ var DAL = (function (self) {
     positionDevice();
   };
   let generateJavaScript = function generateJavaScript() {
-    // Blockly.JavaScript.addReservedWords('sponsor');  // protect reserved word(s)
+    Blockly.JavaScript.addReservedWords('DAL', 'code');  // protect reserved word(s)
     return Blockly.JavaScript.workspaceToCode(self.blocklyWorkspace);
   };
   let displaySource = function displaySource(lang) {
@@ -121,6 +121,54 @@ var DAL = (function (self) {
     }
     sourceElement.style.visibility = 'visible';
     resizeDisplay();
+  };
+  let loadXmlFile = document.getElementById('loadXmlFile');
+  let loadXmlSource = function loadXmlSource() {
+    let ok = (loadXmlFile.files.length == 1); // && confirm('Replace program with file contents?');
+    if (ok) {
+      let file = loadXmlFile.files[0];
+      let reader = new FileReader();
+      reader.addEventListener('load', function (event) {
+        try {
+          let xml = event.target.result;
+          let dom = Blockly.Xml.textToDom(xml);
+          Blockly.Xml.domToWorkspace(dom, self.blocklyWorkspace);
+        } catch (e) {
+          show('Failed to load XML source.');
+        }
+      });
+      reader.readAsText(file);
+    }
+    // Clear this so that the change event still fires even if the
+    // same file is chosen again. If the user re-imports a file, we
+    // want to reload the workspace with its contents.
+    loadXmlFile.value = null;
+  };
+  let createAndDownloadFile = function createAndDownloadFile(contents, filename, mimetype) {
+    var data = new Blob([contents], {type: mimetype});
+    var clickEvent = new MouseEvent("click", {
+      "view": window,
+      "bubbles": true,
+      "cancelable": false
+    });
+    var a = document.createElement('a');
+    a.href = window.URL.createObjectURL(data);
+    a.download = filename;
+    a.textContent = 'Download file!';
+    a.dispatchEvent(clickEvent);
+  };
+  let saveXmlButton = document.getElementById('saveXmlButton');
+  let saveXmlSource = function saveXmlSource() {
+    let filename = prompt('Save XML source to file:', 'dalnefre.xml');
+    if (filename) {
+      try {
+        let dom = Blockly.Xml.workspaceToDom(self.blocklyWorkspace);
+        let xml = Blockly.Xml.domToPrettyText(dom);
+        createAndDownloadFile(xml, filename, 'text/xml');
+      } catch (e) {
+        show('Failed to save XML source.');
+      }
+    }
   };
   let executeJavaScript = function executeJavaScript(fail) {
     fail = fail || self.fail;  // error handler
@@ -196,6 +244,7 @@ var DAL = (function (self) {
   };
 
   let onload = function (e) {
+    Blockly.BlockSvg.START_HAT = true;
     self.blocklyWorkspace = Blockly.inject(sourceBlocks, {
       media: '../../media/',
 //      media : 'https://blockly-demo.appspot.com/static/media/', 
@@ -213,6 +262,7 @@ var DAL = (function (self) {
       oneBasedIndex : true,
       toolbox: document.getElementById('toolbox')
     });
+//    self.blocklyWorkspace.addChangeListener(Blockly.Events.disableOrphans);
     displaySource('Blocks');
     window.addEventListener('resize', resizeDisplay, false);
     positionDevice();
@@ -227,6 +277,8 @@ var DAL = (function (self) {
   self.tart = tart;
   self.init = onload;
   self.displaySource = displaySource;
+  self.loadXml = loadXmlSource;
+  self.saveXml = saveXmlSource;
   self.executeCode = executeJavaScript;
   self.drawDevice = drawDevice;
   self.deviceEvent = deviceEvent;
