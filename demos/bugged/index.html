@@ -47,54 +47,35 @@
   <textarea id="sourceXML" class="panel">XML</textarea>
 
   <xml id="toolbox" style="display: none">
-<!--
-    <category name="Standard" colour="180">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="controls_repeat_ext"></block>
-      <block type="math_number">
-        <field name="NUM">123</field>
-      </block>
-      <block type="math_arithmetic"></block>
-      <block type="text"></block>
-      <block type="text_print"></block>
-    </category>
-    <category name="Dictionary" colour="45">
--->
-      <block type="dict_empty"></block>
-      <block type="dict_is_empty"></block>
-      <block type="dict_has">
-        <value name="DICT">
-          <shadow type="dict_empty"></shadow>
-        </value>
-      </block>
-      <block type="dict_get">
-        <value name="DICT">
-          <shadow type="dict_empty"></shadow>
-        </value>
-      </block>
-      <block type="dict_bind">
-        <value name="DICT">
-          <shadow type="dict_empty"></shadow>
-        </value>
-      </block>
-      <block type="dict_delete"></block>
-      <block type="dict_delete">
-        <value name="NAME">
-          <shadow type="text">
-            <field name="TEXT">name</field>
-          </shadow>
-        </value>
-        <value name="DICT">
-          <shadow type="dict_empty"></shadow>
-        </value>
-      </block>
-      <block type="text">
-      </block>
-<!--
-      <block type="dict_without"></block>
-    </category>
--->
+    <block type="dict_empty"></block>
+    <block type="dict_is_empty"></block>
+    <block type="dict_has">
+      <value name="DICT">
+        <shadow type="dict_empty"></shadow>
+      </value>
+    </block>
+    <block type="dict_get">
+      <value name="DICT">
+        <shadow type="dict_empty"></shadow>
+      </value>
+    </block>
+    <block type="dict_bind">
+      <value name="DICT">
+        <shadow type="dict_empty"></shadow>
+      </value>
+    </block>
+    <block type="dict_delete"></block>
+    <block type="dict_delete">
+      <value name="NAME">
+        <shadow type="text">
+          <field name="TEXT">name</field>
+        </shadow>
+      </value>
+      <value name="DICT">
+        <shadow type="dict_empty"></shadow>
+      </value>
+    </block>
+    <block type="text"></block>
   </xml>
 
   <xml id="workspace" style="display: none">
