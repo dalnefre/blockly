@@ -454,6 +454,27 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 225,
     "tooltip": "the current time in milliseconds",
     "helpUrl": ""
+  },
+  {
+    "type": "text_match_regex",
+    "message0": "%1 matches %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+      },
+      {
+        "type": "field_input",
+        "name": "REGEX",
+        "text": "^[0-9]+$"
+      }
+    ],
+    "inputsInline": true,
+    "output": "Boolean",
+    "colour": 165,
+    "tooltip": "true if text matches regular expression pattern",
+    "helpUrl": ""
   }
 ]);
 
@@ -639,7 +660,7 @@ Blockly.JavaScript['dict_get'] = function(block) {
   var value_dict = Blockly.JavaScript.valueToCode(block, 'DICT', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
   var code = '';
   code += value_dict;
-  if (text_name.match(/^[a-zA-Z_$][0-9a-zA-Z_$]*$/)) {
+  if (text_name.match(DAL.varPattern)) {
     code += '.' + text_name;  // --FIXME-- quote special characters in identifier text_name
   } else {
     code += '[' + Blockly.JavaScript.quote_(text_name) + ']';
@@ -691,7 +712,6 @@ Blockly.JavaScript['device_set'] = function(block) {
 Blockly.JavaScript['device_event'] = function(block) {
   var dropdown_event = block.getFieldValue('EVENT');
   var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
   var code = '';
   code += 'DAL.eventHandler';
   code += '["' + dropdown_event + '"]';
@@ -702,5 +722,20 @@ Blockly.JavaScript['device_event'] = function(block) {
 
 Blockly.JavaScript['device_now'] = function(block) {
   var code = 'performance.now()';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+/*
+ * Text
+ */
+
+Blockly.JavaScript['text_match_regex'] = function(block) {
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+  var text_regex = block.getFieldValue('REGEX');
+  var code = '';
+  code += value_text;
+  code += '.match(/';
+  code += text_regex;
+  code += '/)';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
