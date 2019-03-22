@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Bugged Blockly</title>
+  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blocks_compressed.js"></script>
+  <script src="../../msg/js/en.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    .panel {
+      border: 1px;
+      padding: 2px;
+      height: 500px;
+      width: 600px;
+    }
+    #blocklyDiv {
+      float: left;
+    }
+    #sourceXML {
+      background: #ffe;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+    <a href="../index.html">Demos</a> &gt; Bugged Blockly</h1>
+
+  <p>
+    This is a simple demo of a UI interaction bug in Blockly.
+  </p>
+
+  <p>
+    When dragging one of the "delete/from" blocks in between "nothing in" and "{ }",
+    the "{ }" block either become orphaned, or disappears entirely.
+  </p>
+
+  <div id="blocklyDiv" class="panel"></div>
+  <textarea id="sourceXML" class="panel">XML</textarea>
+
+  <xml id="toolbox" style="display: none">
+<!--
+    <category name="Standard" colour="180">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="controls_repeat_ext"></block>
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
+      <block type="math_arithmetic"></block>
+      <block type="text"></block>
+      <block type="text_print"></block>
+    </category>
+    <category name="Dictionary" colour="45">
+-->
+      <block type="dict_empty"></block>
+      <block type="dict_is_empty"></block>
+      <block type="dict_has">
+        <value name="DICT">
+          <shadow type="dict_empty"></shadow>
+        </value>
+      </block>
+      <block type="dict_get">
+        <value name="DICT">
+          <shadow type="dict_empty"></shadow>
+        </value>
+      </block>
+      <block type="dict_bind">
+        <value name="DICT">
+          <shadow type="dict_empty"></shadow>
+        </value>
+      </block>
+      <block type="dict_delete"></block>
+      <block type="dict_delete">
+        <value name="NAME">
+          <shadow type="text">
+            <field name="TEXT">name</field>
+          </shadow>
+        </value>
+        <value name="DICT">
+          <shadow type="dict_empty"></shadow>
+        </value>
+      </block>
+      <block type="text">
+      </block>
+<!--
+      <block type="dict_without"></block>
+    </category>
+-->
+  </xml>
+
+  <xml id="workspace" style="display: none">
+    <block type="dict_delete" x="108" y="35"></block>
+    <block type="dict_is_empty" x="66" y="145">
+      <value name="DICT">
+        <block type="dict_empty"></block>
+      </value>
+    </block>
+    <block type="dict_delete" x="90" y="229">
+      <value name="NAME">
+        <shadow type="text">
+          <field name="TEXT">name</field>
+        </shadow>
+      </value>
+      <value name="DICT">
+        <shadow type="dict_empty"></shadow>
+      </value>
+    </block>
+  </xml>
+
+  <script>
+    Blockly.defineBlocksWithJsonArray([
+      {
+        "type": "dict_is_empty",
+        "message0": "nothing in %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "DICT",
+            "check": "Dict"
+          }
+        ],
+        "inputsInline": false,
+        "output": "Boolean",
+        "colour": 210,
+        "tooltip": "check for empty dictionary",
+        "helpUrl": ""
+      },
+      {
+        "type": "dict_get",
+        "message0": "get %1 from %2",
+        "args0": [
+          {
+            "type": "field_input",
+            "name": "NAME",
+            "text": "name"
+          },
+          {
+            "type": "input_value",
+            "name": "DICT",
+            "check": "Dict"
+          }
+        ],
+        "inputsInline": false,
+        "output": null,
+        "colour": 210,
+        "tooltip": "dictionary lookup",
+        "helpUrl": ""
+      },
+      {
+        "type": "dict_has",
+        "message0": "%1 defined in %2",
+        "args0": [
+          {
+            "type": "field_input",
+            "name": "NAME",
+            "text": "name"
+          },
+          {
+            "type": "input_value",
+            "name": "DICT",
+            "check": "Dict"
+          }
+        ],
+        "inputsInline": false,
+        "output": "Boolean",
+        "colour": 210,
+        "tooltip": "check for definition",
+        "helpUrl": ""
+      },
+      {
+        "type": "dict_bind",
+        "message0": "bind %1 to %2 with %3",
+        "args0": [
+          {
+            "type": "field_input",
+            "name": "NAME",
+            "text": "name"
+          },
+          {
+            "type": "input_value",
+            "name": "VALUE",
+            "align": "RIGHT"
+          },
+          {
+            "type": "input_value",
+            "name": "DICT",
+            "check": "Dict",
+            "align": "RIGHT"
+          }
+        ],
+        "inputsInline": false,
+        "output": "Dict",
+        "colour": 45,
+        "tooltip": "dictionary definition",
+        "helpUrl": ""
+      },
+      {
+        "type": "dict_delete",
+        "message0": "delete %1 from %2",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "NAME",
+            "check": "String",
+            "align": "RIGHT"
+          },
+          {
+            "type": "input_value",
+            "name": "DICT",
+            "check": "Dict",
+            "align": "RIGHT"
+          }
+        ],
+        "inputsInline": false,
+        "output": "Dict",
+        "colour": 45,
+        "tooltip": "remove dictionary definition",
+        "helpUrl": ""
+      },
+      {
+        "type": "dict_without",
+        "message0": "dictionary %1 without %2",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "DICT",
+            "check": "Dict",
+            "align": "RIGHT"
+          },
+          {
+            "type": "input_value",
+            "name": "NAME",
+            "align": "RIGHT"
+          }
+        ],
+        "inputsInline": false,
+        "output": "Dict",
+        "colour": 45,
+        "tooltip": "remove dictionary definition",
+        "helpUrl": ""
+      },
+      {
+        "type": "dict_empty",
+        "message0": "{ }",
+        "output": "Dict",
+        "colour": 45,
+        "tooltip": "empty dictionary",
+        "helpUrl": ""
+      },
+    ]);
+
+    let sourceElement = document.getElementById('sourceXML');
+    var blocklyWorkspace = Blockly.inject('blocklyDiv', {
+      media: '../../media/',
+      toolbox: document.getElementById('toolbox')
+    });
+    blocklyWorkspace.addChangeListener(() => {
+      let dom = Blockly.Xml.workspaceToDom(self.blocklyWorkspace);
+      sourceElement.value = Blockly.Xml.domToPrettyText(dom);
+//      sourceElement.focus();
+    });
+    Blockly.Xml.domToWorkspace(document.getElementById('workspace'), blocklyWorkspace);
+  </script>
+
+</body>
+</html>
