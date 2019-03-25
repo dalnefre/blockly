@@ -266,6 +266,12 @@ var DAL = (function (self) {
       css : true, 
       rtl : false, 
       scrollbars : true, 
+      grid: {
+        spacing: 16,
+        length: 1,
+        colour: '#0cc',
+        snap: true
+      },
       sounds : true, 
       oneBasedIndex : true,
       toolbox: document.getElementById('toolbox')
