@@ -253,6 +253,14 @@ var DAL = (function (self) {
       disable : true, 
       maxBlocks : Infinity, 
       trashcan : true, 
+      zoom: {
+        controls: true,
+        wheel: false,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2
+      },
       horizontalLayout : false, 
       toolboxPosition : 'start', 
       css : true, 
