@@ -380,6 +380,29 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "dict_extend",
+    "message0": "extend %1 with %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "DICT",
+        "check": "Dict",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE",
+        "check": "Dict",
+        "align": "RIGHT"
+      }
+    ],
+    "inputsInline": false,
+    "output": "Dict",
+    "colour": 45,
+    "tooltip": "extend dictionary with new definitions",
+    "helpUrl": ""
+  },
+  {
     "type": "device_set",
     "message0": "set %1 to %2",
     "args0": [
@@ -689,6 +712,18 @@ Blockly.JavaScript['dict_bind'] = function(block) {
   code += '{}, ' + value_dict + '), ';
   code += '{ ' + Blockly.JavaScript.quote_(text_name);
   code += ': ' + value_value + ' }';
+  code += '))';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['dict_extend'] = function(block) {
+  var value_dict = Blockly.JavaScript.valueToCode(block, 'DICT', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var code = '';
+  code += 'Object.freeze(';  // Dictionary values are immutable
+  code += 'Object.assign(';
+  code += 'Object.assign(';
+  code += '{}, ' + value_dict + '), ' + value_value;
   code += '))';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
