@@ -144,6 +144,7 @@
         <shadow type="dict_empty"></shadow>
       </value>
     </block>
+    <block type="dict_extend"></block>
     <block type="dict_empty"></block>
   </category>
   <category name="Lists" colour="#745CA6">
@@ -1369,7 +1370,7 @@
     </statement>
   </block>
 
-  <block type="actor_sponsor" id="H$JB+4,Q6D/!ynlV.4$o" x="43" y="26">
+  <block type="actor_sponsor" id="H$JB+4,Q6D/!ynlV.4$o" x="600" y="-88">
     <field name="ACTORS">1</field>
     <field name="EVENTS">20</field>
     <statement name="SCRIPT">
@@ -1429,18 +1430,28 @@
                           </shadow>
                         </value>
                         <next>
-                          <block type="actor_send_after" id="An:X@a-!uLgF53d0=xkA">
-                            <value name="DELAY">
-                              <shadow type="math_number" id="EIY`K({($K_L/P0^UofM">
-                                <field name="NUM">300</field>
+                          <block type="device_set" id="ounb_mf#SInfI;S=PxVL">
+                            <field name="PIN">2</field>
+                            <value name="VALUE">
+                              <shadow type="logic_boolean" id="05mDKCj2aZ_4w4rp9hm9">
+                                <field name="BOOL">FALSE</field>
                               </shadow>
                             </value>
-                            <value name="MESSAGE">
-                              <shadow type="dict_empty" id="X%ECAOdn@~NWtfHN;=eB"></shadow>
-                            </value>
-                            <value name="ACTOR">
-                              <block type="actor_self" id="MT.GG#(RL@v2[r#aO%r4"></block>
-                            </value>
+                            <next>
+                              <block type="actor_send_after" id="An:X@a-!uLgF53d0=xkA">
+                                <value name="DELAY">
+                                  <shadow type="math_number" id="EIY`K({($K_L/P0^UofM">
+                                    <field name="NUM">300</field>
+                                  </shadow>
+                                </value>
+                                <value name="MESSAGE">
+                                  <shadow type="dict_empty" id="X%ECAOdn@~NWtfHN;=eB"></shadow>
+                                </value>
+                                <value name="ACTOR">
+                                  <block type="actor_self" id="MT.GG#(RL@v2[r#aO%r4"></block>
+                                </value>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
@@ -1472,34 +1483,44 @@
                       </block>
                     </value>
                     <next>
-                      <block type="device_set" id="H0Pk]YRq4WEHzVs6@M7n">
-                        <field name="PIN">1</field>
+                      <block type="device_set" id="`xZKHHaZ;{W@c*[kU^x{">
+                        <field name="PIN">0</field>
                         <value name="VALUE">
-                          <shadow type="logic_boolean" id="DCE2m~sx,_o;ta;ftxp;">
+                          <shadow type="logic_boolean" id="u`;LeUffRH*P)S@avwJv">
                             <field name="BOOL">FALSE</field>
                           </shadow>
                         </value>
                         <next>
-                          <block type="device_set" id="7lw8NUvd4zD~4W;w+`XX">
-                            <field name="PIN">2</field>
+                          <block type="device_set" id="H0Pk]YRq4WEHzVs6@M7n">
+                            <field name="PIN">1</field>
                             <value name="VALUE">
-                              <shadow type="logic_boolean" id="u;Ts3fIFwNd@^|g_*Dr5">
-                                <field name="BOOL">TRUE</field>
+                              <shadow type="logic_boolean" id="DCE2m~sx,_o;ta;ftxp;">
+                                <field name="BOOL">FALSE</field>
                               </shadow>
                             </value>
                             <next>
-                              <block type="actor_send_after" id="0,]P~CMq7Y4T`ccZ^feM">
-                                <value name="DELAY">
-                                  <shadow type="math_number" id="a:.1`j{@fu-uY$hp-pya">
-                                    <field name="NUM">300</field>
+                              <block type="device_set" id="7lw8NUvd4zD~4W;w+`XX">
+                                <field name="PIN">2</field>
+                                <value name="VALUE">
+                                  <shadow type="logic_boolean" id="u;Ts3fIFwNd@^|g_*Dr5">
+                                    <field name="BOOL">TRUE</field>
                                   </shadow>
                                 </value>
-                                <value name="MESSAGE">
-                                  <shadow type="dict_empty" id="8,N[heb{0$B6WFAya:h|"></shadow>
-                                </value>
-                                <value name="ACTOR">
-                                  <block type="actor_self" id=";}D?Si_F,o#KNTAWsGMj"></block>
-                                </value>
+                                <next>
+                                  <block type="actor_send_after" id="0,]P~CMq7Y4T`ccZ^feM">
+                                    <value name="DELAY">
+                                      <shadow type="math_number" id="a:.1`j{@fu-uY$hp-pya">
+                                        <field name="NUM">300</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="MESSAGE">
+                                      <shadow type="dict_empty" id="8,N[heb{0$B6WFAya:h|"></shadow>
+                                    </value>
+                                    <value name="ACTOR">
+                                      <block type="actor_self" id=";}D?Si_F,o#KNTAWsGMj"></block>
+                                    </value>
+                                  </block>
+                                </next>
                               </block>
                             </next>
                           </block>
@@ -1531,34 +1552,44 @@
                           </block>
                         </value>
                         <next>
-                          <block type="device_set" id="fsg;rP.@y%U21E=v?~qd">
-                            <field name="PIN">2</field>
+                          <block type="device_set" id="PRY_f2BDuXZmo^}D):c7">
+                            <field name="PIN">0</field>
                             <value name="VALUE">
-                              <shadow type="logic_boolean" id="NE*/Hs@*K=![ZDaI]LD3">
-                                <field name="BOOL">FALSE</field>
+                              <shadow type="logic_boolean" id="DB[c_*;QCsL4r,/Lw@0m">
+                                <field name="BOOL">TRUE</field>
                               </shadow>
                             </value>
                             <next>
-                              <block type="device_set" id="PRY_f2BDuXZmo^}D):c7">
-                                <field name="PIN">0</field>
+                              <block type="device_set" id="e#ms4Lf_^];dD/4/ZZ!h">
+                                <field name="PIN">1</field>
                                 <value name="VALUE">
-                                  <shadow type="logic_boolean" id="DB[c_*;QCsL4r,/Lw@0m">
-                                    <field name="BOOL">TRUE</field>
+                                  <shadow type="logic_boolean" id="v!;M9yJO-]}R02-zh%R5">
+                                    <field name="BOOL">FALSE</field>
                                   </shadow>
                                 </value>
                                 <next>
-                                  <block type="actor_send_after" id="@b]f,EHD]zR]ZzK=tHY~">
-                                    <value name="DELAY">
-                                      <shadow type="math_number" id="m}GZjeJ#89k.W$^2)H^3">
-                                        <field name="NUM">300</field>
+                                  <block type="device_set" id="fsg;rP.@y%U21E=v?~qd">
+                                    <field name="PIN">2</field>
+                                    <value name="VALUE">
+                                      <shadow type="logic_boolean" id="NE*/Hs@*K=![ZDaI]LD3">
+                                        <field name="BOOL">FALSE</field>
                                       </shadow>
                                     </value>
-                                    <value name="MESSAGE">
-                                      <shadow type="dict_empty" id="8%0hiBhd|7K`SrQ[F|Bl"></shadow>
-                                    </value>
-                                    <value name="ACTOR">
-                                      <block type="actor_self" id="2{NlP:@`ExA7;KiToh0x"></block>
-                                    </value>
+                                    <next>
+                                      <block type="actor_send_after" id="@b]f,EHD]zR]ZzK=tHY~">
+                                        <value name="DELAY">
+                                          <shadow type="math_number" id="m}GZjeJ#89k.W$^2)H^3">
+                                            <field name="NUM">300</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="MESSAGE">
+                                          <shadow type="dict_empty" id="8%0hiBhd|7K`SrQ[F|Bl"></shadow>
+                                        </value>
+                                        <value name="ACTOR">
+                                          <block type="actor_self" id="2{NlP:@`ExA7;KiToh0x"></block>
+                                        </value>
+                                      </block>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
@@ -1570,58 +1601,28 @@
                   </block>
                 </value>
                 <next>
-                  <block type="device_set" id="`xZKHHaZ;{W@c*[kU^x{">
-                    <field name="PIN">0</field>
-                    <value name="VALUE">
-                      <shadow type="logic_boolean" id="u`;LeUffRH*P)S@avwJv">
-                        <field name="BOOL">FALSE</field>
-                      </shadow>
+                  <block type="actor_send" id="~#$qtN46m!yA__bie-kn">
+                    <value name="MESSAGE">
+                      <shadow type="dict_empty" id=";Gnn#A@:5;?h9-ctXb4t"></shadow>
                     </value>
-                    <next>
-                      <block type="device_set" id="e#ms4Lf_^];dD/4/ZZ!h">
-                        <field name="PIN">1</field>
-                        <value name="VALUE">
-                          <shadow type="logic_boolean" id="v!;M9yJO-]}R02-zh%R5">
-                            <field name="BOOL">FALSE</field>
-                          </shadow>
+                    <value name="ACTOR">
+                      <block type="actor_create" id="Mt#%_KIjJr/c}blB/(Q!">
+                        <value name="STATE">
+                          <shadow type="dict_empty" id="*g5C|FOEqpE?K$0-K{!p"></shadow>
                         </value>
-                        <next>
-                          <block type="device_set" id="ounb_mf#SInfI;S=PxVL">
-                            <field name="PIN">2</field>
-                            <value name="VALUE">
-                              <shadow type="logic_boolean" id="05mDKCj2aZ_4w4rp9hm9">
-                                <field name="BOOL">TRUE</field>
-                              </shadow>
-                            </value>
-                            <next>
-                              <block type="actor_send" id="~#$qtN46m!yA__bie-kn">
-                                <value name="MESSAGE">
-                                  <shadow type="dict_empty" id=";Gnn#A@:5;?h9-ctXb4t"></shadow>
-                                </value>
-                                <value name="ACTOR">
-                                  <block type="actor_create" id="Mt#%_KIjJr/c}blB/(Q!">
-                                    <value name="STATE">
-                                      <shadow type="dict_empty" id="*g5C|FOEqpE?K$0-K{!p"></shadow>
-                                    </value>
-                                    <value name="BEHAVIOR">
-                                      <shadow type="actor_behavior" id="%=rm=eh:0XkrGhN.R@wv">
-                                        <field name="NAME"></field>
-                                        <statement name="SCRIPT">
-                                          <shadow type="actor_ignore" id="?t]7p/Jf{u9N*)|LbQ`~"></shadow>
-                                        </statement>
-                                      </shadow>
-                                      <block type="actor_state" id="iSa6:qf!SlFif4R?^i3v">
-                                        <field name="NAME">red</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                              </block>
-                            </next>
+                        <value name="BEHAVIOR">
+                          <shadow type="actor_behavior" id="%=rm=eh:0XkrGhN.R@wv">
+                            <field name="NAME"></field>
+                            <statement name="SCRIPT">
+                              <shadow type="actor_ignore" id="?t]7p/Jf{u9N*)|LbQ`~"></shadow>
+                            </statement>
+                          </shadow>
+                          <block type="actor_state" id="iSa6:qf!SlFif4R?^i3v">
+                            <field name="NAME">red</field>
                           </block>
-                        </next>
+                        </value>
                       </block>
-                    </next>
+                    </value>
                   </block>
                 </next>
               </block>
