@@ -5,10 +5,16 @@
 
 var BART = (function (self) {
   var CRLF = {};
-  
+
+  let blockToError = function blockToError(block) {
+    return "ERROR: unknown block '" + block.getStyleName() + "'";
+  };
+
   let blockToCRLF = function blockToCRLF(block) {
     var convert = CRLF[block.getStyleName()];
-    // [FIXME: catch unknown style!]
+    if (!convert) {
+      return blockToError(block);
+    }
     return convert(block);
   };
   
