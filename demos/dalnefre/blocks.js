@@ -506,11 +506,11 @@ Blockly.JavaScript['actor_send_after'] = function(block) {
   code += 'target(message); ';
   code += '}, ' + value_delay + ');\n';
   code += '})(' + value_actor + ', ' + value_message +');\n';
-  return code;
+  return code;  // statements don't need binding-strength
 };
 
 Blockly.JavaScript['actor_create'] = function(block) {
-  var value_state = Blockly.JavaScript.valueToCode(block, 'STATE', Blockly.JavaScript.ORDER_COMMA);
+  var value_state = Blockly.JavaScript.valueToCode(block, 'STATE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
   var value_behavior = Blockly.JavaScript.valueToCode(block, 'BEHAVIOR', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
   var code = '';
   code += 'this.sponsor(';
@@ -601,7 +601,7 @@ Blockly.JavaScript['actor_debug'] = function(block) {
   code += '(_ => function DEBUG(__) {  // ignore state\n';
   code += '  DAL.log("DEBUG:", __);\n';
   code += '})';
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
 Blockly.JavaScript['actor_break'] = function(block) {
@@ -610,7 +610,7 @@ Blockly.JavaScript['actor_break'] = function(block) {
   code += 'DAL.breakpoint('
   code += Blockly.JavaScript.quote_(text_data);
   code += ');\n';
-  return code;
+  return code;  // statements don't need binding-strength
 };
 
 /*
@@ -678,25 +678,25 @@ Blockly.JavaScript['dict_extend'] = function(block) {
 
 Blockly.JavaScript['device_set'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
-  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
   var code = '';
   code += 'DAL.setDevicePin(';
   code += dropdown_pin
   code += ', ';
   code += value_value
   code += ');\n';
-  return code;
+  return code;  // statements don't need binding-strength
 };
 
 Blockly.JavaScript['device_event'] = function(block) {
   var dropdown_event = block.getFieldValue('EVENT');
-  var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_actor = Blockly.JavaScript.valueToCode(block, 'ACTOR', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
   var code = '';
   code += 'DAL.eventHandler';
   code += '["' + dropdown_event + '"]';
   code += ' = ' + value_actor;
   code += ';\n';
-  return code;
+  return code;  // statements don't need binding-strength
 };
 
 Blockly.JavaScript['device_now'] = function(block) {
@@ -709,7 +709,7 @@ Blockly.JavaScript['device_now'] = function(block) {
  */
 
 Blockly.JavaScript['text_match_regex'] = function(block) {
-  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
   var text_regex = block.getFieldValue('REGEX');
   var code = '';
   code += value_text;
