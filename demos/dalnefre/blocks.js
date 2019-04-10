@@ -60,27 +60,6 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    "type": "actor_behavior_with",
-    "message0": "behavior with: %1 %2",
-    "args0": [
-      {
-        "type": "input_value",
-        "name": "STATE",
-        "check": "Dict",
-        "align": "RIGHT"
-      },
-      {
-        "type": "input_statement",
-        "name": "SCRIPT",
-        "check": "Action"
-      }
-    ],
-    "output": "Behavior",
-    "colour": 270,
-    "tooltip": "actor's script with initial state",
-    "helpUrl": ""
-  },
-  {
     "type": "actor_send",
     "message0": "send %1 to %2",
     "args0": [
@@ -553,20 +532,6 @@ Blockly.JavaScript['actor_behavior'] = function(block) {
   code += '  this._ = this._ || _;  // actor state\n';
   code += statements_script;
   code += '})';
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
-};
-
-Blockly.JavaScript['actor_behavior_with'] = function(block) {
-  var value_state = Blockly.JavaScript.valueToCode(block, 'STATE', Blockly.JavaScript.ORDER_COMMA);
-  var statements_script = Blockly.JavaScript.statementToCode(block, 'SCRIPT');
-  var code = '';
-  code += '(_ => function (__) {\n';
-  code += '  this._ = this._ || _;  // actor state\n';
-  code += statements_script;
-  code += '})(';
-  code += 'Object.assign(';
-  code += 'Object.create(this._)';
-  code += ', ' + value_state + '))';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
