@@ -72,9 +72,26 @@ var BART = (function (self) {
     return crlf;
   };
 
+  CRLF['actor_become'] = function (block) {
+    var crlf = {
+      "kind": "actor_become",
+      "behavior": blockToCRLF(block.getInputTargetBlock('BEHAVIOR'))  /* <behavior> */
+    };
+    return crlf;
+  };
+
   CRLF['actor_ignore'] = function (block) {
     var crlf = {
       "kind": "actor_ignore"
+    };
+    return crlf;
+  };
+
+  CRLF['actor_assign'] = function (block) {
+    var crlf = {
+      "kind": "actor_assign",
+      "name": fieldToString(block.getField('NAME')),
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE'))  /* <expression> */
     };
     return crlf;
   };
@@ -98,8 +115,42 @@ var BART = (function (self) {
   CRLF['actor_behavior'] = function (block) {
     var crlf = {
       "kind": "actor_behavior",
-      "name": fieldToString(block.getField('NAME')),  // FIXME: name is optional, check for missing?
+      "name": fieldToString(block.getField('NAME')),  // FIXME: behavior name is optional, check for missing?
       "script": stackToCRLF(block.getInputTargetBlock('SCRIPT'))
+    };
+    return crlf;
+  };
+
+  CRLF['actor_state'] = function (block) {
+    var crlf = {
+      "kind": "actor_state",
+      "name": fieldToString(block.getField('NAME'))
+    };
+    return crlf;
+  };
+
+  CRLF['dict_get'] = function (block) {
+    var crlf = {
+      "kind": "dict_get",
+      "name": fieldToString(block.getField('NAME')),
+      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+    };
+    return crlf;
+  };
+
+  CRLF['actor_has_state'] = function (block) {
+    var crlf = {
+      "kind": "actor_has_state",
+      "name": fieldToString(block.getField('NAME'))
+    };
+    return crlf;
+  };
+
+  CRLF['dict_has'] = function (block) {
+    var crlf = {
+      "kind": "dict_has",
+      "name": fieldToString(block.getField('NAME')),
+      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
     };
     return crlf;
   };
@@ -114,6 +165,16 @@ var BART = (function (self) {
   CRLF['dict_empty'] = function (block) {
     var crlf = {
       "kind": "dict_empty"
+    };
+    return crlf;
+  };
+
+  CRLF['dict_bind'] = function (block) {
+    var crlf = {
+      "kind": "dict_bind",
+      "name": fieldToString(block.getField('NAME')),
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE')),  /* <expression> */
+      "with": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
     };
     return crlf;
   };
