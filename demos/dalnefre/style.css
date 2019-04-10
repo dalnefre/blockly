@@ -37,10 +37,16 @@ table {
 }
 pre.source {
   margin: 0px;
-  border: 1px solid #0cc;
   padding: 2px;
-  background-color: #ffd;
   overflow: scroll;
+}
+#sourceJavaScript {
+  border: 1px solid #0cc;
+  background-color: #ffd;
+}
+#sourceBART {
+  border: 1px solid #cc0;
+  background-color: #dff;
 }
 #loadXmlFile {
   position: absolute;
