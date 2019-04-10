@@ -11,6 +11,15 @@ var BART = (function (self) {
     // [FIXME: catch unknown style!]
     return convert(block);
   };
+  
+  let toArray = function toArray(block) {
+    var list = [];
+    while (block) {
+      list.append(toCRLF(block));
+      block = block.getNextBlock();
+    }
+    return list;
+  };
 
   let asString = function asString(field, default) {
     let value = field.getText();
@@ -35,9 +44,7 @@ var BART = (function (self) {
       "kind": "actor_sponsor",
       "actors": asNumber(block.getField('ACTORS')),
       "events": asNumber(block.getField('EVENTS')),
-      "script": [
-        // Blockly.JavaScript.statementToCode(block, 'SCRIPT');
-      ]
+      "script": toArray(block.getInputTargetBlock('SCRIPT'))
     };
     return crlf;
   };
