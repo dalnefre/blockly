@@ -6,45 +6,45 @@
 var BART = (function (self) {
   var CRLF = {};
   
-  let toCRLF = function toCRLF(block) {
+  let blockToCRLF = function blockToCRLF(block) {
     var convert = CRLF[block.getStyleName()];
     // [FIXME: catch unknown style!]
     return convert(block);
   };
   
-  let toArray = function toArray(block) {
+  let stackToArray = function stackToArray(block) {
     var list = [];
     while (block) {
-      list.append(toCRLF(block));
+      list.append(blockToCRLF(block));
       block = block.getNextBlock();
     }
     return list;
   };
 
-  let asString = function asString(field, default) {
+  let fieldToString = function fieldToString(field, missing) {
     let value = field.getText();
     if (typeof value === 'string') {
       return value;
     } else {
-      return default;
+      return missing;
     }
   };
 
-  let asNumber = function asNumber(field, default) {
+  let fieldToNumber = function fieldToNumber(field, missing) {
     let value = field.getText();
     if (typeof value === 'string') {
       return (1 * value);
     } else {
-      return default;
+      return missing;
     }
   };
 
   CRLF['actor_sponsor'] = function (block) {
     var crlf = {
       "kind": "actor_sponsor",
-      "actors": asNumber(block.getField('ACTORS')),
-      "events": asNumber(block.getField('EVENTS')),
-      "script": toArray(block.getInputTargetBlock('SCRIPT'))
+      "actors": fieldToNumber(block.getField('ACTORS')),
+      "events": fieldToNumber(block.getField('EVENTS')),
+      "script": stackToArray(block.getInputTargetBlock('SCRIPT'))
     };
     return crlf;
   };
@@ -52,13 +52,13 @@ var BART = (function (self) {
   CRLF['actor_send'] = function (block) {
     var crlf = {
       "kind": "actor_send",
-      "message": toCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
-      "actor":  toCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+      "message": blockToCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
+      "actor":  blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
     };
     return crlf;
   };
 
   // exports
-  self.toCRLF = toCRLF;
+  self.blockToCRLF = blockToCRLF;
   return self;
 })({});
