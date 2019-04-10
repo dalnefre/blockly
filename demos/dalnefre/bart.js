@@ -6,27 +6,6 @@
 var BART = (function (self) {
   var CRLF = {};
 
-  let blockToError = function blockToError(block) {
-    return "ERROR: unknown block '" + block.getStyleName() + "'";
-  };
-
-  let blockToCRLF = function blockToCRLF(block) {
-    var convert = CRLF[block.getStyleName()];
-    if (!convert) {
-      return blockToError(block);
-    }
-    return convert(block);
-  };
-  
-  let stackToArray = function stackToArray(block) {
-    var list = [];
-    while (block) {
-      list.append(blockToCRLF(block));
-      block = block.getNextBlock();
-    }
-    return list;
-  };
-
   let fieldToString = function fieldToString(field, missing) {
     let value = field.getText();
     if (typeof value === 'string') {
@@ -45,12 +24,41 @@ var BART = (function (self) {
     }
   };
 
+  let blockToError = function blockToError(block) {
+    return "ERROR: unknown block '" + block.type + "'";
+  };
+
+  let blockToCRLF = function blockToCRLF(block) {
+    var convert = CRLF[block.type];
+    if (!convert) {
+      return blockToError(block);
+    }
+    return convert(block);
+  };
+  
+  let stackToCRLF = function stackToCRLF(block) {
+    var list = [];
+    while (block) {
+      list.push(blockToCRLF(block));
+      block = block.getNextBlock();
+    }
+    return list;
+  };
+
+  let workspaceToCRLF = function workspaceToCRLF(workspace) {
+    var list = workspace.getTopBlocks(true);
+    for (var i = 0; i < list.length; ++i) {
+      list[i] = blockToCRLF(list[i]);  // replace each block with CRLF
+    }
+    return list;
+  };
+
   CRLF['actor_sponsor'] = function (block) {
     var crlf = {
       "kind": "actor_sponsor",
       "actors": fieldToNumber(block.getField('ACTORS')),
       "events": fieldToNumber(block.getField('EVENTS')),
-      "script": stackToArray(block.getInputTargetBlock('SCRIPT'))
+      "script": stackToCRLF(block.getInputTargetBlock('SCRIPT'))
     };
     return crlf;
   };
@@ -65,6 +73,6 @@ var BART = (function (self) {
   };
 
   // exports
-  self.blockToCRLF = blockToCRLF;
+  self.workspaceToCRLF = workspaceToCRLF;
   return self;
 })({});

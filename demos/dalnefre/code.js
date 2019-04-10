@@ -70,6 +70,7 @@ var DAL = (function (self) {
   let displayArea = document.getElementById('displayArea');
   let source = {  // source elements by language
     "JavaScript": document.getElementById('sourceJavaScript'),
+    "BART": document.getElementById('sourceBART'),
     "XML": document.getElementById('sourceXML'),
     "Blocks": document.getElementById('sourceBlocks')
   };
@@ -113,6 +114,10 @@ var DAL = (function (self) {
     sourceElement = source[lang] || sourceBlocks;  // default language: Blocks
     if (lang === 'JavaScript') {
       sourceElement.textContent = generateJavaScript();
+    }
+    if (lang === 'BART') {
+      let crlf = BART.workspaceToCRLF(self.blocklyWorkspace);
+      sourceElement.textContent = JSON.stringify(crlf, null, 2);
     }
     if (lang === 'XML') {
       let dom = Blockly.Xml.workspaceToDom(self.blocklyWorkspace);
