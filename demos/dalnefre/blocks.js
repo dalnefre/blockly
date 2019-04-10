@@ -175,21 +175,6 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    "type": "actor_new",
-    "message0": "new actor %1",
-    "args0": [
-      {
-        "type": "input_value",
-        "name": "BEHAVIOR",
-        "check": "Behavior"
-      }
-    ],
-    "output": "Actor",
-    "colour": 90,
-    "tooltip": "create an actor",
-    "helpUrl": ""
-  },
-  {
     "type": "actor_create",
     "message0": "actor with: %1 script: %2",
     "args0": [
@@ -543,12 +528,6 @@ Blockly.JavaScript['actor_send_after'] = function(block) {
   code += '}, ' + value_delay + ');\n';
   code += '})(' + value_actor + ', ' + value_message +');\n';
   return code;
-};
-
-Blockly.JavaScript['actor_new'] = function(block) {
-  var value_behavior = Blockly.JavaScript.valueToCode(block, 'BEHAVIOR', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
-  var code = 'this.sponsor(' + value_behavior + ')';
-  return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
 };
 
 Blockly.JavaScript['actor_create'] = function(block) {
