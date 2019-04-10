@@ -67,7 +67,53 @@ var BART = (function (self) {
     var crlf = {
       "kind": "actor_send",
       "message": blockToCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
-      "actor":  blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+      "actor": blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+    };
+    return crlf;
+  };
+
+  CRLF['actor_ignore'] = function (block) {
+    var crlf = {
+      "kind": "actor_ignore"
+    };
+    return crlf;
+  };
+
+  CRLF['actor_create'] = function (block) {
+    var crlf = {
+      "kind": "actor_create",
+      "state": blockToCRLF(block.getInputTargetBlock('STATE')),  /* <dictionary> */
+      "behavior": blockToCRLF(block.getInputTargetBlock('BEHAVIOR'))  /* <behavior> */
+    };
+    return crlf;
+  };
+
+  CRLF['actor_self'] = function (block) {
+    var crlf = {
+      "kind": "actor_self"
+    };
+    return crlf;
+  };
+
+  CRLF['actor_behavior'] = function (block) {
+    var crlf = {
+      "kind": "actor_behavior",
+      "name": fieldToString(block.getField('NAME')),  // FIXME: name is optional, check for missing?
+      "script": stackToCRLF(block.getInputTargetBlock('SCRIPT'))
+    };
+    return crlf;
+  };
+
+  CRLF['actor_message'] = function (block) {
+    var crlf = {
+      "kind": "actor_message"
+    };
+    return crlf;
+  };
+
+  CRLF['dict_empty'] = function (block) {
+    var crlf = {
+      "kind": "dict_empty"
     };
     return crlf;
   };
