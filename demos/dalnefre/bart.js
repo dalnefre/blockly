@@ -72,42 +72,11 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['actor_become'] = function (block) {
-    var crlf = {
-      "kind": "actor_become",
-      "behavior": blockToCRLF(block.getInputTargetBlock('BEHAVIOR'))  /* <behavior> */
-    };
-    return crlf;
-  };
-
-  CRLF['actor_ignore'] = function (block) {
-    var crlf = {
-      "kind": "actor_ignore"
-    };
-    return crlf;
-  };
-
-  CRLF['actor_assign'] = function (block) {
-    var crlf = {
-      "kind": "actor_assign",
-      "name": fieldToString(block.getField('NAME')),
-      "value": blockToCRLF(block.getInputTargetBlock('VALUE'))  /* <expression> */
-    };
-    return crlf;
-  };
-
   CRLF['actor_create'] = function (block) {
     var crlf = {
       "kind": "actor_create",
       "state": blockToCRLF(block.getInputTargetBlock('STATE')),  /* <dictionary> */
       "behavior": blockToCRLF(block.getInputTargetBlock('BEHAVIOR'))  /* <behavior> */
-    };
-    return crlf;
-  };
-
-  CRLF['actor_self'] = function (block) {
-    var crlf = {
-      "kind": "actor_self"
     };
     return crlf;
   };
@@ -121,19 +90,27 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['actor_state'] = function (block) {
+  CRLF['actor_become'] = function (block) {
     var crlf = {
-      "kind": "actor_state",
-      "name": fieldToString(block.getField('NAME'))
+      "kind": "actor_become",
+      "behavior": blockToCRLF(block.getInputTargetBlock('BEHAVIOR'))  /* <behavior> */
     };
     return crlf;
   };
 
-  CRLF['dict_get'] = function (block) {
+  CRLF['actor_assign'] = function (block) {
     var crlf = {
-      "kind": "dict_get",
+      "kind": "actor_assign",
       "name": fieldToString(block.getField('NAME')),
-      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE'))  /* <expression> */
+    };
+    return crlf;
+  };
+
+  CRLF['actor_state'] = function (block) {
+    var crlf = {
+      "kind": "actor_state",
+      "name": fieldToString(block.getField('NAME'))
     };
     return crlf;
   };
@@ -146,18 +123,48 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['dict_has'] = function (block) {
+  CRLF['actor_message'] = function (block) {
     var crlf = {
-      "kind": "dict_has",
-      "name": fieldToString(block.getField('NAME')),
-      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+      "kind": "actor_message"
     };
     return crlf;
   };
 
-  CRLF['actor_message'] = function (block) {
+  CRLF['actor_self'] = function (block) {
     var crlf = {
-      "kind": "actor_message"
+      "kind": "actor_self"
+    };
+    return crlf;
+  };
+
+  CRLF['actor_ignore'] = function (block) {
+    var crlf = {
+      "kind": "actor_ignore"
+    };
+    return crlf;
+  };
+
+  CRLF['actor_fail'] = function (block) {
+    var crlf = {
+      "kind": "actor_fail",
+      "error": blockToCRLF(block.getInputTargetBlock('ERROR'))  /* <expression> */
+    };
+    return crlf;
+  };
+
+  CRLF['actor_send_after'] = function (block) {
+    var crlf = {
+      "kind": "actor_send_after",
+      "delay": fieldToNumber(block.getField('DELAY')),
+      "message": blockToCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
+      "actor": blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+    };
+    return crlf;
+  };
+
+  CRLF['device_now'] = function (block) {
+    var crlf = {
+      "kind": "device_now"
     };
     return crlf;
   };
@@ -175,6 +182,24 @@ var BART = (function (self) {
       "name": fieldToString(block.getField('NAME')),
       "value": blockToCRLF(block.getInputTargetBlock('VALUE')),  /* <expression> */
       "with": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+    };
+    return crlf;
+  };
+
+  CRLF['dict_get'] = function (block) {
+    var crlf = {
+      "kind": "dict_get",
+      "name": fieldToString(block.getField('NAME')),
+      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+    };
+    return crlf;
+  };
+
+  CRLF['dict_has'] = function (block) {
+    var crlf = {
+      "kind": "dict_has",
+      "name": fieldToString(block.getField('NAME')),
+      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
     };
     return crlf;
   };
