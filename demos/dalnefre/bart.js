@@ -241,6 +241,108 @@ var BART = (function (self) {
     return crlf;
   };
 
+  CRLF['logic_negate'] = function (block) {
+    let op = "neg";
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Boolean",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('BOOL'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['logic_operation'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Boolean",
+      "name": op + "[2]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('A')),
+        blockToCRLF(block.getInputTargetBlock('B'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['math_number_property'] = function (block) {
+    let op = fieldToString(block.getField('PROPERTY'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Boolean"
+    };
+    if (op == 'divisible by') {
+      crlf["name"] = op + "[2]";
+      crlf["args"] = [
+        blockToCRLF(block.getInputTargetBlock('NUMBER_TO_CHECK')),
+        blockToCRLF(block.getInputTargetBlock('DIVISOR'))
+      ]
+    } else {
+      crlf["name"] = op + "[1]";
+      crlf["args"] = [
+        blockToCRLF(block.getInputTargetBlock('NUMBER_TO_CHECK'))
+      ]
+    }
+    return crlf;
+  };
+
+  CRLF['math_single'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('NUM'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['math_arithmetic'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[2]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('A')),
+        blockToCRLF(block.getInputTargetBlock('B'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['math_trig'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('NUM'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['logic_ternary'] = function (block) {
+    let op = "if-then-else";
+    var crlf = {
+      "kind": "expr_operation",
+      "name": op + "[3]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('IF')),
+        blockToCRLF(block.getInputTargetBlock('THEN')),
+        blockToCRLF(block.getInputTargetBlock('ELSE'))
+      ]
+    };
+    return crlf;
+  };
+
   // exports
   self.workspaceToCRLF = workspaceToCRLF;
   return self;
