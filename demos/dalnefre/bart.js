@@ -207,6 +207,7 @@ var BART = (function (self) {
   CRLF['logic_null'] = function (block) {
     var crlf = {
       "kind": "expr_literal",
+      "type": "Unit",
       "const": null
     };
     return crlf;
@@ -216,6 +217,7 @@ var BART = (function (self) {
     let bool = fieldToString(block.getField('BOOL'));
     var crlf = {
       "kind": "expr_literal",
+      "type": "Boolean",
       "const": (bool == 'true')
     };
     return crlf;
@@ -224,6 +226,7 @@ var BART = (function (self) {
   CRLF['math_number'] = function (block) {
     var crlf = {
       "kind": "expr_literal",
+      "type": "Number",
       "const": fieldToNumber(block.getField('NUM'))
     };
     return crlf;
@@ -232,6 +235,7 @@ var BART = (function (self) {
   CRLF['text'] = function (block) {
     var crlf = {
       "kind": "expr_literal",
+      "type": "String",
       "const": fieldToString(block.getField('TEXT'))
     };
     return crlf;
