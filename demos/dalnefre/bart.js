@@ -25,7 +25,7 @@ var BART = (function (self) {
   };
 
   let blockToError = function blockToError(block) {
-    return "ERROR: unknown block '" + block.type + "'";
+    return "ERROR: unknown block -- " + block.type;
   };
 
   let blockToCRLF = function blockToCRLF(block) {
@@ -200,6 +200,39 @@ var BART = (function (self) {
       "kind": "dict_has",
       "name": fieldToString(block.getField('NAME')),
       "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+    };
+    return crlf;
+  };
+
+  CRLF['logic_null'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "const": null
+    };
+    return crlf;
+  };
+
+  CRLF['logic_boolean'] = function (block) {
+    let bool = fieldToString(block.getField('BOOL'));
+    var crlf = {
+      "kind": "expr_literal",
+      "const": (bool == 'true')
+    };
+    return crlf;
+  };
+
+  CRLF['math_number'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "const": fieldToNumber(block.getField('NUM'))
+    };
+    return crlf;
+  };
+
+  CRLF['text'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "const": fieldToString(block.getField('TEXT'))
     };
     return crlf;
   };
