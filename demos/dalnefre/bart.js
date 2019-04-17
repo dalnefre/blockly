@@ -7,35 +7,42 @@ var BART = (function (self) {
   var CRLF = {};
 
   let fieldToString = function fieldToString(field, missing) {
-    let value = field.getText();
-    if (typeof value === 'string') {
-      return value;
-    } else {
-      return missing;
+    if (field) {
+      let value = field.getText();
+      if (typeof value === 'string') {
+        return value;
+      }
     }
+    return missing;
   };
 
   let fieldToNumber = function fieldToNumber(field, missing) {
-    let value = field.getText();
-    if (typeof value === 'string') {
-      return (1 * value);
-    } else {
-      return missing;
+    if (field) {
+      let value = field.getText();
+      if (typeof value === 'string') {
+        return (1 * value);
+      }
     }
+    return missing;
   };
 
   let blockToError = function blockToError(block) {
-    return "ERROR: unknown block -- " + block.type;
+    if (block) {
+      return "ERROR: unknown block -- " + block.type;
+    }
+    return "ERROR: missing block";
   };
 
   let blockToCRLF = function blockToCRLF(block) {
-    var convert = CRLF[block.type];
-    if (!convert) {
-      return blockToError(block);
+    if (block) {
+      var convert = CRLF[block.type];
+      if (convert) {
+        return convert(block);
+      }
     }
-    return convert(block);
+    return blockToError(block);
   };
-  
+
   let stackToCRLF = function stackToCRLF(block) {
     var list = [];
     while (block) {
