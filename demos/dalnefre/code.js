@@ -117,7 +117,14 @@ var DAL = (function (self) {
     }
     if (lang === 'BART') {
       let crlf = BART.workspaceToCRLF(self.blocklyWorkspace);
-      sourceElement.textContent = JSON.stringify(crlf, null, 2);
+      var text = '';
+      text += BART.dumpCRLF(crlf);
+      text += '\n// CRLF =\n';
+      text += JSON.stringify(crlf, null, 2);
+      text += '\n/*\n';
+      text += BART.dataCRLF(crlf);
+      text += '*/\n';
+      sourceElement.textContent = text;
     }
     if (lang === 'XML') {
       let dom = Blockly.Xml.workspaceToDom(self.blocklyWorkspace);

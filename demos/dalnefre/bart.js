@@ -505,8 +505,50 @@ var BART = (function (self) {
     }
     return output;
   };
+  let dumpCRLF = function dumpCRLF(crlf) {
+    let bose = valueToBOSE(crlf);
+    var text = '';
+    var offset = 0;
+    while (offset < bose.length) {
+      var os = ('00000000' + offset.toString(16)).slice(-8);
+      text += os;
+      text += '  ';
+      var hd = hexdump(bose, offset, 16);
+      hd = (hd + '                                                ').slice(0, 47);
+      text += hd;
+      text += '  |';
+      var cd = chardump(bose, offset, 16);
+      cd = (cd + '                ').slice(0, 16);
+      text += cd;
+      text += '|\n';
+      offset += 16;
+    }
+    return text;
+  };
+  let dataCRLF = function dataCRLF(crlf) {
+    let bose = valueToBOSE(crlf);
+    var text = 'data = {\n';
+    var offset = 0;
+    while (offset < bose.length) {
+      text += '  ';
+      var hd = hexdump(bose, offset, 16, ' ', '0x', ',');
+      text += hd;
+      text += '  // ';
+      var cd = chardump(bose, offset, 16);
+      text += cd;
+      text += '\n';
+      offset += 16;
+    }
+    text += '};\n';
+    return text;
+  };
 
   // exports
+  self.chardump = chardump;
+  self.hexdump = hexdump;
+  self.valueToBOSE = valueToBOSE;
+  self.dumpCRLF = dumpCRLF;
+  self.dataCRLF = dataCRLF;
   self.workspaceToCRLF = workspaceToCRLF;
   return self;
 })({});
