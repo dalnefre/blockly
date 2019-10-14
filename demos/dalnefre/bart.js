@@ -441,13 +441,35 @@ var BART = (function (self) {
       return output;
     };
     let stringToBOSE = function stringToBOSE(s) {
+      let is7bit = function is7bit(s) {
+        var ok = true;
+        var i = 0;
+        while (i < s.length) {
+          var c = s.charCodeAt(i);  // grab UTF-16 character
+          if (c > 0x7F) {
+            ok = false;  // not 7-bit ASCII
+            break;
+          }
+          ++i;
+        }
+        return ok;
+      };
       s = "" + s;  // force string representation
       var output = "";
       if (s.length == 0) {
         output += String.fromCodePoint(0x0F);  // empty string
+      } else if (is7bit(s)) {
+        output += String.fromCodePoint(0x0A);  // UTF-8 String
+        output += integerToBOSE(s.length);
+        var i = 0;
+        while (i < s.length) {
+          var c = s.charCodeAt(i);  // grab UTF-16 character
+          output += String.fromCodePoint(c);  // 7-bit codepoint
+          ++i;
+        }
       } else {
         output += String.fromCodePoint(0x0C);  // UTF-16 String
-        output += integerToBOSE(s.length);
+        output += integerToBOSE(s.length * 2);
         var i = 0;
         while (i < s.length) {
           var c = s.charCodeAt(i);  // grab UTF-16 character
