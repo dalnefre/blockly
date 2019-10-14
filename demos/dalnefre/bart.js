@@ -60,6 +60,10 @@ var BART = (function (self) {
     return list;
   };
 
+  /*
+   * Action
+   */
+
   CRLF['actor_sponsor'] = function (block) {
     var crlf = {
       "kind": "actor_sponsor",
@@ -105,45 +109,6 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['actor_assign'] = function (block) {
-    var crlf = {
-      "kind": "actor_assign",
-      "name": fieldToString(block.getField('NAME')),
-      "value": blockToCRLF(block.getInputTargetBlock('VALUE'))  /* <expression> */
-    };
-    return crlf;
-  };
-
-  CRLF['actor_state'] = function (block) {
-    var crlf = {
-      "kind": "actor_state",
-      "name": fieldToString(block.getField('NAME'))
-    };
-    return crlf;
-  };
-
-  CRLF['actor_has_state'] = function (block) {
-    var crlf = {
-      "kind": "actor_has_state",
-      "name": fieldToString(block.getField('NAME'))
-    };
-    return crlf;
-  };
-
-  CRLF['actor_message'] = function (block) {
-    var crlf = {
-      "kind": "actor_message"
-    };
-    return crlf;
-  };
-
-  CRLF['actor_self'] = function (block) {
-    var crlf = {
-      "kind": "actor_self"
-    };
-    return crlf;
-  };
-
   CRLF['actor_ignore'] = function (block) {
     var crlf = {
       "kind": "actor_ignore"
@@ -159,26 +124,67 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['actor_send_after'] = function (block) {
+  //CRLF['actor_debug'] = function (block) { ... };
+
+  //CRLF['actor_break'] = function (block) { ... };
+
+  /*
+   * State
+   */
+
+  CRLF['actor_self'] = function (block) {
     var crlf = {
-      "kind": "actor_send_after",
-      "delay": fieldToNumber(block.getField('DELAY')),
-      "message": blockToCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
-      "actor": blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+      "kind": "actor_self"
     };
     return crlf;
   };
 
-  CRLF['device_now'] = function (block) {
+  CRLF['actor_assign'] = function (block) {
     var crlf = {
-      "kind": "device_now"
+      "kind": "actor_assign",
+      "name": fieldToString(block.getField('NAME')),
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE'))  /* <expression> */
     };
     return crlf;
   };
 
-  CRLF['dict_empty'] = function (block) {
+  CRLF['actor_has_state'] = function (block) {
     var crlf = {
-      "kind": "dict_empty"
+      "kind": "actor_has_state",
+      "name": fieldToString(block.getField('NAME'))
+    };
+    return crlf;
+  };
+
+  CRLF['actor_state'] = function (block) {
+    var crlf = {
+      "kind": "actor_state",
+      "name": fieldToString(block.getField('NAME'))
+    };
+    return crlf;
+  };
+
+  CRLF['actor_message'] = function (block) {
+    var crlf = {
+      "kind": "actor_message"
+    };
+    return crlf;
+  };
+
+  CRLF['dict_has'] = function (block) {
+    var crlf = {
+      "kind": "dict_has",
+      "name": fieldToString(block.getField('NAME')),
+      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+    };
+    return crlf;
+  };
+
+  CRLF['dict_get'] = function (block) {
+    var crlf = {
+      "kind": "dict_get",
+      "name": fieldToString(block.getField('NAME')),
+      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
     };
     return crlf;
   };
@@ -193,42 +199,18 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['dict_get'] = function (block) {
+  //CRLF['dict_extend'] = function (block) { ... };
+
+  CRLF['dict_empty'] = function (block) {
     var crlf = {
-      "kind": "dict_get",
-      "name": fieldToString(block.getField('NAME')),
-      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
+      "kind": "dict_empty"
     };
     return crlf;
   };
 
-  CRLF['dict_has'] = function (block) {
-    var crlf = {
-      "kind": "dict_has",
-      "name": fieldToString(block.getField('NAME')),
-      "in": blockToCRLF(block.getInputTargetBlock('DICT'))  /* <dictionary> */
-    };
-    return crlf;
-  };
-
-  CRLF['logic_null'] = function (block) {
-    var crlf = {
-      "kind": "expr_literal",
-      "type": "Unit",
-      "const": null
-    };
-    return crlf;
-  };
-
-  CRLF['logic_boolean'] = function (block) {
-    let bool = fieldToString(block.getField('BOOL'));
-    var crlf = {
-      "kind": "expr_literal",
-      "type": "Boolean",
-      "const": (bool == 'true')
-    };
-    return crlf;
-  };
+  /*
+   * Math
+   */
 
   CRLF['math_number'] = function (block) {
     var crlf = {
@@ -239,33 +221,11 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['text'] = function (block) {
-    var crlf = {
-      "kind": "expr_literal",
-      "type": "String",
-      "const": fieldToString(block.getField('TEXT'))
-    };
-    return crlf;
-  };
-
-  CRLF['logic_negate'] = function (block) {
-    let op = "neg";
-    var crlf = {
-      "kind": "expr_operation",
-      "type": "Boolean",
-      "name": op + "[1]",
-      "args": [
-        blockToCRLF(block.getInputTargetBlock('BOOL'))
-      ]
-    };
-    return crlf;
-  };
-
-  CRLF['logic_operation'] = function (block) {
+  CRLF['math_arithmetic'] = function (block) {
     let op = fieldToString(block.getField('OP'));
     var crlf = {
       "kind": "expr_operation",
-      "type": "Boolean",
+      "type": "Number",
       "name": op + "[2]",
       "args": [
         blockToCRLF(block.getInputTargetBlock('A')),
@@ -274,6 +234,37 @@ var BART = (function (self) {
     };
     return crlf;
   };
+
+  CRLF['math_single'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('NUM'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['math_trig'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('NUM'))
+      ]
+    };
+    return crlf;
+  };
+
+  //CRLF['math_constant'] = function (block) {
+  //  let name = fieldToString(block.getField('CONSTANT'));
+  //  ...
+  //};
 
   CRLF['math_number_property'] = function (block) {
     let op = fieldToString(block.getField('PROPERTY'));
@@ -296,24 +287,68 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['math_single'] = function (block) {
-    let op = fieldToString(block.getField('OP'));
+  //CRLF['math_round'] = function (block) { ... };
+
+  //CRLF['math_on_list'] = function (block) { ... };
+
+  //CRLF['math_modulo'] = function (block) { ... };
+
+  //CRLF['math_constrain'] = function (block) { ... };
+
+  //CRLF['math_random_int'] = function (block) { ... };
+
+  //CRLF['math_random_float'] = function (block) { ... };
+
+  /*
+   * Text
+   */
+
+  CRLF['text'] = function (block) {
     var crlf = {
-      "kind": "expr_operation",
-      "type": "Number",
-      "name": op + "[1]",
-      "args": [
-        blockToCRLF(block.getInputTargetBlock('NUM'))
-      ]
+      "kind": "expr_literal",
+      "type": "String",
+      "const": fieldToString(block.getField('TEXT'))
     };
     return crlf;
   };
 
-  CRLF['math_arithmetic'] = function (block) {
+  //CRLF['text_join'] = function (block) { ... };
+
+  //CRLF['text_append'] = function (block) { ... };
+
+  //CRLF['text_length'] = function (block) { ... };
+
+  //CRLF['text_isEmpty'] = function (block) { ... };
+
+  //CRLF['text_indexOf'] = function (block) { ... };
+
+  //CRLF['text_charAt'] = function (block) { ... };
+
+  //CRLF['text_getSubstring'] = function (block) { ... };
+
+  //CRLF['text_changeCase'] = function (block) { ... };
+
+  //CRLF['text_trim'] = function (block) { ... };
+
+  //CRLF['text_print'] = function (block) { ... };
+
+  //CRLF['text_prompt_ext'] = function (block) { ... };
+
+  //CRLF['text_match_regex'] = function (block) { ... };
+
+  /*
+   * Logic
+   */
+
+  //CRLF['controls_if'] = function (block) { ... };
+
+  //CRLF['logic_compare'] = function (block) { ... };
+
+  CRLF['logic_operation'] = function (block) {
     let op = fieldToString(block.getField('OP'));
     var crlf = {
       "kind": "expr_operation",
-      "type": "Number",
+      "type": "Boolean",
       "name": op + "[2]",
       "args": [
         blockToCRLF(block.getInputTargetBlock('A')),
@@ -323,15 +358,34 @@ var BART = (function (self) {
     return crlf;
   };
 
-  CRLF['math_trig'] = function (block) {
-    let op = fieldToString(block.getField('OP'));
+  CRLF['logic_negate'] = function (block) {
+    let op = "neg";
     var crlf = {
       "kind": "expr_operation",
-      "type": "Number",
+      "type": "Boolean",
       "name": op + "[1]",
       "args": [
-        blockToCRLF(block.getInputTargetBlock('NUM'))
+        blockToCRLF(block.getInputTargetBlock('BOOL'))
       ]
+    };
+    return crlf;
+  };
+
+  CRLF['logic_boolean'] = function (block) {
+    let bool = fieldToString(block.getField('BOOL'));
+    var crlf = {
+      "kind": "expr_literal",
+      "type": "Boolean",
+      "const": (bool == 'true')
+    };
+    return crlf;
+  };
+
+  CRLF['logic_null'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "type": "Unit",
+      "const": null
     };
     return crlf;
   };
@@ -349,6 +403,35 @@ var BART = (function (self) {
     };
     return crlf;
   };
+
+  /*
+   * Device
+   */
+
+  //CRLF['device_set'] = function (block) { ... };
+
+  //CRLF['device_event'] = function (block) { ... };
+
+  CRLF['device_now'] = function (block) {
+    var crlf = {
+      "kind": "device_now"
+    };
+    return crlf;
+  };
+
+  CRLF['actor_send_after'] = function (block) {
+    var crlf = {
+      "kind": "actor_send_after",
+      "delay": fieldToNumber(block.getField('DELAY')),
+      "message": blockToCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
+      "actor": blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+    };
+    return crlf;
+  };
+
+  /*
+   * support routines
+   */
 
   // chardump
   let chardump = function chardump(string, offset, count, separator, prefix, suffix, replace) {
