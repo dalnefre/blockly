@@ -277,12 +277,12 @@ var BART = (function (self) {
       crlf["args"] = [
         blockToCRLF(block.getInputTargetBlock('NUMBER_TO_CHECK')),
         blockToCRLF(block.getInputTargetBlock('DIVISOR'))
-      ]
+      ];
     } else {
       crlf["name"] = op + "[1]";
       crlf["args"] = [
         blockToCRLF(block.getInputTargetBlock('NUMBER_TO_CHECK'))
-      ]
+      ];
     }
     return crlf;
   };
@@ -312,17 +312,66 @@ var BART = (function (self) {
     return crlf;
   };
 
-  //CRLF['text_join'] = function (block) { ... };
+  CRLF['text_join'] = function (block) {
+    var parts = [];
+    var i = 0;
+    while (i < 99) {  // FIXME: is there a limit to the number of clauses?
+      var add_block = block.getInputTargetBlock('ADD' + i);
+      if (add_block) {
+        parts.push(blockToCRLF(add_block));
+      }
+      ++i;
+    }
+    let op = "join";
+    var crlf = {
+      "kind": "expr_operation",
+      "name": op + "[" + parts.length + "]",
+      "args": parts
+    };
+    return crlf;
+  };
 
   //CRLF['text_append'] = function (block) { ... };
 
-  //CRLF['text_length'] = function (block) { ... };
+  CRLF['text_length'] = function (block) {
+    let op = "length";
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('VALUE'))
+      ]
+    };
+    return crlf;
+  };
 
   //CRLF['text_isEmpty'] = function (block) { ... };
 
   //CRLF['text_indexOf'] = function (block) { ... };
 
-  //CRLF['text_charAt'] = function (block) { ... };
+  CRLF['text_charAt'] = function (block) {
+    let op = fieldToString(block.getField('WHERE'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number"
+    };
+    // FIXME: check for <mutation at="true"> instead?
+    //if ((op == 'FROM_START') && (op == 'FROM_END')) {
+    if ((op == 'letter #') || (op == 'letter # from end')) {
+      crlf["name"] = "charAt_" + op + "[2]";
+      crlf["args"] = [
+        blockToCRLF(block.getInputTargetBlock('VALUE')),
+        blockToCRLF(block.getInputTargetBlock('AT'))
+      ];
+    } else {
+      crlf["name"] = "charAt_" + op + "[1]";
+      crlf["args"] = [
+        blockToCRLF(block.getInputTargetBlock('VALUE'))
+      ];
+    }
+    return crlf;
+  };
 
   //CRLF['text_getSubstring'] = function (block) { ... };
 
@@ -340,9 +389,49 @@ var BART = (function (self) {
    * Logic
    */
 
-  //CRLF['controls_if'] = function (block) { ... };
+  CRLF['controls_if'] = function (block) {
+    var cases = [];
+    var i = 0;
+    while (i < 99) {  // FIXME: is there a limit to the number of clauses?
+      var if_block = block.getInputTargetBlock('IF' + i);
+      var do_block = block.getInputTargetBlock('DO' + i);
+      if (if_block) {
+        cases.push({
+          "if": blockToCRLF(if_block),
+          "do": stackToCRLF(do_block)
+        });
+      }
+      ++i;
+    }
+    let else_block = block.getInputTargetBlock('ELSE');
+    if (else_block) {
+      cases.push({
+        "if": { "kind": "expr_literal", "type": "Boolean", "const": "true" },
+        "do": stackToCRLF(else_block)
+      });
+    }
+    let op = "conditional";
+    var crlf = {
+      "kind": "expr_operation",
+      "name": op + "[" + cases.length + "]",
+      "args": cases
+    };
+    return crlf;
+  };
 
-  //CRLF['logic_compare'] = function (block) { ... };
+  CRLF['logic_compare'] = function (block) {
+    let op = fieldToString(block.getField('OP'));
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Boolean",
+      "name": op + "[2]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('A')),
+        blockToCRLF(block.getInputTargetBlock('B'))
+      ]
+    };
+    return crlf;
+  };
 
   CRLF['logic_operation'] = function (block) {
     let op = fieldToString(block.getField('OP'));
@@ -479,11 +568,10 @@ var BART = (function (self) {
         }
         output += prefix;
         var hex = string.codePointAt(offset + index).toString(16);
-        if (hex.length > 1) {
-          output += hex;
-        } else {
-          output += '0' + hex;
+        if (hex.length < 2) {
+          output += '0';
         }
+        output += hex;
         output += suffix;
       }
       ++index;
@@ -525,17 +613,15 @@ var BART = (function (self) {
     };
     let stringToBOSE = function stringToBOSE(s) {
       let is7bit = function is7bit(s) {
-        var ok = true;
         var i = 0;
         while (i < s.length) {
           var c = s.charCodeAt(i);  // grab UTF-16 character
           if (c > 0x7F) {
-            ok = false;  // not 7-bit ASCII
-            break;
+            return false;  // not 7-bit ASCII
           }
           ++i;
         }
-        return ok;
+        return true;  // only 7-bit ASCII (safe UTF-8)
       };
       s = "" + s;  // force string representation
       var output = "";
@@ -606,6 +692,7 @@ var BART = (function (self) {
         output += content;
       }
     } else {  // substitute `null` for unsupported value type
+      // FIXME: print WARNING to console?
       output += String.fromCodePoint(0xFF);
     }
     return output;
