@@ -8,7 +8,7 @@ var BART = (function (self) {
 
   let fieldToString = function fieldToString(field, missing) {
     if (field) {
-      let value = field.getText();
+      let value = field.getValue();
       if (typeof value === 'string') {
         return value;
       }
@@ -18,7 +18,7 @@ var BART = (function (self) {
 
   let fieldToNumber = function fieldToNumber(field, missing) {
     if (field) {
-      let value = field.getText();
+      let value = field.getValue();
       if (typeof value === 'string') {
         return (1 * value);
       }
@@ -272,7 +272,7 @@ var BART = (function (self) {
       "kind": "expr_operation",
       "type": "Boolean"
     };
-    if (op == 'divisible by') {
+    if (op == 'DIVISIBLE_BY') {
       crlf["name"] = op + "[2]";
       crlf["args"] = [
         blockToCRLF(block.getInputTargetBlock('NUMBER_TO_CHECK')),
@@ -357,8 +357,7 @@ var BART = (function (self) {
       "type": "Number"
     };
     // FIXME: check for <mutation at="true"> instead?
-    //if ((op == 'FROM_START') && (op == 'FROM_END')) {
-    if ((op == 'letter #') || (op == 'letter # from end')) {
+    if ((op == 'FROM_START') || (op == 'FROM_END')) {
       crlf["name"] = "charAt_" + op + "[2]";
       crlf["args"] = [
         blockToCRLF(block.getInputTargetBlock('VALUE')),
@@ -465,7 +464,7 @@ var BART = (function (self) {
     var crlf = {
       "kind": "expr_literal",
       "type": "Boolean",
-      "const": (bool == 'true')
+      "const": (bool == 'TRUE')
     };
     return crlf;
   };
