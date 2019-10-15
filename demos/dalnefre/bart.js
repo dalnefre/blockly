@@ -378,7 +378,14 @@ var BART = (function (self) {
 
   //CRLF['text_trim'] = function (block) { ... };
 
-  //CRLF['text_print'] = function (block) { ... };
+  CRLF['text_print'] = function (block) {
+    var crlf = {
+      "kind": "log_print",
+      "level": "INFO",
+      "value": blockToCRLF(block.getInputTargetBlock('TEXT'))
+    };
+    return crlf;
+  };
 
   //CRLF['text_prompt_ext'] = function (block) { ... };
 

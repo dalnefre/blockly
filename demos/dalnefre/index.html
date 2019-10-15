@@ -59,6 +59,7 @@
 </body>
 
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+
   <category name="Action" colour="345">
     <block type="actor_sponsor">
       <statement name="SCRIPT">
@@ -125,6 +126,7 @@
     <block type="actor_debug"></block>
     <block type="actor_break"></block>
   </category>
+
   <category name="State" colour="45">
     <block type="actor_self"></block>
     <block type="actor_assign"></block>
@@ -149,6 +151,7 @@
     <block type="dict_extend"></block>
     <block type="dict_empty"></block>
   </category>
+
   <category name="Lists" colour="#745CA6">
     <block type="lists_create_with">
       <mutation items="0"></mutation>
@@ -217,7 +220,15 @@
       <field name="DIRECTION">1</field>
     </block>
   </category>
+
   <category name="Device" colour="345">
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">text</field>
+        </shadow>
+      </value>
+    </block>
     <block type="device_set">
       <value name="VALUE">
         <shadow type="logic_boolean">
@@ -238,7 +249,9 @@
       </value>
     </block>
   </category>
+
   <sep></sep>
+
   <category name="Math" colour="#5C68A6">
     <block type="math_number">
       <field name="NUM">0</field>
@@ -339,6 +352,7 @@
     </block>
     <block type="math_random_float"></block>
   </category>
+
   <category name="Text" colour="#5CA68D">
     <block type="text">
       <field name="TEXT"></field>
@@ -436,6 +450,7 @@
       <field name="REGEX">^[a-zA-Z_$][0-9a-zA-Z_$]*$</field>
     </block>
   </category>
+
   <category name="Logic" colour="#5C81A6">
     <block type="controls_if"></block>
     <block type="logic_compare">
@@ -451,6 +466,7 @@
     <block type="logic_null"></block>
     <block type="logic_ternary"></block>
   </category>
+
   <category name="Loops" colour="#5CA65C">
     <block type="controls_repeat_ext">
       <value name="TIMES">
@@ -487,10 +503,15 @@
       <field name="FLOW">BREAK</field>
     </block>
   </category>
+
   <sep></sep>
+
   <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
+
   <category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
+
   <sep></sep>
+
   <category name="Library" colour="#666666" expanded="true">
 
     <category name="Test">
