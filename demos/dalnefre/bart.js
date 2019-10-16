@@ -589,7 +589,7 @@ var BART = (function (self) {
     let integerToBOSE = function integerToBOSE(n) {
       n = 0 + n;  // force number representation
       var output = "";
-      if ((n >= -64) && (n <= 126)) {  // small integer range
+      if ((-64 <= n) && (n <= 126)) {  // small integer range
         output += String.fromCodePoint(0x80 + n);
       } else {
         if (n < 0) {
@@ -597,7 +597,7 @@ var BART = (function (self) {
         } else {
           output += String.fromCodePoint(0x10);  // positive integer, 0 padding
         }
-        if ((n >= -32768) && (n <= 32767)) {  // 16-bit range
+        if ((-32768 <= n) && (n <= 65535)) {  // 16-bit range
           output += String.fromCodePoint(0x82);  // 2-byte size
           n >>>= 0;  // force 32-bit integer representation
           output += String.fromCodePoint(n & 0xFF);  // LSB
@@ -633,6 +633,15 @@ var BART = (function (self) {
       var output = "";
       if (s.length == 0) {
         output += String.fromCodePoint(0x0F);  // empty string
+      } else if (s.charCodeAt(0) == 0x10) {  // capability starts with DLE (^P)
+        output += String.fromCodePoint(0x08);  // raw octet data
+        output += integerToBOSE(s.length);
+        var i = 0;
+        while (i < s.length) {
+          var c = s.charCodeAt(i);  // grab UTF-16 character
+          output += String.fromCodePoint(c) & 0xFF;  // octet (byte) data
+          ++i;
+        }
       } else if (is7bit(s)) {
         output += String.fromCodePoint(0x0A);  // UTF-8 String
         output += integerToBOSE(s.length);
