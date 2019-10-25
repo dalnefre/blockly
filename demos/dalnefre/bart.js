@@ -203,7 +203,9 @@ var BART = (function (self) {
 
   CRLF['dict_empty'] = function (block) {
     var crlf = {
-      "kind": "dict_empty"
+      "kind": "expr_literal",
+      "type": "Object",
+      "const": {}
     };
     return crlf;
   };
@@ -325,7 +327,7 @@ var BART = (function (self) {
     let op = "join";
     var crlf = {
       "kind": "expr_operation",
-      "name": op + "[" + parts.length + "]",
+      "name": op + "[*]", /*"[" + parts.length + "]",*/
       "args": parts
     };
     return crlf;
@@ -381,7 +383,7 @@ var BART = (function (self) {
   CRLF['text_print'] = function (block) {
     var crlf = {
       "kind": "log_print",
-      "level": "INFO",
+      "level": 1,
       "value": blockToCRLF(block.getInputTargetBlock('TEXT'))
     };
     return crlf;
@@ -419,7 +421,7 @@ var BART = (function (self) {
     let op = "conditional";
     var crlf = {
       "kind": "expr_operation",
-      "name": op + "[" + cases.length + "]",
+      "name": op + "[*]", /*"[" + cases.length + "]",*/
       "args": cases
     };
     return crlf;
@@ -479,7 +481,7 @@ var BART = (function (self) {
   CRLF['logic_null'] = function (block) {
     var crlf = {
       "kind": "expr_literal",
-      "type": "Unit",
+      "type": "Null",
       "const": null
     };
     return crlf;
@@ -734,10 +736,10 @@ var BART = (function (self) {
   };
   let dataCRLF = function dataCRLF(crlf) {
     let bose = valueToBOSE(crlf);
-    var text = 'data = {\n';
+    var text = 'uint8_t bose[] = {\n';
     var offset = 0;
     while (offset < bose.length) {
-      text += '  ';
+      text += '    ';
       var hd = hexdump(bose, offset, 16, ' ', '0x', ',');
       text += hd;
       text += '  // ';

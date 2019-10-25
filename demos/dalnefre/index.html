@@ -516,6 +516,75 @@
 
     <category name="Test">
 
+  <block type="actor_sponsor" id="$LGeMv~E_90V^h~D@Re@" x="40" y="40">
+    <field name="ACTORS">1</field>
+    <field name="EVENTS">1</field>
+    <statement name="SCRIPT">
+      <shadow type="actor_send" id="w`S7NNBR+:Qc{Ej~Z{{f">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="J3P`N+-dt]Rzv!7hlMt0"></shadow>
+        </value>
+        <value name="ACTOR">
+          <shadow type="actor_create" id="/A,PZRlD..6r9]f6y=?i">
+            <value name="STATE">
+              <shadow type="dict_empty" id="U9vV4gkd6G#{b*Z:v2%a"></shadow>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="ao[+`*YN!FdbBuNPS|c7">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="TWX%M4_Fb7,-{fi4tO07"></shadow>
+                </statement>
+              </shadow>
+            </value>
+          </shadow>
+        </value>
+      </shadow>
+      <block type="actor_send" id="$z,3boXC2|a/e%j%_b8O">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="4OE55.{_+fv|)zfQqQI}"></shadow>
+        </value>
+        <value name="ACTOR">
+          <block type="actor_create" id="?!mexe:kH/C^ru)=^2],">
+            <value name="STATE">
+              <shadow type="dict_empty" id="h[8a=6c=+^Z|P#W0wDP."></shadow>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="fXx$U:F(4kAKW-i:$duF">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="Zip^[z0;H6aXYDFu7.q6"></shadow>
+                </statement>
+              </shadow>
+              <block type="actor_behavior" id="fK]7N{%2g=%(G8esYvgp">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id=")t@)Sh[uRYFA2G6cWt3|"></shadow>
+                  <block type="text_print" id="hV}-tK~QhCoMxI`X[roW">
+                    <value name="TEXT">
+                      <shadow type="text" id="YHzzwzUtRvKW{XHXU4w_">
+                        <field name="TEXT">World</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="itiwtE3^9GQ!r*xbhlfi">
+            <value name="TEXT">
+              <shadow type="text" id="K=6X#zuG*n4m/%C++Rv_">
+                <field name="TEXT">Hello</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
   <block type="actor_sponsor" id="[+eT3m{rLl1seH-Q-P{8" x="74" y="40">
     <field name="ACTORS">1</field>
     <field name="EVENTS">2</field>
