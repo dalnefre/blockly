@@ -597,8 +597,15 @@ var BART = (function (self) {
     memo__type: false,  // option to memoize "type" property values
     memo__name: false,  // option to memoize "name" property values
 */
+    memo_no_wrap: true,  // option to prevent memo index wrap-around
     memo_index: 0,  // index of next memo table entry to use
     memo_table: [],  // table of memoized Strings
+    memo_full: false,  // index wrap-around flag
+    memo_clear: function memo_clear() {  // reset memo table (each top-level object must start fresh)
+      BOSE.memo_index = 0;
+      BOSE.memo_table = [];
+      BOSE.memo_full = false;
+    },
     memo_lookup: function memo_lookup(string) {  // return the memo index matching this `string`
       return BOSE.memo_table.indexOf(string);  // -1 = not found.
     },
@@ -606,6 +613,9 @@ var BART = (function (self) {
       let index = BOSE.memo_index++;
       if (BOSE.memo_index > 0xFF) {
         BOSE.memo_index = 0;  // wrap-around memo index
+        if (BOSE.memo_no_wrap) {
+          BOSE.memo_full = true;
+        }
       }
       BOSE.memo_table[index] = string;
       return index;
@@ -669,11 +679,11 @@ var BART = (function (self) {
         output += String.fromCodePoint(c) & 0xFF;  // octet (byte) data
         ++i;
       }
-    } if (memoize && ((memo = BOSE.memo_lookup(s)) >= 0)) {
+    } else if (memoize && ((memo = BOSE.memo_lookup(s)) >= 0)) {
       output += String.fromCodePoint(0x09);  // memo reference
       output += String.fromCodePoint(memo);
     } else if (is7bit(s)) {
-      if (memoize) {
+      if (memoize && !BOSE.memo_full) {
         BOSE.memo_add(s);
         output += String.fromCodePoint(0x0B);  // UTF-8 String (+ memoize)
       } else {
@@ -687,7 +697,7 @@ var BART = (function (self) {
         ++i;
       }
     } else {
-      if (memoize) {
+      if (memoize && !BOSE.memo_full) {
         BOSE.memo_add(s);
         output += String.fromCodePoint(0x0D);  // UTF-16 String (+ memoize)
       } else {
@@ -758,6 +768,7 @@ var BART = (function (self) {
     return output;
   };
   let dumpCRLF = function dumpCRLF(crlf) {
+    BOSE.memo_clear();
     let bose = valueToBOSE(crlf);
     var text = '';
     var offset = 0;
@@ -778,6 +789,7 @@ var BART = (function (self) {
     return text;
   };
   let dataCRLF = function dataCRLF(crlf) {
+    BOSE.memo_clear();
     let bose = valueToBOSE(crlf);
     var text = 'uint8_t bose[] = {\n';
     var offset = 0;
@@ -792,6 +804,9 @@ var BART = (function (self) {
       offset += 16;
     }
     text += '};\n';
+    //console.log("BOSE.memo_index = ", BOSE.memo_index);
+    //console.log("BOSE.memo_table = ", BOSE.memo_table);
+    //console.log("BOSE.memo_full = ", BOSE.memo_full);
     return text;
   };
 
