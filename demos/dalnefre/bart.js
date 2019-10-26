@@ -586,86 +586,126 @@ var BART = (function (self) {
     }
     return output;
   };
-  // Binary Octet-Stream Encoding
-  let valueToBOSE = function valueToBOSE(value) {
-    let integerToBOSE = function integerToBOSE(n) {
-      n = 0 + n;  // force number representation
-      var output = "";
-      if ((-64 <= n) && (n <= 126)) {  // small integer range
-        output += String.fromCodePoint(0x80 + n);
-      } else {
-        if (n < 0) {
-          output += String.fromCodePoint(0x18);  // negative integer, 0 padding
-        } else {
-          output += String.fromCodePoint(0x10);  // positive integer, 0 padding
-        }
-        if ((-32768 <= n) && (n <= 65535)) {  // 16-bit range
-          output += String.fromCodePoint(0x82);  // 2-byte size
-          n >>>= 0;  // force 32-bit integer representation
-          output += String.fromCodePoint(n & 0xFF);  // LSB
-          n >>= 8;
-          output += String.fromCodePoint(n & 0xFF);  // MSB
-        } else {
-          output += String.fromCodePoint(0x84);  // 4-byte size
-          n >>>= 0;  // force 32-bit integer representation
-          output += String.fromCodePoint(n & 0xFF);  // LSB
-          n >>= 8;
-          output += String.fromCodePoint(n & 0xFF);
-          n >>= 8;
-          output += String.fromCodePoint(n & 0xFF);
-          n >>= 8;
-          output += String.fromCodePoint(n & 0xFF);  // MSB
-        }
+  let BOSE = {  // Binary Octet-Stream Encoding
+    memo_properties: true,  // option to memoize property names
+    memo__kind: true,  // option to memoize "kind" property values
+    memo__type: true,  // option to memoize "type" property values
+    memo__name: true,  // option to memoize "name" property values
+/*
+    memo_properties: false,  // option to memoize property names
+    memo__kind: false,  // option to memoize "kind" property values
+    memo__type: false,  // option to memoize "type" property values
+    memo__name: false,  // option to memoize "name" property values
+*/
+    memo_index: 0,  // index of next memo table entry to use
+    memo_table: [],  // table of memoized Strings
+    memo_lookup: function memo_lookup(string) {  // return the memo index matching this `string`
+      return BOSE.memo_table.indexOf(string);  // -1 = not found.
+    },
+    memo_add: function memo_add(string) {  // add `string` to memo table, return the index where it was stored.
+      let index = BOSE.memo_index++;
+      if (BOSE.memo_index > 0xFF) {
+        BOSE.memo_index = 0;  // wrap-around memo index
       }
-      return output;
+      BOSE.memo_table[index] = string;
+      return index;
+    }
+  };
+  let integerToBOSE = function integerToBOSE(n) {
+    n = 0 + n;  // force number representation
+    var output = "";
+    if ((-64 <= n) && (n <= 126)) {  // small integer range
+      output += String.fromCodePoint(0x80 + n);
+    } else {
+      if (n < 0) {
+        output += String.fromCodePoint(0x18);  // negative integer, 0 padding
+      } else {
+        output += String.fromCodePoint(0x10);  // positive integer, 0 padding
+      }
+      if ((-32768 <= n) && (n <= 65535)) {  // 16-bit range
+        output += String.fromCodePoint(0x82);  // 2-byte size
+        n >>>= 0;  // force 32-bit integer representation
+        output += String.fromCodePoint(n & 0xFF);  // LSB
+        n >>= 8;
+        output += String.fromCodePoint(n & 0xFF);  // MSB
+      } else {
+        output += String.fromCodePoint(0x84);  // 4-byte size
+        n >>>= 0;  // force 32-bit integer representation
+        output += String.fromCodePoint(n & 0xFF);  // LSB
+        n >>= 8;
+        output += String.fromCodePoint(n & 0xFF);
+        n >>= 8;
+        output += String.fromCodePoint(n & 0xFF);
+        n >>= 8;
+        output += String.fromCodePoint(n & 0xFF);  // MSB
+      }
+    }
+    return output;
+  };
+  let stringToBOSE = function stringToBOSE(s, memoize) {
+    memoize = memoize || false;
+    var memo = -1;
+    let is7bit = function is7bit(s) {
+      var i = 0;
+      while (i < s.length) {
+        var c = s.charCodeAt(i);  // grab UTF-16 character
+        if (c > 0x7F) {
+          return false;  // not 7-bit ASCII
+        }
+        ++i;
+      }
+      return true;  // only 7-bit ASCII (safe UTF-8)
     };
-    let stringToBOSE = function stringToBOSE(s) {
-      let is7bit = function is7bit(s) {
-        var i = 0;
-        while (i < s.length) {
-          var c = s.charCodeAt(i);  // grab UTF-16 character
-          if (c > 0x7F) {
-            return false;  // not 7-bit ASCII
-          }
-          ++i;
-        }
-        return true;  // only 7-bit ASCII (safe UTF-8)
-      };
-      s = "" + s;  // force string representation
-      var output = "";
-      if (s.length == 0) {
-        output += String.fromCodePoint(0x0F);  // empty string
-      } else if (s.charCodeAt(0) == 0x10) {  // capability starts with DLE (^P)
-        output += String.fromCodePoint(0x08);  // raw octet data
-        output += integerToBOSE(s.length);
-        var i = 0;
-        while (i < s.length) {
-          var c = s.charCodeAt(i);  // grab UTF-16 character
-          output += String.fromCodePoint(c) & 0xFF;  // octet (byte) data
-          ++i;
-        }
-      } else if (is7bit(s)) {
+    s = "" + s;  // force string representation
+    var output = "";
+    if (s.length == 0) {
+      output += String.fromCodePoint(0x0F);  // empty string
+    } else if (s.charCodeAt(0) == 0x10) {  // capability starts with DLE (^P)
+      output += String.fromCodePoint(0x08);  // raw octet data
+      output += integerToBOSE(s.length);
+      var i = 0;
+      while (i < s.length) {
+        var c = s.charCodeAt(i);  // grab UTF-16 character
+        output += String.fromCodePoint(c) & 0xFF;  // octet (byte) data
+        ++i;
+      }
+    } if (memoize && ((memo = BOSE.memo_lookup(s)) >= 0)) {
+      output += String.fromCodePoint(0x09);  // memo reference
+      output += String.fromCodePoint(memo);
+    } else if (is7bit(s)) {
+      if (memoize) {
+        BOSE.memo_add(s);
+        output += String.fromCodePoint(0x0B);  // UTF-8 String (+ memoize)
+      } else {
         output += String.fromCodePoint(0x0A);  // UTF-8 String
-        output += integerToBOSE(s.length);
-        var i = 0;
-        while (i < s.length) {
-          var c = s.charCodeAt(i);  // grab UTF-16 character
-          output += String.fromCodePoint(c);  // 7-bit codepoint
-          ++i;
-        }
+      }
+      output += integerToBOSE(s.length);
+      var i = 0;
+      while (i < s.length) {
+        var c = s.charCodeAt(i);  // grab UTF-16 character
+        output += String.fromCodePoint(c);  // 7-bit codepoint
+        ++i;
+      }
+    } else {
+      if (memoize) {
+        BOSE.memo_add(s);
+        output += String.fromCodePoint(0x0D);  // UTF-16 String (+ memoize)
       } else {
         output += String.fromCodePoint(0x0C);  // UTF-16 String
-        output += integerToBOSE(s.length * 2);
-        var i = 0;
-        while (i < s.length) {
-          var c = s.charCodeAt(i);  // grab UTF-16 character
-          output += String.fromCodePoint(c >>> 8);  // MSB
-          output += String.fromCodePoint(c & 0xFF);  // LSB
-          ++i;
-        }
       }
-      return output;
-    };
+      output += integerToBOSE(s.length * 2);
+      var i = 0;
+      while (i < s.length) {
+        var c = s.charCodeAt(i);  // grab UTF-16 character
+        output += String.fromCodePoint(c >>> 8);  // MSB
+        output += String.fromCodePoint(c & 0xFF);  // LSB
+        ++i;
+      }
+    }
+    return output;
+  };
+  let valueToBOSE = function valueToBOSE(value, memoize) {
+    memoize = memoize || false;
     var output = "";
     if (value === null) {
       output += String.fromCodePoint(0xFF);  // null
@@ -677,7 +717,7 @@ var BART = (function (self) {
       // FIXME: all numbers are treated as 32-bit integers, for now...
       output += integerToBOSE(value);
     } else if (typeof value === 'string') {
-      output += stringToBOSE(value);
+      output += stringToBOSE(value, memoize);
     } else if (Array.isArray(value)) {
       if (value.length == 0) {
         output += String.fromCodePoint(0x02);  // empty array
@@ -701,8 +741,11 @@ var BART = (function (self) {
         var content = integerToBOSE(keys.length);  // count field
         keys.forEach(
           function (key, index, array) {
-            content += stringToBOSE(key);
-            content += valueToBOSE(value[key]);
+            content += stringToBOSE(key, BOSE.memo_properties);
+            memoize = (BOSE.memo__kind && (key === 'kind'))
+                   || (BOSE.memo__type && (key === 'type'))
+                   || (BOSE.memo__name && (key === 'name'));
+            content += valueToBOSE(value[key], memoize);
           }
         );
         output += integerToBOSE(content.length);  // size field
