@@ -897,6 +897,110 @@
     </statement>
   </block>
 
+  <block type="actor_sponsor" id="z=9iN7PfG;*Qlt6s-66H" x="88" y="56">
+    <field name="ACTORS">1</field>
+    <field name="EVENTS">3</field>
+    <statement name="SCRIPT">
+      <shadow type="actor_send" id="jg/`(oR4HxJc{Nx@Wp~0">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id="xB=30EPAhS7cdr]p!MiJ"></shadow>
+        </value>
+        <value name="ACTOR">
+          <shadow type="actor_create" id="m[YjMXptyU7(q:)6V+23">
+            <value name="STATE">
+              <shadow type="dict_empty" id="GVOz}pYc%TQ{8+yM*pZJ"></shadow>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id="!61Nx/=mQZDI~sIRbiRQ">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="Q@m]QZJvCJfp47KH3V?c"></shadow>
+                </statement>
+              </shadow>
+            </value>
+          </shadow>
+        </value>
+      </shadow>
+      <block type="actor_send" id=",x:=/n%DBZ7=HnKgLxi4">
+        <value name="MESSAGE">
+          <shadow type="dict_empty" id=";W$MQiD=|=*zja}j+XQI"></shadow>
+        </value>
+        <value name="ACTOR">
+          <block type="actor_create" id="vDh9v7oF;?Acqcse!%K^">
+            <value name="STATE">
+              <shadow type="dict_empty" id="8Rsvs=Pt1.=8ZE^]f~1:"></shadow>
+            </value>
+            <value name="BEHAVIOR">
+              <shadow type="actor_behavior" id=",-Aeo1Yxvgmj20}[[7{Q">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="KR?94@7r5L+,xt2s]q=F"></shadow>
+                </statement>
+              </shadow>
+              <block type="actor_behavior" id="X59{H2Tx,?fy[3miU6t2">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="/KNZ@BJeu2X*R*}x86g#"></shadow>
+                  <block type="actor_send" id="{S*a$4g!Y/LTx_l`UK)]">
+                    <value name="MESSAGE">
+                      <shadow type="dict_empty" id="4y#QWFR7rEw`6P1Khi4]"></shadow>
+                    </value>
+                    <value name="ACTOR">
+                      <block type="actor_self" id="RNM5NqeZh}jukvHXzr$L"></block>
+                    </value>
+                    <next>
+                      <block type="actor_become" id="Uf~}nuDMsxL5uOkrsIW2">
+                        <value name="BEHAVIOR">
+                          <shadow type="actor_behavior" id=")%9Wd,S/8Jhe0Vna[S5h">
+                            <field name="NAME"></field>
+                            <statement name="SCRIPT">
+                              <shadow type="actor_ignore" id="=OJLOGItQDb!N{^TY;@J"></shadow>
+                            </statement>
+                          </shadow>
+                          <block type="actor_behavior" id="I|~@T]^J|CP_1xB,*]jq">
+                            <field name="NAME"></field>
+                            <statement name="SCRIPT">
+                              <shadow type="actor_ignore" id="Ecy{JJ~|Zae!qX=;f0nT"></shadow>
+                              <block type="text_print" id="sA7t0HpzZwvHTq0^`qju">
+                                <value name="TEXT">
+                                  <shadow type="text" id="Ts_3^G!!|0k%+Vi^B;R-">
+                                    <field name="TEXT">Ignored...</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="actor_fail" id="y3{9}:~.1[$((eXmrqz+">
+                            <value name="ERROR">
+                              <shadow type="text" id="pj%gljJk@!0}3v==h,C.">
+                                <field name="TEXT">Throw!?</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="text_print" id="aLqp0],%:c$1Ogk=kR]a">
+                                <value name="TEXT">
+                                  <shadow type="text" id=":u2sx769vw#K~=tSG;iU">
+                                    <field name="TEXT">Where am I...</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+
   <block type="actor_sponsor" id="j9Wu=Ht*_CWhP^$4DO+u" x="42" y="25">
     <field name="ACTORS">99</field>
     <field name="EVENTS">999</field>
