@@ -418,10 +418,8 @@ var BART = (function (self) {
         "do": stackToCRLF(else_block)
       });
     }
-    let op = "conditional";
     var crlf = {
-      "kind": "expr_operation",
-      "name": op + "[*]", /*"[" + cases.length + "]",*/
+      "kind": "conditional",
       "args": cases
     };
     return crlf;
