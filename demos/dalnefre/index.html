@@ -3094,9 +3094,9 @@
 
     <category name="PEG">
 
-  <block type="actor_sponsor" id="Jf7:US`s[0TzOQ*`Rj2?" x="44" y="-87">
-    <field name="ACTORS">99</field>
-    <field name="EVENTS">999</field>
+  <block type="actor_sponsor" id="Jf7:US`s[0TzOQ*`Rj2?" x="-56" y="-8">
+    <field name="ACTORS">9</field>
+    <field name="EVENTS">99</field>
     <statement name="SCRIPT">
       <shadow type="actor_send">
         <value name="MESSAGE">
@@ -3126,11 +3126,25 @@
             </value>
             <value name="BEHAVIOR">
               <shadow type="actor_behavior" id="mzG~hl(L@k@T}BPP`}Lf">
+                <field name="NAME"></field>
                 <statement name="SCRIPT">
                   <shadow type="actor_ignore" id="ttOS_;J]*!]W3^wv`n.i"></shadow>
                 </statement>
               </shadow>
-              <block type="actor_debug" id="]oL,IYd|DdH`E8.Ipe/W"></block>
+              <block type="actor_behavior" id="%QTq$69AOay|ClcOAU{R">
+                <field name="NAME"></field>
+                <statement name="SCRIPT">
+                  <shadow type="actor_ignore" id="[m@|.=3pe;~OF5RwDoDG"></shadow>
+                  <block type="text_print" id="vx}.|U`1#+eK5K;$nj/!">
+                    <value name="TEXT">
+                      <shadow type="text" id="%PIw4Ki5}*:`$q$a*yr4">
+                        <field name="TEXT">text</field>
+                      </shadow>
+                      <block type="actor_message" id="E`*LF!$]PyzfyIDI?f|5"></block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
             </value>
           </block>
         </value>
@@ -3394,7 +3408,7 @@
     </statement>
   </block>
 
-  <block type="actor_assign" id=".klLBN6qX;6O~T3euihf" x="49" y="684">
+  <block type="actor_assign" id=".klLBN6qX;6O~T3euihf" x="-56" y="792">
     <field name="NAME">reader</field>
     <value name="VALUE">
       <block type="actor_create" id="w9`+$ahD.{Bwzw?;}Qfa">
@@ -3424,10 +3438,10 @@
                 <next>
                   <block type="controls_if" id="_hcf`ou$9^(RwMXx;EtC">
                     <value name="IF0">
-                      <block type="dict_get" id="6DsXqVOp*cJx:!ui6kj~">
+                      <block type="dict_has" id="9bSt(GD,w1mrFiLwq`mR">
                         <field name="NAME">next</field>
                         <value name="DICT">
-                          <shadow type="actor_message" id="0@]@1|d4UHA(uzkEfSHk"></shadow>
+                          <shadow type="actor_message" id="~0P2{i=q(H?M!6O/$I;E"></shadow>
                         </value>
                       </block>
                     </value>
