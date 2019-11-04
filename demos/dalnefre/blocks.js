@@ -32,7 +32,7 @@ Blockly.defineBlocksWithJsonArray([
         "align": "RIGHT"
       }
     ],
-    "colour": 345,
+    "colour": 270,
     "tooltip": "actor resource pool",
     "helpUrl": ""
   },

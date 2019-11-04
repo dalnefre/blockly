@@ -454,7 +454,7 @@ var BART = (function (self) {
   };
 
   CRLF['logic_negate'] = function (block) {
-    let op = "neg";
+    let op = "NOT";
     var crlf = {
       "kind": "expr_operation",
       "type": "Boolean",
