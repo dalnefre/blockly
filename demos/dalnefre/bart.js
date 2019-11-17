@@ -348,7 +348,29 @@ var BART = (function (self) {
     return crlf;
   };
 
-  //CRLF['text_isEmpty'] = function (block) { ... };
+  CRLF['text_isEmpty'] = function (block) {
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Boolean",
+      "name": "EQ[2]",
+      "args": [
+        {
+          "kind": "expr_operation",
+          "type": "Number",
+          "name": "length[1]",
+          "args": [
+            blockToCRLF(block.getInputTargetBlock('VALUE'))
+          ]
+        },
+        {
+          "kind": "expr_literal",
+          "type": "Number",
+          "const": 0
+        }
+      ]
+    };
+    return crlf;
+  };
 
   //CRLF['text_indexOf'] = function (block) { ... };
 
@@ -494,6 +516,66 @@ var BART = (function (self) {
         blockToCRLF(block.getInputTargetBlock('IF')),
         blockToCRLF(block.getInputTargetBlock('THEN')),
         blockToCRLF(block.getInputTargetBlock('ELSE'))
+      ]
+    };
+    return crlf;
+  };
+
+  /*
+   * List (Array)
+   */
+
+  CRLF['lists_create_with'] = function (block) {
+    var parts = [];
+    var i = 0;
+    while (i < 99) {  // FIXME: is there a limit to the number of clauses?
+      var add_block = block.getInputTargetBlock('ADD' + i);
+      if (add_block) {
+        parts.push(blockToCRLF(add_block));
+      }
+      ++i;
+    }
+    let op = "list";
+    var crlf = {
+      "kind": "expr_operation",
+      "name": op + "[*]", /*"[" + parts.length + "]",*/
+      "args": parts
+    };
+    return crlf;
+  };
+
+  CRLF['lists_length'] = function (block) {
+    let op = "length";
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Number",
+      "name": op + "[1]",
+      "args": [
+        blockToCRLF(block.getInputTargetBlock('VALUE'))
+      ]
+    };
+    return crlf;
+  };
+
+  CRLF['lists_isEmpty'] = function (block) {
+    var crlf = {
+      "kind": "expr_operation",
+      "type": "Boolean",
+      "name": "EQ[2]",
+      "args": [
+        {
+          "kind": "expr_operation",
+          "type": "Number",
+          "name": "length[1]",
+          "args": [
+            blockToCRLF(block.getInputTargetBlock('VALUE'))
+          ]
+        },
+        {
+          "kind": "expr_literal",
+          "type": "Number",
+          "const": 0
+        }
       ]
     };
     return crlf;
