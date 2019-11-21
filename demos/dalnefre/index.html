@@ -152,75 +152,6 @@
     <block type="dict_empty"></block>
   </category>
 
-  <category name="Lists" colour="#745CA6">
-    <block type="lists_create_with">
-      <mutation items="0"></mutation>
-    </block>
-    <block type="lists_create_with">
-      <mutation items="3"></mutation>
-    </block>
-    <block type="lists_repeat">
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">5</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="lists_length"></block>
-    <block type="lists_isEmpty"></block>
-    <block type="lists_indexOf">
-      <field name="END">FIRST</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_getIndex">
-      <mutation statement="false" at="true"></mutation>
-      <field name="MODE">GET</field>
-      <field name="WHERE">FROM_START</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_setIndex">
-      <mutation at="true"></mutation>
-      <field name="MODE">SET</field>
-      <field name="WHERE">FROM_START</field>
-      <value name="LIST">
-        <block type="variables_get">
-          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_getSublist">
-      <mutation at1="true" at2="true"></mutation>
-      <field name="WHERE1">FROM_START</field>
-      <field name="WHERE2">FROM_START</field>
-      <value name="LIST">
-        <block type="variables_get">
-          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_split">
-      <mutation mode="SPLIT"></mutation>
-      <field name="MODE">SPLIT</field>
-      <value name="DELIM">
-        <shadow type="text">
-          <field name="TEXT">,</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="lists_sort">
-      <field name="TYPE">NUMERIC</field>
-      <field name="DIRECTION">1</field>
-    </block>
-  </category>
-
   <category name="Device" colour="345">
     <block type="text_print">
       <value name="TEXT">
@@ -248,6 +179,111 @@
         <shadow type="dict_empty"></shadow>
       </value>
     </block>
+  </category>
+
+  <sep></sep>
+/*
+Color Scheme
+  45    Dictionary/Object
+  120   List/Array
+  165   Text/String
+  210   Logic/Boolean
+  225   Number
+  270   Behavior/Config
+  345   Action/Device
+*/
+
+<!--
+  <category name="Logic" colour="#5C81A6">
+-->
+  <category name="Logic" colour="210">
+    <block type="logic_boolean">
+      <field name="BOOL">TRUE</field>
+    </block>
+    <block type="logic_compare">
+      <field name="OP">EQ</field>
+    </block>
+    <block type="logic_operation">
+      <field name="OP">AND</field>
+    </block>
+    <block type="logic_negate"></block>
+    <block type="controls_if"></block>
+    <block type="logic_ternary"></block>
+    <block type="logic_null"></block>
+  </category>
+
+<!--
+  <category name="Number" colour="#5C68A6">
+-->
+  <category name="Number" colour="225">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+    <block type="math_arithmetic">
+      <field name="OP">ADD</field>
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_single">
+      <field name="OP">ROOT</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">9</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+
+<!--
+  <category name="String" colour="#5CA68D">
+-->
+  <category name="String" colour="165">
+    <block type="string_empty"></block>
+    <block type="string_literal"></block>
+    <block type="string_length">
+      <value name="TEXT">
+        <shadow type="string_literal"></shadow>
+      </value>
+    </block>
+    <block type="string_at">
+      <value name="INDEX">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TEXT">
+        <shadow type="string_literal"></shadow>
+      </value>
+    </block>
+    <block type="character"></block>
+    <block type="text_join">
+      <mutation items="2"></mutation>
+    </block>
+  </category>
+
+<!--
+  <category name="String" colour="#5CA68D">
+-->
+  <category name="Array" colour="120">
+    <block type="controls_forEach">
+      <field name="VAR" id="brww4FbohaY,0{=OTJP8" variabletype="">j</field>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
+    </block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
   </category>
 
   <sep></sep>
@@ -451,20 +487,73 @@
     </block>
   </category>
 
-  <category name="Logic" colour="#5C81A6">
-    <block type="controls_if"></block>
-    <block type="logic_compare">
-      <field name="OP">EQ</field>
+  <category name="Lists" colour="#745CA6">
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
     </block>
-    <block type="logic_operation">
-      <field name="OP">AND</field>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
     </block>
-    <block type="logic_negate"></block>
-    <block type="logic_boolean">
-      <field name="BOOL">TRUE</field>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
     </block>
-    <block type="logic_null"></block>
-    <block type="logic_ternary"></block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <mutation statement="false" at="true"></mutation>
+      <field name="MODE">GET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <mutation at="true"></mutation>
+      <field name="MODE">SET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <mutation at1="true" at2="true"></mutation>
+      <field name="WHERE1">FROM_START</field>
+      <field name="WHERE2">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="dxsjYo)6~KbZ!{6-F%6z" variabletype="">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <mutation mode="SPLIT"></mutation>
+      <field name="MODE">SPLIT</field>
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort">
+      <field name="TYPE">NUMERIC</field>
+      <field name="DIRECTION">1</field>
+    </block>
   </category>
 
   <category name="Loops" colour="#5CA65C">

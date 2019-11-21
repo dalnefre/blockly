@@ -1,5 +1,14 @@
 'use strict';
 
+/*
+Color Scheme
+  45    Dictionary/Object
+  165   Text/String
+  210   Logic/Boolean
+  225   Number
+  270   Behavior/Config
+  345   Action/Device
+*/
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "actor_sponsor",
@@ -443,6 +452,80 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "string_empty",
+    "message0": "\" \"",
+    "output": "String",
+    "colour": 165,
+    "tooltip": "The empty string.",
+    "helpUrl": ""
+  },
+  {
+    "type": "string_literal",
+    "message0": "\"%1\"",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "TEXT",
+        "text": ""
+      }
+    ],
+    "output": "String",
+    "colour": 165,
+    "tooltip": "A string.",
+    "helpUrl": ""
+  },
+  {
+    "type": "string_length",
+    "message0": "count codes in %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+      }
+    ],
+    "output": "Number",
+    "colour": 225,
+    "tooltip": "Length of a string, including spaces.",
+    "helpUrl": ""
+  },
+  {
+    "type": "string_at",
+    "message0": "code #%1 in %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "INDEX",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+      }
+    ],
+    "inputsInline": true,
+    "output": "Number",
+    "colour": 225,
+    "tooltip": "Codepoint at position in string.",
+    "helpUrl": ""
+  },
+  {
+    "type": "character",
+    "message0": "code for '%1'",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "CHAR",
+        "text": "A"
+      }
+    ],
+    "output": "Number",
+    "colour": 225,
+    "tooltip": "Codepoint for a character.",
+    "helpUrl": ""
+  },
+  {
     "type": "text_match_regex",
     "message0": "%1 matches %2",
     "args0": [
@@ -702,6 +785,50 @@ Blockly.JavaScript['device_event'] = function(block) {
 Blockly.JavaScript['device_now'] = function(block) {
   var code = 'performance.now()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+/*
+ * String
+ */
+
+Blockly.JavaScript['string_empty'] = function(block) {
+  var code = '""';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['string_literal'] = function(block) {
+  var field_text = block.getFieldValue('TEXT');
+  var code = '';
+  code += '"';
+  code += field_text;  // --FIXME-- quote special characters in string value!
+  code += '"';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['string_length'] = function(block) {
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += value_text;
+  code += '.length';
+  return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['string_at'] = function(block) {
+  var value_index = Blockly.JavaScript.valueToCode(block, 'INDEX', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += value_text;
+  code += '.charCodeAt(';
+  code += value_index;
+  code += '-1)';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['character'] = function(block) {
+  var field_char = block.getFieldValue('CHAR');
+  var code = '';
+  code += field_char.charCodeAt(0);
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];  // default: ORDER_NONE
 };
 
 /*
