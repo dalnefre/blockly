@@ -526,6 +526,50 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "array_empty",
+    "message0": "[ ]",
+    "output": "Array",
+    "colour": 120,
+    "tooltip": "The empty array.",
+    "helpUrl": ""
+  },
+  {
+    "type": "array_length",
+    "message0": "count items in %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array"
+      }
+    ],
+    "output": "Number",
+    "colour": 225,
+    "tooltip": "Length of an array.",
+    "helpUrl": ""
+  },
+  {
+    "type": "array_at",
+    "message0": "item #%1 in %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "INDEX",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array"
+      }
+    ],
+    "inputsInline": true,
+    "output": null,
+    "colour": 210,
+    "tooltip": "Item at position in array.",
+    "helpUrl": ""
+  },
+  {
     "type": "text_match_regex",
     "message0": "%1 matches %2",
     "args0": [
@@ -829,6 +873,34 @@ Blockly.JavaScript['character'] = function(block) {
   var code = '';
   code += field_char.charCodeAt(0);
   return [code, Blockly.JavaScript.ORDER_ATOMIC];  // default: ORDER_NONE
+};
+
+/*
+ * Array
+ */
+
+Blockly.JavaScript['array_empty'] = function(block) {
+  var code = '[]';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['array_length'] = function(block) {
+  var value_list = Blockly.JavaScript.valueToCode(block, 'LIST', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += value_list;
+  code += '.length';
+  return [code, Blockly.JavaScript.ORDER_MEMBER];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['array_at'] = function(block) {
+  var value_index = Blockly.JavaScript.valueToCode(block, 'INDEX', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
+  var value_list = Blockly.JavaScript.valueToCode(block, 'LIST', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += value_list;
+  code += '[';
+  code += value_index;
+  code += '-1]';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
 /*
