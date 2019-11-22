@@ -211,6 +211,104 @@ var BART = (function (self) {
   };
 
   /*
+   * String (Text)
+   */
+
+  CRLF['string_literal'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "type": "String",
+      "const": fieldToString(block.getField('TEXT'))
+    };
+    return crlf;
+  };
+
+  CRLF['string_length'] = function (block) {
+    var crlf = {
+      "kind": "string_length",
+      "string": blockToCRLF(block.getInputTargetBlock('TEXT'))  /* <string> */
+    };
+    return crlf;
+  };
+
+  CRLF['string_at'] = function (block) {
+    var crlf = {
+      "kind": "string_at",
+      "index": blockToCRLF(block.getInputTargetBlock('INDEX')),  /* <number> */
+      "string": blockToCRLF(block.getInputTargetBlock('TEXT'))  /* <string> */
+    };
+    return crlf;
+  };
+
+  CRLF['string_insert'] = function (block) {
+    var crlf = {
+      "kind": "string_insert",
+      "index": blockToCRLF(block.getInputTargetBlock('INDEX')),  /* <number> */
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE')),  /* <number> */
+      "string": blockToCRLF(block.getInputTargetBlock('TEXT'))  /* <string> */
+    };
+    return crlf;
+  };
+
+  CRLF['character'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "type": "Number",
+      "const": fieldToString(block.getField('CHAR')).charCodeAt(0)  /* <number> */
+    };
+    return crlf;
+  };
+
+  CRLF['string_empty'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "type": "String",
+      "const": ""
+    };
+    return crlf;
+  };
+
+  /*
+   * Array (List)
+   */
+
+  CRLF['array_length'] = function (block) {
+    var crlf = {
+      "kind": "array_length",
+      "array": blockToCRLF(block.getInputTargetBlock('LIST'))  /* <array> */
+    };
+    return crlf;
+  };
+
+  CRLF['array_at'] = function (block) {
+    var crlf = {
+      "kind": "array_at",
+      "index": blockToCRLF(block.getInputTargetBlock('INDEX')),  /* <number> */
+      "array": blockToCRLF(block.getInputTargetBlock('LIST'))  /* <array> */
+    };
+    return crlf;
+  };
+
+  CRLF['array_insert'] = function (block) {
+    var crlf = {
+      "kind": "array_insert",
+      "index": blockToCRLF(block.getInputTargetBlock('INDEX')),  /* <number> */
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE')),  /* <expression> */
+      "array": blockToCRLF(block.getInputTargetBlock('LIST'))  /* <array> */
+    };
+    return crlf;
+  };
+
+  CRLF['array_empty'] = function (block) {
+    var crlf = {
+      "kind": "expr_literal",
+      "type": "Array",
+      "const": []
+    };
+    return crlf;
+  };
+
+  /*
    * Math
    */
 

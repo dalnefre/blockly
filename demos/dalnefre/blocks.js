@@ -511,6 +511,35 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "string_insert",
+    "message0": "insert %1 at %2 in %3",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "VALUE",
+        "check": "Number",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "INDEX",
+        "check": "Number",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String",
+        "align": "RIGHT"
+      }
+    ],
+    "inputsInline": false,
+    "output": "String",
+    "colour": 165,
+    "tooltip": "Add codepoint to string.",
+    "helpUrl": ""
+  },
+  {
     "type": "character",
     "message0": "code for '%1'",
     "args0": [
@@ -567,6 +596,34 @@ Blockly.defineBlocksWithJsonArray([
     "output": null,
     "colour": 210,
     "tooltip": "Item at position in array.",
+    "helpUrl": ""
+  },
+  {
+    "type": "array_insert",
+    "message0": "insert %1 at %2 in %3",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "VALUE",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "INDEX",
+        "check": "Number",
+        "align": "RIGHT"
+      },
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array",
+        "align": "RIGHT"
+      }
+    ],
+    "inputsInline": false,
+    "output": "Array",
+    "colour": 120,
+    "tooltip": "Add item to array.",
     "helpUrl": ""
   },
   {
@@ -868,6 +925,20 @@ Blockly.JavaScript['string_at'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
+Blockly.JavaScript['string_insert'] = function(block) {
+  var value_index = Blockly.JavaScript.valueToCode(block, 'INDEX', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += '';
+  code += value_text + '.slice(0, ' + value_index + '-1)';
+  code += ' + ';
+  code += 'String.fromCharCode(' + value_value + ')';
+  code += ' + ';
+  code += value_text + '.slice(' + value_index + '-1)';
+  return [code, Blockly.JavaScript.ORDER_NONE];  // default: ORDER_NONE
+};
+
 Blockly.JavaScript['character'] = function(block) {
   var field_char = block.getFieldValue('CHAR');
   var code = '';
@@ -901,6 +972,18 @@ Blockly.JavaScript['array_at'] = function(block) {
   code += value_index;
   code += '-1]';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
+};
+
+Blockly.JavaScript['array_insert'] = function(block) {
+  var value_index = Blockly.JavaScript.valueToCode(block, 'INDEX', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var value_list = Blockly.JavaScript.valueToCode(block, 'LIST', Blockly.JavaScript.ORDER_MEMBER);  // default: ORDER_ATOMIC
+  var code = '';
+  code += '';
+  code += value_list + '.slice(0, ' + value_index + '-1)';
+  code += '.concat([' + value_value + '])';
+  code += '.concat(' + value_list + '.slice(' + value_index + '-1))';
+  return [code, Blockly.JavaScript.ORDER_NONE];  // default: ORDER_NONE
 };
 
 /*

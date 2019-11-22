@@ -265,6 +265,19 @@ Color Scheme
         <shadow type="string_literal"></shadow>
       </value>
     </block>
+    <block type="string_insert">
+      <value name="VALUE">
+        <shadow type="character"></shadow>
+      </value>
+      <value name="INDEX">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TEXT">
+        <shadow type="string_literal"></shadow>
+      </value>
+    </block>
     <block type="character"></block>
     <block type="string_empty"></block>
   </category>
@@ -282,6 +295,16 @@ Color Scheme
       </value>
     </block>
     <block type="array_at">
+      <value name="INDEX">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="LIST">
+        <shadow type="array_empty"></shadow>
+      </value>
+    </block>
+    <block type="array_insert">
       <value name="INDEX">
         <shadow type="math_number">
           <field name="NUM">1</field>
