@@ -888,6 +888,17 @@ Blockly.JavaScript['device_now'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
 };
 
+Blockly.JavaScript['text_print'] = function(block) {
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var code = '';
+  code += 'DAL.show(';
+  //code += 'JSON.stringify(';
+  code += value_text;
+  //code += ', null, 2)';
+  code += ');\n';
+  return code;  // statements don't need binding-strength
+};
+
 /*
  * String
  */

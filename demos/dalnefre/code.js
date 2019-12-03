@@ -4,7 +4,9 @@ var DAL = (function (self) {
 
   let ignore = function noop() { return ignore; };  // no operation (callable)
   let log = (console && console.log) || ignore;  // default error log
-  let show = alert && (_ => alert(_)) || ignore;  // synchronous message dialog
+  //let show = alert && (_ => alert(_)) || ignore;  // synchronous message dialog
+  let show = alert && (_ => alert(JSON.stringify(_))) || ignore;  // synchronous message dialog
+  //let show = alert && (_ => alert(JSON.stringify(_, null, 2))) || ignore;  // synchronous message dialog
   let fail = function fail(e) { self.log('FAIL!', e); self.show('FAIL! ' + e); };  // default error handler
   let trace = log;
   let xtrace = ignore;

@@ -218,7 +218,7 @@ var BART = (function (self) {
     var crlf = {
       "kind": "expr_literal",
       "type": "String",
-      "const": fieldToString(block.getField('TEXT'))
+      "const": fieldToString(block.getField('TEXT'), '')
     };
     return crlf;
   };
@@ -534,7 +534,7 @@ var BART = (function (self) {
     let else_block = block.getInputTargetBlock('ELSE');
     if (else_block) {
       cases.push({
-        "if": { "kind": "expr_literal", "type": "Boolean", "const": "true" },
+        "if": { "kind": "expr_literal", "type": "Boolean", "const": true },
         "do": stackToCRLF(else_block)
       });
     }
@@ -898,9 +898,9 @@ var BART = (function (self) {
     if (value === null) {
       output += String.fromCodePoint(0xFF);  // null
     } else if (value === true) {
-      output += String.fromCodePoint(0x00);  // true
+      output += String.fromCodePoint(0x01);  // true
     } else if (value === false) {
-      output += String.fromCodePoint(0x01);  // false
+      output += String.fromCodePoint(0x00);  // false
     } else if (typeof value === 'number') {
       // FIXME: all numbers are treated as 32-bit integers, for now...
       output += integerToBOSE(value);
