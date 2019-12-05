@@ -500,6 +500,7 @@ var BART = (function (self) {
 
   //CRLF['text_trim'] = function (block) { ... };
 
+/*
   CRLF['text_print'] = function (block) {
     var crlf = {
       "kind": "log_print",
@@ -508,6 +509,7 @@ var BART = (function (self) {
     };
     return crlf;
   };
+*/
 
   //CRLF['text_prompt_ext'] = function (block) { ... };
 
@@ -700,6 +702,15 @@ var BART = (function (self) {
       "delay": fieldToNumber(block.getField('DELAY')),
       "message": blockToCRLF(block.getInputTargetBlock('MESSAGE')),  /* <dictionary> */
       "actor": blockToCRLF(block.getInputTargetBlock('ACTOR'))  /* <address> */
+    };
+    return crlf;
+  };
+
+  CRLF['log_print'] = function (block) {
+    var crlf = {
+      "kind": "log_print",
+      "level": 1,
+      "value": blockToCRLF(block.getInputTargetBlock('VALUE'))
     };
     return crlf;
   };

@@ -217,7 +217,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": null,
-    "colour": 210,
+    "colour": "#999999",  // colour=210
     "tooltip": "retrieve state",
     "helpUrl": ""
   },
@@ -300,7 +300,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "inputsInline": false,
     "output": null,
-    "colour": 210,
+    "colour": "#999999",  // colour=210
     "tooltip": "dictionary lookup",
     "helpUrl": ""
   },
@@ -373,6 +373,21 @@ Blockly.defineBlocksWithJsonArray([
     "output": "Dict",
     "colour": 45,
     "tooltip": "extend dictionary with new definitions",
+    "helpUrl": ""
+  },
+  {
+    "type": "log_print",
+    "message0": "PRINT %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "VALUE"
+      }
+    ],
+    "previousStatement": "Action",
+    "nextStatement": "Action",
+    "colour": 345,
+    "tooltip": "print value to output log",
     "helpUrl": ""
   },
   {
@@ -594,7 +609,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "inputsInline": true,
     "output": null,
-    "colour": 210,
+    "colour": "#999999",  // colour=210
     "tooltip": "Item at position in array.",
     "helpUrl": ""
   },
@@ -860,6 +875,17 @@ Blockly.JavaScript['dict_extend'] = function(block) {
  * Device
  */
 
+Blockly.JavaScript['log_print'] = function(block) {
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
+  var code = '';
+  code += 'DAL.show(';
+  //code += 'JSON.stringify(';
+  code += value_value;
+  //code += ', null, 2)';
+  code += ');\n';
+  return code;  // statements don't need binding-strength
+};
+
 Blockly.JavaScript['device_set'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
   var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);  // default: ORDER_ATOMIC
@@ -886,17 +912,6 @@ Blockly.JavaScript['device_event'] = function(block) {
 Blockly.JavaScript['device_now'] = function(block) {
   var code = 'performance.now()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];  // default: ORDER_NONE
-};
-
-Blockly.JavaScript['text_print'] = function(block) {
-  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_COMMA);  // default: ORDER_ATOMIC
-  var code = '';
-  code += 'DAL.show(';
-  //code += 'JSON.stringify(';
-  code += value_text;
-  //code += ', null, 2)';
-  code += ');\n';
-  return code;  // statements don't need binding-strength
 };
 
 /*
